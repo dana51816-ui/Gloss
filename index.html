@@ -566,6 +566,8 @@ input[type="date"]::-webkit-calendar-picker-indicator{ opacity:.6; cursor:pointe
 .form-actions .btn{ width:100%; }
 @media (min-width:600px){ .form-actions .btn{ width:auto; justify-self:start; } }
 .form-actions p{ margin:0; font-size:.88rem; color:var(--khaki-ink); }
+.wa-fallback{ font-size:.95rem; color:var(--burgundy); font-weight:500; text-underline-offset:4px; }
+[hidden]{ display:none !important; }
 
 /* ---------- faq ---------- */
 .faq{ border-top:1px solid var(--rule); }
@@ -868,7 +870,7 @@ input[type="date"]::-webkit-calendar-picker-indicator{ opacity:.6; cursor:pointe
           <li>16 עמודים בעיצוב מגזיני</li>
           <li>כתיבה ועריכה</li>
           <li>עיצוב עם התמונות שלכם</li>
-          <li>[מספר] סבבי תיקונים</li>
+          <li>סבב תיקונים אחד</li>
           <li>קובץ מוכן לשליחה ולהדפסה תוך [זמן מסירה]</li>
         </ul>
         <a class="btn btn-lg" href="#order">להזמנת העיתון <span class="arr" aria-hidden="true">&larr;</span></a>
@@ -931,6 +933,7 @@ input[type="date"]::-webkit-calendar-picker-indicator{ opacity:.6; cursor:pointe
         <div class="form-actions">
           <button class="btn btn-lg" type="submit">שליחה בוואטסאפ <span class="arr" aria-hidden="true">&larr;</span></button>
           <p>ייפתח וואטסאפ עם כל הפרטים כהודעה מוכנה.</p>
+          <a class="wa-fallback" id="wa-fallback" href="#" target="_blank" rel="noopener" hidden>וואטסאפ לא נפתח? לחצו כאן לפתיחת ההודעה</a>
         </div>
       </form>
     </div>
@@ -1012,7 +1015,7 @@ input[type="date"]::-webkit-calendar-picker-indicator{ opacity:.6; cursor:pointe
    WA_NUMBER: מספר הוואטסאפ בפורמט בינלאומי, ספרות בלבד.
    לדוגמה למספר 050-1234567 כותבים: 972501234567
    ============================================================ */
-const WA_NUMBER = '[מספר וואטסאפ]';
+const WA_NUMBER = '972503850012';
 const WA_DEFAULT_TEXT = 'היי, אשמח לשמוע על עיתון אישי במתנה';
 
 document.documentElement.classList.add('js');
@@ -1109,8 +1112,10 @@ document.documentElement.classList.add('js');
     const notes = form.notes.value.trim();
     if (notes) lines.push('הערות: ' + notes);
     const url = waUrl(lines.join('\n'));
-    const win = window.open(url, '_blank');
-    if (win) { try { win.opener = null; } catch(_){} } else { window.location.href = url; }
+    const link = document.getElementById('wa-fallback');
+    link.href = url;
+    link.hidden = false;
+    link.click();
   });
 })();
 </script>
