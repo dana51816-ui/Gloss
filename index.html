@@ -5,12 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Studio GLOSS | עיתון אישי במתנה</title>
 <meta name="description" content="עיתון אישי של 16 עמודים בסגנון מגזין, שכל מילה בו על בעל השמחה. מתנה ליום הולדת, יום נישואין, שנה ביחד, להורים, לסבא וסבתא ולחברים.">
-<meta name="theme-color" content="#FFF0B3">
+<meta name="theme-color" content="#D7191F">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="he_IL">
 <meta property="og:title" content="Studio GLOSS | הסיפור שלהם. בעיתון אחד.">
 <meta property="og:description" content="עיתון אישי של 16 עמודים בסגנון מגזין, שכל מילה בו על בעל השמחה.">
-<meta property="og:image" content="gloss-logo.png">
+<meta property="og:image" content="gloss-logo-pink.png">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%236B0F1E'/%3E%3Ctext x='32' y='47' font-family='Georgia,serif' font-size='44' font-weight='700' text-anchor='middle' fill='%23F8F2E7'%3EG%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -339,26 +339,23 @@ input[type="date"].input{ text-align:right; display:block; min-width:0; }
 }
 
 
-/* ---------- palettes (live switcher) ---------- */
-:root, [data-pal="butter"]{ --bg:#FFF0B3; --bg-2:#FFF7D6; --surface:#FFFDF3; --brand:#6B0F1E; --block:#6B0F1E; --on-block:#FFF0B3; --btn-bg:#6B0F1E; --btn-fg:#FFF7D6; --btn-hover:#86182B; --pop:#E23A52; --ink:#2A1416; --ink-soft:#5E4A38; --line:rgba(42,20,22,.14); --line-2:rgba(42,20,22,.3); --logo-plate:transparent; }
-[data-pal="mint"]{ --bg:#D7EFE2; --bg-2:#E8F6EE; --surface:#F7FCF9; --brand:#6B0F1E; --block:#123D2E; --on-block:#D7EFE2; --btn-bg:#6B0F1E; --btn-fg:#F7FCF9; --btn-hover:#86182B; --pop:#E23A52; --ink:#14231C; --ink-soft:#3F5A4D; --line:rgba(20,35,28,.14); --line-2:rgba(20,35,28,.3); --logo-plate:transparent; }
-[data-pal="night"]{ --bg:#141012; --bg-2:#1D1719; --surface:#1A1416; --brand:#FF8597; --block:#6B0F1E; --on-block:#FFE6EA; --btn-bg:#FF8597; --btn-fg:#141012; --btn-hover:#FFA3B1; --pop:#FFD36B; --ink:#F6EEEA; --ink-soft:#BBA9A6; --line:rgba(246,238,234,.14); --line-2:rgba(246,238,234,.3); --logo-plate:#F6EEEA; color-scheme:dark; }
-[data-pal="chrome"]{ --bg:#E9E9E7; --bg-2:#F2F2F0; --surface:#FBFBFA; --brand:#6B0F1E; --block:#18181A; --on-block:#E9E9E7; --btn-bg:#6B0F1E; --btn-fg:#FBFBFA; --btn-hover:#86182B; --pop:#FF5A6E; --ink:#18181A; --ink-soft:#55555A; --line:rgba(24,24,26,.14); --line-2:rgba(24,24,26,.3); --logo-plate:transparent; }
-[data-pal="powder"]{ --bg:#F8DCDD; --bg-2:#FCEEEE; --surface:#FFFFFF; --brand:#6B0F1E; --block:#6B0F1E; --on-block:#FFFFFF; --btn-bg:#6B0F1E; --btn-fg:#FFFFFF; --btn-hover:#86182B; --pop:#F8DCDD; --ink:#2A1416; --ink-soft:#6A4E52; --line:rgba(42,20,22,.12); --line-2:rgba(42,20,22,.28); --logo-plate:transparent; }
-body, .header, .why, .order, .sheet, .ticker, .inside, .how, .samples, .price, .faq, .finale, .footer, .mobile-nav{ transition:background-color .6s var(--ease), color .6s var(--ease), border-color .6s var(--ease); }
-.masthead img, .masthead-sm, .header .logo img, .footer .logo img{ background:var(--logo-plate); border-radius:18px; transition:background-color .6s; }
-[data-pal="night"] .masthead img, [data-pal="night"] .masthead-sm{ padding:3% 5%; }
-[data-pal="night"] .header .logo img, [data-pal="night"] .footer .logo img{ padding:4px 10px; border-radius:8px; }
-
-/* palette switcher */
-.pal{ position:fixed; z-index:70; left:16px; bottom:calc(16px + env(safe-area-inset-bottom)); display:flex; align-items:center; gap:6px; padding:6px; border-radius:999px; background:var(--surface); box-shadow:0 10px 30px -10px rgba(0,0,0,.35); }
-@media (max-width:979px){ .pal{ bottom:calc(84px + env(safe-area-inset-bottom)); left:12px; } }
-.pal-toggle{ height:36px; padding:0 12px; border:0; border-radius:999px; background:transparent; color:var(--ink); font-size:.85rem; font-weight:700; cursor:pointer; }
-.pal-list{ display:flex; gap:6px; max-width:0; overflow:hidden; transition:max-width .5s var(--ease); }
-.pal.open .pal-list{ max-width:260px; }
-.pal-list button{ width:36px; height:36px; flex:none; border-radius:50%; border:2px solid transparent; cursor:pointer; background:linear-gradient(135deg, var(--a) 0 50%, var(--b) 50% 100%); transition:transform .3s var(--spring), border-color .3s; }
-.pal-list button:hover{ transform:scale(1.12); }
-.pal-list button[aria-pressed="true"]{ border-color:var(--ink); }
+/* ---------- colour: cherry red / bubblegum pink / oxblood ---------- */
+:root{ --bg:#D7191F; --bg-2:#E5343A; --surface:#FFC9DC; --block:#3A0610; --on-block:#FFFFFF;
+  --brand:#FFC9DC; --ink:#FFFFFF; --ink-soft:rgba(255,255,255,.86); --btn-bg:#FFC9DC; --btn-fg:#3A0610; --btn-hover:#FFFFFF; --pop:#3A0610;
+  --line:rgba(255,255,255,.22); --line-2:rgba(255,255,255,.5); }
+.inside, .how, .price, .faq, .footer, .sheet{ --brand:#D7191F; --ink:#3A0610; --ink-soft:#6E2A35; --btn-bg:#D7191F; --btn-fg:#FFFFFF; --btn-hover:#B01016; --pop:#D7191F; --line:rgba(58,6,16,.14); --line-2:rgba(58,6,16,.32); --bg-2:#FFDCE8; }
+.why, .order, .mobile-nav{ --brand:#FFC9DC; --pop:#FFC9DC; --ink:#FFFFFF; --ink-soft:rgba(255,255,255,.85); }
+.inside, .how, .price, .faq, .footer, .sheet{ color:var(--ink); }
+.pg, .barcode-s, .frame{ --ink:#2A1416; --ink-soft:#5E4A4C; --line:rgba(42,20,22,.12); --line-2:rgba(42,20,22,.28); color:var(--ink); }
+.barcode-s{ background:#FFFDF8; }
+.sheet{ background:var(--surface) !important; }
+.frame{ --ink-soft:#6E2A35; }
+.masthead{ position:relative; }
+.masthead::after{ content:""; position:absolute; inset:0; pointer-events:none;
+  -webkit-mask:url("gloss-logo-pink.png") center/100% 100% no-repeat; mask:url("gloss-logo-pink.png") center/100% 100% no-repeat;
+  background:linear-gradient(105deg, transparent 38%, rgba(255,255,255,.95) 50%, transparent 62%) no-repeat; background-size:300% 100%; background-position:150% 0; animation:shine 5.5s var(--ease) 1.8s infinite; }
+@keyframes shine{ 0%{ background-position:150% 0; } 35%,100%{ background-position:-50% 0; } }
+@media (prefers-reduced-motion:reduce){ .masthead::after{ animation:none; display:none; } }
 
 /* motion layer */
 body::after{ content:""; position:fixed; inset:-50%; z-index:65; pointer-events:none; opacity:.05; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); animation:grain 1.2s steps(6) infinite; }
@@ -525,7 +522,7 @@ body::after{ content:""; position:fixed; inset:-50%; z-index:65; pointer-events:
 
 <header class="header" id="header">
   <div class="wrap">
-    <a class="logo" href="#top" aria-label="Studio GLOSS - לראש העמוד"><img src="gloss-logo.png" alt="Studio GLOSS" width="1240" height="421"></a>
+    <a class="logo" href="#top" aria-label="Studio GLOSS - לראש העמוד"><img src="gloss-logo-pink.png" alt="Studio GLOSS" width="1240" height="421"></a>
     <nav class="nav" aria-label="ניווט ראשי">
       <a href="#inside">מה בפנים</a>
       <a href="#how">איך זה עובד</a>
@@ -553,7 +550,7 @@ body::after{ content:""; position:fixed; inset:-50%; z-index:65; pointer-events:
 <section class="hero" id="top">
   <div class="wrap">
     <div class="dateline"><span>גיליון מס' 1</span><span class="mid">עיתונים אישיים במתנה</span><span>מהדורה אישית</span></div>
-    <div class="masthead"><img src="gloss-logo.png" alt="Studio GLOSS" width="1240" height="421"></div>
+    <div class="masthead"><img src="gloss-logo-pink.png" alt="Studio GLOSS" width="1240" height="421"></div>
     <div class="cover-grid">
       <div class="cl-main">
         <h1 class="big rv">הסיפור שלהם. בעיתון אחד.</h1>
@@ -750,7 +747,7 @@ body::after{ content:""; position:fixed; inset:-50%; z-index:65; pointer-events:
 <!-- ============ FINALE ============ -->
 <section class="section finale" id="contact">
   <div class="wrap">
-    <img class="masthead-sm rv" src="gloss-logo.png" alt="" width="1240" height="421">
+    <img class="masthead-sm rv" src="gloss-logo-pink.png" alt="" width="1240" height="421">
     <h2 class="big rv">יש לכם מישהו לחגוג?<span class="lt">בואו נספר את הסיפור שלו.</span></h2>
     <a class="btn btn-lg rv" data-d="2" data-wa href="https://wa.me/972503850012" target="_blank" rel="noopener">לכתוב לנו בוואטסאפ <span class="arr" aria-hidden="true">&larr;</span></a>
     <p class="fine rv" data-d="3">עונים מהר, ובלי שום התחייבות.</p>
@@ -761,7 +758,7 @@ body::after{ content:""; position:fixed; inset:-50%; z-index:65; pointer-events:
 <footer class="footer">
   <div class="wrap">
     <div class="footer-grid">
-      <a class="logo" href="#top" aria-label="Studio GLOSS - לראש העמוד"><img src="gloss-logo.png" alt="Studio GLOSS" width="1240" height="421" loading="lazy"></a>
+      <a class="logo" href="#top" aria-label="Studio GLOSS - לראש העמוד"><img src="gloss-logo-red.png" alt="Studio GLOSS" width="1240" height="421" loading="lazy"></a>
       <p class="about"><b>Studio GLOSS</b><br>עיתונים אישיים במתנה. הסיפור שלהם, בעיתון אחד.</p>
       <ul class="social">
         <!-- להחליף את הקישורים: -->
@@ -773,16 +770,6 @@ body::after{ content:""; position:fixed; inset:-50%; z-index:65; pointer-events:
   </div>
 </footer>
 
-<div class="pal" id="pal" role="group" aria-label="בחירת צבעים">
-  <button class="pal-toggle" type="button" id="pal-toggle" aria-expanded="false">צבעים</button>
-  <div class="pal-list">
-    <button type="button" data-pal="butter" title="חמאה" aria-label="חמאה" style="--a:#FFF0B3;--b:#6B0F1E"></button>
-    <button type="button" data-pal="mint" title="מנטה" aria-label="מנטה" style="--a:#D7EFE2;--b:#123D2E"></button>
-    <button type="button" data-pal="night" title="לילה" aria-label="לילה" style="--a:#141012;--b:#FF8597"></button>
-    <button type="button" data-pal="chrome" title="כרום" aria-label="כרום" style="--a:#E9E9E7;--b:#18181A"></button>
-    <button type="button" data-pal="powder" title="פודרה" aria-label="פודרה" style="--a:#F8DCDD;--b:#6B0F1E"></button>
-  </div>
-</div>
 <div class="cursor" id="cursor" aria-hidden="true"></div>
 <div class="dock" id="dock" aria-hidden="true"><a class="btn" href="#order" tabindex="-1">להזמנת עיתון <span class="arr" aria-hidden="true">&larr;</span></a></div>
 
@@ -893,7 +880,7 @@ const PAGES = [
   <div class="in"><p class="quote">"הדבר הכי טוב שקרה לי."</p>
    <div class="note"><h5>ממנו, אלייך</h5>${L(7)}<span class="sig">[שם]</span></div>${HT('', '[תמונה]')}
   </div>${FO(15)}</div>`,
-`<div class="pg even p16"><img src="gloss-logo.png" alt="" width="1240" height="421">
+`<div class="pg even p16"><img src="gloss-logo-red.png" alt="" width="1240" height="421">
   <p class="t">והסיפור<br>ממשיך.</p><p class="meta">גיליון מס' 1 · עותק יחיד</p>
   <div class="barcode"><i></i><span>GLOSS</span></div></div>`
 ];
@@ -1083,15 +1070,6 @@ const SPREAD_TO_ENTRIES = [[0],[1],[2],[3],[4,5],[6],[7],[8],[9]];
   const root = document.documentElement;
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const fine = matchMedia('(hover:hover) and (pointer:fine)').matches;
-  /* palette switcher (preview tool: remove the .pal block once a palette is chosen) */
-  let pal = 'butter';
-  try { pal = localStorage.getItem('gloss-pal') || pal; } catch(e){}
-  const setPal = (p) => { root.dataset.pal = p; document.querySelectorAll('.pal-list button').forEach(b => b.setAttribute('aria-pressed', b.dataset.pal === p)); try { localStorage.setItem('gloss-pal', p); } catch(e){} };
-  setPal(pal);
-  const palEl = document.getElementById('pal'), palT = document.getElementById('pal-toggle');
-  palT.addEventListener('click', () => { const o = !palEl.classList.contains('open'); palEl.classList.toggle('open', o); palT.setAttribute('aria-expanded', o); });
-  document.querySelectorAll('.pal-list button').forEach(b => b.addEventListener('click', () => setPal(b.dataset.pal)));
-
   /* split headings into words */
   document.querySelectorAll('.big').forEach(h => {
     let i = 0; const frag = document.createDocumentFragment();
