@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>Studio GLOSS Reel</title>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;500;700;900&family=Heebo:wght@300;400;500;700&family=Playfair+Display:ital,wght@1,400;1,500&display=swap" rel="stylesheet">
+<style>
+:root{--burgundy:#6B0F1E;--oxblood:#3A0610;--khaki:#8C7A55;--khaki-ink:#6E5E3E;--ivory:#F8F2E7;--paper:#F2E9D8;--ink:#2A1416;--soft:#E8D6C0;
+--serif:'Frank Ruhl Libre',serif;--sans:'Heebo',sans-serif;--ital:'Playfair Display',serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
+#stage{position:absolute;inset:0;overflow:hidden;background:var(--burgundy)}
+.sc{position:absolute;inset:0;display:none;overflow:hidden}
+.m{overflow:hidden;display:block;padding:.06em 0 .12em}
+.m>span{display:block;will-change:transform}
+.disp{font-family:var(--serif);font-weight:900;letter-spacing:-.02em;line-height:.98}
+.card{position:absolute;background:#fff;box-shadow:0 50px 90px rgba(20,4,8,.55),0 10px 24px rgba(20,4,8,.3)}
+.card img{display:block;width:100%;height:100%;object-fit:cover}
+.sheen{position:absolute;inset:0;background:linear-gradient(110deg,rgba(255,255,255,0) 40%,rgba(255,255,255,.38) 50%,rgba(255,255,255,0) 60%);background-size:300% 100%;mix-blend-mode:screen;pointer-events:none}
+#grain{position:absolute;inset:-20px;background:url(grain.png);opacity:.10;mix-blend-mode:overlay;pointer-events:none;z-index:50}
+#vig{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 45%,rgba(0,0,0,0) 55%,rgba(10,0,3,.38) 100%);pointer-events:none;z-index:49}
+.c{position:absolute;left:90px;right:90px;text-align:center}
+.lt{color:var(--ivory)} .dk{color:var(--burgundy)}
+.face{position:absolute;inset:0;backface-visibility:hidden;overflow:hidden}
+.face img{width:100%;height:100%;object-fit:cover;display:block}
+.shade{position:absolute;inset:0;pointer-events:none}
+</style>
+</head>
+<body>
+<div id="stage">
+
+  <!-- A: HOOK -->
+  <div class="sc" id="A" style="background:var(--burgundy)">
+    <div class="c lt disp" style="top:560px;font-size:150px">
+      <span class="m"><span id="a1">מה נותנים</span></span>
+      <span class="m"><span id="a2">למי שיש לו</span></span>
+      <span class="m" style="font-size:300px;line-height:1"><span id="a3">הכל?</span></span>
+    </div>
+  </div>
+
+  <!-- B: ANSWER + COVER -->
+  <div class="sc" id="B" style="background:var(--burgundy);perspective:2200px">
+    <div class="c lt disp" style="top:250px;font-size:140px"><span class="m"><span id="b1">שער משלו.</span></span></div>
+    <div class="card" id="bcov" style="width:780px;height:1170px;left:150px;top:540px;transform-origin:50% 100%">
+      <img src="../carousel/assets/page-01.jpg"><div class="sheen" id="bsh"></div></div>
+  </div>
+
+  <!-- C: PAGE STACK -->
+  <div class="sc" id="C" style="background:var(--oxblood)">
+    <div class="c lt disp" style="top:200px;font-size:130px">
+      <span class="m"><span id="c1">16 עמודים.</span></span>
+      <span class="m" style="color:#C9B48A"><span id="c2">רק עליו.</span></span>
+    </div>
+    <div id="cstack" style="position:absolute;inset:0"></div>
+  </div>
+
+  <!-- D: 3D FLIP -->
+  <div class="sc" id="D" style="background:var(--paper)">
+    <div class="c dk disp" style="top:250px;font-size:120px;height:160px">
+      <span class="m" style="position:absolute;inset:0"><span id="d1">הסיפורים שלו.</span></span>
+      <span class="m" style="position:absolute;inset:0"><span id="d2">התמונות שלו.</span></span>
+      <span class="m" style="position:absolute;inset:0;font-size:104px"><span id="d3">הבדיחות הפנימיות.</span></span>
+    </div>
+    <div id="dwrap" style="position:absolute;left:60px;top:640px;width:960px;height:720px;perspective:2600px">
+      <div id="dsp" style="position:absolute;inset:0;transform-style:preserve-3d">
+        <div style="position:absolute;left:30px;right:30px;bottom:-40px;height:60px;background:radial-gradient(ellipse at center,rgba(58,6,16,.45),rgba(58,6,16,0) 70%);filter:blur(8px)"></div>
+        <div class="face" style="left:0;width:50%;right:auto"><img id="dL" src="../carousel/assets/page-03.jpg"><div class="shade" style="background:linear-gradient(to left,rgba(0,0,0,.22),rgba(0,0,0,0) 12%)"></div></div>
+        <div class="face" style="left:50%;width:50%"><img id="dR" src="../carousel/assets/page-02.jpg"><div class="shade" style="background:linear-gradient(to right,rgba(0,0,0,.25),rgba(0,0,0,0) 12%)"></div></div>
+        <div id="leaf1" style="position:absolute;left:0;top:0;width:50%;height:100%;transform-origin:100% 50%;transform-style:preserve-3d">
+          <div class="face"><img src="../carousel/assets/page-03.jpg"><div class="shade" id="l1a" style="background:linear-gradient(to left,rgba(0,0,0,.6),rgba(0,0,0,0))"></div></div>
+          <div class="face" style="transform:rotateY(180deg)"><img src="../carousel/assets/page-04.jpg"><div class="shade" id="l1b" style="background:linear-gradient(to right,rgba(0,0,0,.6),rgba(0,0,0,0))"></div></div>
+        </div>
+        <div id="leaf2" style="position:absolute;left:0;top:0;width:50%;height:100%;transform-origin:100% 50%;transform-style:preserve-3d">
+          <div class="face"><img src="../carousel/assets/page-05.jpg"><div class="shade" id="l2a" style="background:linear-gradient(to left,rgba(0,0,0,.6),rgba(0,0,0,0))"></div></div>
+          <div class="face" style="transform:rotateY(180deg)"><img src="../carousel/assets/page-06.jpg"><div class="shade" id="l2b" style="background:linear-gradient(to right,rgba(0,0,0,.6),rgba(0,0,0,0))"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- E: MACRO DETAIL -->
+  <div class="sc" id="E" style="background:#fff">
+    <img id="eimg" src="p3hi-03.jpg" style="position:absolute;left:0;top:0;width:2860px;transform-origin:0 0">
+    <div style="position:absolute;left:0;right:0;bottom:0;height:900px;background:linear-gradient(to top,rgba(107,15,30,.97) 30%,rgba(107,15,30,0))"></div>
+    <div class="c lt disp" style="top:1180px;font-size:130px">
+      <span class="m"><span id="e1">אפס תבניות.</span></span>
+      <span class="m" style="color:#E3CFA6"><span id="e2">כל מילה עליו.</span></span>
+    </div>
+  </div>
+
+  <!-- F: OCCASIONS -->
+  <div class="sc" id="F" style="background:var(--oxblood)">
+    <img id="fimg" src="../carousel/assets/page-14.jpg" style="position:absolute;left:-60px;top:-90px;width:1200px;height:2100px;object-fit:cover;filter:blur(6px) saturate(.8)">
+    <div style="position:absolute;inset:0;background:rgba(58,6,16,.78)"></div>
+    <div class="c lt" style="top:620px">
+      <div class="m" style="font:300 64px/1.2 var(--sans);color:var(--soft)"><span id="f0">מגזין אישי</span></div>
+      <div class="disp" style="position:relative;height:250px;font-size:150px;margin-top:20px">
+        <span class="m" style="position:absolute;inset:0"><span id="f1">ליום הולדת.</span></span>
+        <span class="m" style="position:absolute;inset:0"><span id="f2">ליום נישואין.</span></span>
+        <span class="m" style="position:absolute;inset:0"><span id="f3">להורים.</span></span>
+        <span class="m" style="position:absolute;inset:0"><span id="f4">לסבא וסבתא.</span></span>
+        <span class="m" style="position:absolute;inset:0"><span id="f5">לחברים.</span></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- G: HOW -->
+  <div class="sc" id="G" style="background:var(--ivory)">
+    <div style="position:absolute;right:90px;left:90px;top:330px">
+      <div class="disp dk" style="font-size:120px"><span class="m"><span id="g0">כל מה שצריך:</span></span></div>
+      <div style="margin-top:90px">
+        <div id="gr1" style="height:2px;background:var(--khaki);transform-origin:100% 50%"></div>
+        <div style="display:flex;gap:50px;align-items:baseline;padding:44px 0"><span class="m" style="font:italic 400 140px/.8 var(--ital);color:var(--khaki);width:110px;flex:none"><span id="gn1">1</span></span><span class="m" style="font:700 66px/1.15 var(--serif);color:var(--ink)"><span id="gt1">שולחים הודעה בוואטסאפ</span></span></div>
+        <div id="gr2" style="height:2px;background:var(--khaki);transform-origin:100% 50%"></div>
+        <div style="display:flex;gap:50px;align-items:baseline;padding:44px 0"><span class="m" style="font:italic 400 140px/.8 var(--ital);color:var(--khaki);width:110px;flex:none"><span id="gn2">2</span></span><span class="m" style="font:700 66px/1.15 var(--serif);color:var(--ink)"><span id="gt2">ממלאים שאלון ושולחים תמונות</span></span></div>
+        <div id="gr3" style="height:2px;background:var(--khaki);transform-origin:100% 50%"></div>
+        <div style="display:flex;gap:50px;align-items:baseline;padding:44px 0"><span class="m" style="font:italic 400 140px/.8 var(--ital);color:var(--khaki);width:110px;flex:none"><span id="gn3">3</span></span><span class="m" style="font:700 66px/1.15 var(--serif);color:var(--ink)"><span id="gt3">מקבלים מגזין מוכן לשליחה ולהדפסה</span></span></div>
+        <div id="gr4" style="height:2px;background:var(--khaki);transform-origin:100% 50%"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- H: FINALE -->
+  <div class="sc" id="H" style="background:var(--burgundy)">
+    <div id="hframe" style="position:absolute;inset:50px;border:1.5px solid rgba(232,214,192,.45)"></div>
+    <div style="position:absolute;left:0;right:0;top:200px;text-align:center"><div class="m" style="display:inline-block"><span id="hlogo"><img src="../carousel/assets/logo-ivory.png" style="width:640px;display:block"></span></div></div>
+    <div class="card" id="h3" style="width:380px;height:570px;left:90px;top:520px"><img src="../carousel/assets/page-06.jpg"></div>
+    <div class="card" id="h2" style="width:380px;height:570px;left:610px;top:520px"><img src="../carousel/assets/page-04.jpg"></div>
+    <div class="card" id="h1" style="width:440px;height:660px;left:320px;top:480px;z-index:2"><img src="../carousel/assets/page-01.jpg"><div class="sheen" id="hsh"></div></div>
+    <div class="c lt" style="top:1230px">
+      <div class="disp" style="font-size:96px;font-weight:700;line-height:1.08"><span class="m"><span id="ht1">הסיפור שלו</span></span><span class="m"><span id="ht2">מחכה לשער.</span></span></div>
+      <div id="hcta" style="display:inline-flex;align-items:center;gap:34px;margin-top:46px;background:var(--ivory);color:var(--burgundy);padding:26px 50px">
+        <span style="font:900 64px/1 var(--serif)">300 ₪</span><span style="width:2px;height:54px;background:var(--khaki)"></span><span style="font:700 40px/1.1 var(--sans)">שלחו הודעה בוואטסאפ</span>
+      </div>
+      <div id="hsub" style="font:300 34px/1.4 var(--sans);color:var(--soft);margin-top:28px">גיליון דיגיטלי · הקישור בביו</div>
+    </div>
+  </div>
+
+  <div id="vig"></div><div id="grain"></div>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const P=(t,a,b)=>cl((t-a)/(b-a));
+const expo=x=>x>=1?1:1-Math.pow(2,-10*x);
+const eo=x=>1-Math.pow(1-x,4);
+const eio=x=>x<.5?8*x**4:1-Math.pow(-2*x+2,4)/2;
+const lerp=(a,b,x)=>a+(b-a)*x;
+// mask line: in at tin, out at tout (optional)
+function line(id,t,tin,tout,dur=.5){
+  const qi=expo(P(t,tin,tin+dur)); const qo=tout==null?0:eio(P(t,tout,tout+.32));
+  const el=$(id); el.style.transform=`translateY(${(1-qi)*115-qo*115}%)`; el.style.visibility=(qi<=0||qo>=1)?'hidden':'visible';
+}
+const SCENES=[['A',0,2.05],['B',2.05,4.3],['C',4.3,7.2],['D',7.2,10.5],['E',10.5,13.4],['F',13.4,16.0],['G',16.0,19.0],['H',19.0,24.0]];
+// stack cards for C
+const CP=[3,7,9,4,8,12,13,10,11,6],ROT=[-4,3,-2,5,-3,2,-5,4,-1,2];
+CP.forEach((n,i)=>{const d=document.createElement('div');d.className='card';d.id='cs'+i;
+ d.style.cssText+=`width:720px;height:1080px;left:180px;top:580px;`;d.innerHTML=`<img src="../carousel/assets/page-${String(n).padStart(2,'0')}.jpg">`;$('cstack').appendChild(d)});
+const DUR=24.0;
+window.render=function(t){
+  for(const [id,a,b] of SCENES) $(id).style.display=(t>=a&&t<b)?'block':'none';
+  $('grain').style.backgroundPosition=`${(Math.sin(t*91.7)*1e4)%512|0}px ${(Math.cos(t*57.3)*1e4)%512|0}px`;
+  // A
+  line('a1',t,.05); line('a2',t,.38); line('a3',t,.72,null,.55);
+  { const z=1+.04*P(t,0,2.05); $('A').style.transform=`scale(${z})`; }
+  // B
+  { const s=2.05; line('b1',t,s+.08);
+    const q=expo(P(t,s,s+.7)); $('bcov').style.transform=`translateY(${(1-q)*900}px) rotateX(${(1-q)*28}deg) rotate(${lerp(-6,-2.5,q)}deg) scale(${1+.04*P(t,s+.7,4.3)})`;
+    $('bsh').style.backgroundPosition=`${lerp(140,-60,eio(P(t,s+.9,s+1.7)))}% 0`; }
+  // C
+  { const s=4.3; line('c1',t,s+.05); line('c2',t,s+1.2);
+    CP.forEach((n,i)=>{const tc=s+.15+i*.27, q=P(t,tc,tc+.16), e=eo(q), el=$('cs'+i);
+      el.style.display=t>=tc?'block':'none'; el.style.opacity=Math.min(1,q*2);
+      el.style.transform=`translateY(${(1-e)*60}px) scale(${1.14-.14*e}) rotate(${ROT[i]}deg)`;});
+    $('cstack').style.transform=`scale(${1+.035*P(t,s,7.2)})`; }
+  // D
+  { const s=7.2, f1=[7.95,8.75], f2=[9.15,9.95];
+    line('d1',t,s+.05,8.35); line('d2',t,8.42,9.55); line('d3',t,9.62);
+    const sq=expo(P(t,s,s+.6));
+    $('dsp').style.transform=`translateY(${(1-sq)*120}px) rotateX(${lerp(26,14,sq)}deg) scale(${lerp(.9,1,sq)+.03*P(t,s,10.5)})`;
+    $('D').style.opacity=1;
+    $('dL').src='../carousel/assets/page-'+(t<f1[0]?'03':t<f2[0]?'05':'07')+'.jpg';
+    $('dR').src='../carousel/assets/page-'+(t<f1[1]?'02':t<f2[1]?'04':'06')+'.jpg';
+    [[ 'leaf1',f1,'l1a','l1b'],['leaf2',f2,'l2a','l2b']].forEach(([id,f,a,b])=>{
+      const on=t>=f[0]&&t<f[1]; $(id).style.display=on?'block':'none';
+      const e=eio(P(t,f[0],f[1])); $(id).style.transform=`rotateY(${e*180}deg)`;
+      const sh=Math.sin(Math.PI*e); $(a).style.opacity=sh*.8; $(b).style.opacity=sh*.8;});
+  }
+  // E macro pan across page 3 (image width 4400 => scale 4 from 1100)
+  { const s=10.5, q=eio(P(t,s,13.4));
+    // focal points in 1100-wide page coords: scooter(880,560) -> horse(560,560) -> family(190,560)
+    const pts=[[880,560],[560,580],[240,560]];
+    const seg=q<.5?0:1, lq=eio(q<.5?q*2:(q-.5)*2);
+    const fx=lerp(pts[seg][0],pts[seg+1][0],lq), fy=lerp(pts[seg][1],pts[seg+1][1],lq);
+    const sc=lerp(1,.9,q);
+    $('eimg').style.transform=`translate(${540-fx*2.6*sc}px,${720-fy*2.6*sc}px) scale(${sc})`;
+    line('e1',t,s+.35); line('e2',t,s+1.0); }
+  // F
+  { const s=13.4; line('f0',t,s+.05);
+    const ts=[s+.25,s+.72,s+1.19,s+1.66,s+2.13];
+    ts.forEach((a,i)=>line('f'+(i+1),t,a,i<4?ts[i+1]-.05:null,.38));
+    $('fimg').style.transform=`scale(${1.05+.06*P(t,s,16)})`; }
+  // G
+  { const s=16.0; line('g0',t,s+.05);
+    [1,2,3].forEach(i=>{const a=s+.35+(i-1)*.62; line('gn'+i,t,a); line('gt'+i,t,a+.08);});
+    [1,2,3,4].forEach(i=>{const a=s+.25+(i-1)*.62; $('gr'+i).style.transform=`scaleX(${expo(P(t,a,a+.6))})`;}); }
+  // H
+  { const s=19.0;
+    const fan=(id,a,r,dx)=>{const q=expo(P(t,a,a+.75)); $(id).style.transform=`translate(${(1-q)*dx}px,${(1-q)*1100}px) rotate(${r*q}deg)`;};
+    fan('h3',s+.05,-9,-60); fan('h2',s+.15,9,60); fan('h1',s+.0,-1.5,0);
+    $('hsh').style.backgroundPosition=`${lerp(140,-60,eio(P(t,s+2.6,s+3.5)))}% 0`;
+    line('hlogo',t,s+.55,null,.7); line('ht1',t,s+.9); line('ht2',t,s+1.1);
+    const qc=expo(P(t,s+1.6,s+2.2)); $('hcta').style.opacity=qc; $('hcta').style.transform=`translateY(${(1-qc)*40}px)`;
+    const qs=expo(P(t,s+1.9,s+2.5)); $('hsub').style.opacity=qs;
+    $('hframe').style.opacity=expo(P(t,s+.4,s+1.2)); }
+};
+window.DUR=DUR;
+render(0);
+</script>
+</body>
+</html>
