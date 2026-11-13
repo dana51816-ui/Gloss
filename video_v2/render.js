@@ -32,22 +32,31 @@ const run = (cmd, args) => new Promise((res, rej) => { const p = spawn(cmd, args
     await browser.close(); return;
   }
   if (mode === 'chunk') {
-    const f0 = +rest[0], f1 = +rest[1], SUB = +(rest[2] || 3);
+    const f0 = +rest[0], f1 = +rest[1];
+    const B = 60 / 110, T = b => b * B;
+    const FAST = [[0.3, 2.45, 8], [T(6), T(8), 10], [T(17), T(18.7), 6], [T(20), T(20.8), 6], [T(22), T(22.6), 12], [T(24.2), T(25.3), 6],
+      [T(26), T(26.9), 8], [T(28), T(28.9), 10], [T(34), T(34.6), 6], [T(36.2), T(37.7), 8], [T(38.2), T(40), 12], [T(41.9), T(44.7), 12], [T(52), T(53.5), 6]];
+    const subFor = t => { let n = 3; for (const [a, b, k] of FAST) if (t >= a - 0.05 && t <= b + 0.05) n = Math.max(n, k); return n; };
     const { browser, stage, at } = await open();
-    const ff = spawn('ffmpeg', ['-y', '-loglevel', 'error', '-f', 'image2pipe', '-framerate', String(FPS * SUB), '-c:v', 'mjpeg', '-i', '-',
-      '-vf', `tmix=frames=${SUB},select='eq(mod(n\\,${SUB})\\,${SUB - 1})',setpts=N/${FPS}/TB`, '-r', String(FPS),
+    const ff = spawn('ffmpeg', ['-y', '-loglevel', 'error', '-f', 'rawvideo', '-pix_fmt', 'rgb24', '-s', '1080x1920', '-r', String(FPS), '-i', '-',
       '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '8', '-pix_fmt', 'yuv444p', out], { stdio: ['pipe', 'inherit', 'inherit'] });
+    const acc = spawn('python3', ['-I', path.join(__dirname, 'accum.py')], { stdio: ['pipe', 'pipe', 'inherit'] });
+    acc.stdout.pipe(ff.stdin);
+    const w = async buf => { if (!acc.stdin.write(buf)) await new Promise(r => acc.stdin.once('drain', r)); };
+    const u32 = n => { const b = Buffer.alloc(4); b.writeUInt32LE(n); return b; };
     const t0 = Date.now();
     for (let f = f0; f < f1; f++) {
+      const SUB = subFor(f / FPS);
+      await w(u32(SUB));
       for (let k = 0; k < SUB; k++) {
         const t = f / FPS + (SUB > 1 ? (k - (SUB - 1) / 2) * (SHUTTER / FPS) / (SUB - 1) : 0);
         await at(Math.max(0, t));
-        const buf = await stage.screenshot({ type: 'jpeg', quality: 96 });
-        if (!ff.stdin.write(buf)) await new Promise(r => ff.stdin.once('drain', r));
+        const buf = await stage.screenshot({ type: 'jpeg', quality: 95 });
+        await w(u32(buf.length)); await w(buf);
       }
       if ((f - f0) % 60 === 0) console.log(`[${f0}-${f1}] frame ${f} ${((Date.now() - t0) / 1000).toFixed(0)}s`);
     }
-    ff.stdin.end(); await new Promise(r => ff.on('close', r)); await browser.close(); return;
+    acc.stdin.end(); await new Promise(r => ff.on('close', r)); await browser.close(); return;
   }
   if (mode === 'video') {
     const audio = rest[0] && rest[0] !== '-' ? rest[0] : null, W = +(rest[1] || 3), SUB = rest[2] || '3';
