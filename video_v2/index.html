@@ -1,0 +1,736 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>GLOSS | Written About One · v2</title>
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<style>
+:root{
+  --bur:#6B0F1E; --bur-d:#3E0710; --ivory:#F8F2E7; --paper:#F3ECDF;
+  --khaki:#8C7A55; --khaki-l:#CDBD93; --ink:#24130F;
+  --serif:"Frank Ruhl Libre",serif; --sans:"Heebo",sans-serif; --didone:"Bodoni Moda",serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
+#stage{position:relative;width:1080px;height:1920px;overflow:hidden;background:var(--bur);-webkit-font-smoothing:antialiased;font-family:var(--sans);color:var(--ivory)}
+.abs{position:absolute}
+.layer{position:absolute;inset:0;overflow:hidden}
+.ltr{direction:ltr;unicode-bidi:isolate}
+.mask{overflow:hidden;display:inline-block;vertical-align:top;padding:0 .05em .04em}
+.mask>span{display:inline-block;will-change:transform}
+.p3{transform-style:preserve-3d}
+
+/* studio */
+#studio{position:absolute;inset:0}
+#studioLight{position:absolute;inset:0;background:radial-gradient(ellipse 70% 45% at 50% 42%,rgba(255,220,200,.16),rgba(0,0,0,0) 70%),radial-gradient(ellipse 120% 80% at 50% 50%,rgba(0,0,0,0) 40%,rgba(0,0,0,.45) 100%)}
+#L3d{perspective:2400px;perspective-origin:540px 960px}
+#cam{position:absolute;left:0;top:0;width:1080px;height:1920px}
+.obj{position:absolute;left:0;top:0;width:1080px;height:1620px;transform-origin:0 0}
+.face{position:absolute;left:0;top:0;width:1080px;height:1620px;backface-visibility:hidden}
+.pimg{position:absolute;left:0;top:0;width:1080px;height:1620px;display:none}
+.edge{position:absolute;background:repeating-linear-gradient(90deg,#efe8db 0 2px,#d9d0c0 2px 3px)}
+.edgeH{position:absolute;background:repeating-linear-gradient(0deg,#efe8db 0 2px,#d9d0c0 2px 3px)}
+#floorShadow{position:absolute;left:0;top:0;width:1080px;height:1620px;background:radial-gradient(ellipse 50% 50% at 50% 50%,rgba(0,0,0,.55),rgba(0,0,0,0) 70%);transform-origin:50% 50%;filter:blur(20px)}
+.strip{position:absolute;top:0;height:1620px;transform-style:preserve-3d;transform-origin:100% 50%}
+.strip>.sf,.strip>.sb{position:absolute;left:0;top:0;height:1620px;backface-visibility:hidden;background-repeat:no-repeat}
+.strip>.sb{transform:rotateY(180deg);background:linear-gradient(90deg,#efe7da,#f7f1e6)}
+.sh{position:absolute;inset:0;pointer-events:none}
+#sheen{position:absolute;left:0;top:0;width:1080px;height:1620px;pointer-events:none;mix-blend-mode:screen;
+  background:linear-gradient(105deg,rgba(255,255,255,0) 38%,rgba(255,250,240,.10) 45%,rgba(255,255,255,.55) 50%,rgba(255,250,240,.10) 55%,rgba(255,255,255,0) 62%);background-size:300% 100%;background-repeat:no-repeat}
+#underShade{position:absolute;left:0;top:0;width:1080px;height:1620px;pointer-events:none}
+.lift{position:absolute;background-repeat:no-repeat;transform-style:preserve-3d}
+.hole{position:absolute}
+
+/* hook */
+#hookCv{position:absolute;left:0;top:0;filter:drop-shadow(0 24px 40px rgba(0,0,0,.55))}
+.hline{left:0;right:0;top:420px;text-align:center;font-family:var(--serif);font-weight:700;font-size:88px;line-height:1.2;color:var(--ivory)}
+.hline em{font-style:normal;color:var(--khaki-l)}
+
+/* big type */
+.giant{left:0;right:0;text-align:center;font-family:var(--serif);font-weight:900;color:var(--ivory);line-height:1;white-space:nowrap}
+.kick{left:0;right:0;text-align:center;font-family:var(--sans);font-weight:300;font-size:28px;letter-spacing:.42em;color:var(--khaki-l)}
+
+/* chapter tabs */
+.chap{position:absolute;display:flex;align-items:flex-end;gap:22px;direction:rtl;white-space:nowrap}
+.chap .n{font-family:var(--didone);font-style:italic;font-weight:500;font-variation-settings:"opsz" 12;font-size:150px;line-height:.8;color:var(--khaki-l)}
+.chap .t{font-family:var(--serif);font-weight:900;font-size:72px;line-height:1.02;color:var(--ivory);padding-bottom:4px}
+.chap .t small{display:block;font-family:var(--sans);font-weight:300;font-size:22px;letter-spacing:.38em;color:var(--khaki-l);margin-bottom:12px}
+.chap.light .t{color:var(--bur)} .chap.light .n{color:var(--khaki)} .chap.light .t small{color:var(--khaki)}
+.vert{position:absolute;transform-origin:0 0;white-space:nowrap;font-family:var(--serif);font-weight:900;font-size:84px;color:var(--ivory)}
+
+/* flat scenes */
+.full{position:absolute;inset:0;overflow:hidden}
+.full img{position:absolute;left:0;top:0;transform-origin:0 0}
+#doors{perspective:1600px;perspective-origin:540px 960px}
+.door{position:absolute;top:0;width:540px;height:1920px;overflow:hidden;background:var(--bur);backface-visibility:hidden}
+.door img{position:absolute;top:150px;width:1080px;height:1620px}
+#dof{position:absolute;inset:0;pointer-events:none;backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px)}
+.sunCopy{left:0;right:0;text-align:center;font-family:var(--serif);font-weight:900;font-size:86px;line-height:1.16;color:#FFF9EF;text-shadow:0 2px 34px rgba(70,15,10,.6)}
+.sunCopy .w{display:inline-block}
+#bloom{position:absolute;inset:0;pointer-events:none;mix-blend-mode:screen}
+#leak{position:absolute;inset:0;pointer-events:none;mix-blend-mode:screen}
+
+/* end */
+#endLine{left:0;right:0;top:1150px;text-align:center;font-family:var(--serif);font-weight:900;font-size:92px;line-height:1.1;color:var(--ivory)}
+#endSub{left:0;right:0;top:1375px;text-align:center;font-family:var(--sans);font-weight:300;font-size:34px;line-height:1.5;color:rgba(248,242,231,.86)}
+#endSub b{font-weight:500;color:var(--khaki-l);letter-spacing:.02em}
+#endCta{left:50%;top:1478px;background:var(--ivory);color:var(--bur);font-family:var(--sans);font-weight:600;font-size:38px;padding:24px 60px;border-radius:999px;white-space:nowrap;overflow:hidden}
+#ctaShine{position:absolute;inset:0;background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.9) 50%,transparent 65%);background-size:300% 100%;mix-blend-mode:soft-light}
+
+#grain{position:absolute;inset:0;width:1080px;height:1920px;mix-blend-mode:overlay;opacity:.08;pointer-events:none}
+#vig{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 85% 70% at 50% 50%,rgba(0,0,0,0) 55%,rgba(0,0,0,.28) 100%)}
+</style>
+</head>
+<body>
+<div id="stage">
+
+  <!-- ===== 3D WORLD ===== -->
+  <div class="layer" id="L3d">
+    <div id="studio"><div id="studioLight"></div></div>
+    <div id="cam" class="p3">
+      <div id="floorShadow"></div>
+      <!-- the magazine object -->
+      <div id="mag" class="obj p3">
+        <img class="face" id="magBack" src="assets/pages/p-back.jpg" style="transform:translateZ(-14px) rotateY(180deg);backface-visibility:visible">
+        <div class="edge" style="left:0;top:0;width:14px;height:1620px;transform-origin:0 0;transform:rotateY(90deg)"></div>
+        <div class="edge" style="left:1080px;top:0;width:14px;height:1620px;transform-origin:0 0;transform:rotateY(90deg);background:#e9e2d4"></div>
+        <div class="edgeH" style="left:0;top:0;width:1080px;height:14px;transform-origin:0 0;transform:rotateX(-90deg)"></div>
+        <div class="edgeH" style="left:0;top:1620px;width:1080px;height:14px;transform-origin:0 0;transform:rotateX(-90deg)"></div>
+        <div id="under" class="face"></div>
+        <div id="underShade" style="transform:translateZ(.2px)"></div>
+        <div id="holes" class="p3" style="position:absolute;left:0;top:0;width:1080px;height:1620px"></div>
+        <div id="leafWrap" class="p3" style="position:absolute;left:0;top:0;width:1080px;height:1620px;transform:translateZ(.6px)"></div>
+        <div id="lifts" class="p3" style="position:absolute;left:0;top:0;width:1080px;height:1620px"></div>
+        <div id="sheen" style="transform:translateZ(1px)"></div>
+      </div>
+      <!-- loose sheet (drop / isometric) -->
+      <div id="sheet" class="obj p3"><div id="sheetShadow" style="position:absolute;inset:0;background:rgba(0,0,0,.55);filter:blur(30px);transform:translateZ(-2px)"></div><img class="face" id="sheetImg" src="assets/pages/p-07.jpg"></div>
+      <!-- exploded issue -->
+      <div id="stack" class="p3" style="position:absolute;left:0;top:0"></div>
+    </div>
+    <div id="dof"></div>
+  </div>
+
+  <!-- ===== FLAT SCENES ===== -->
+  <div class="layer" id="Lcouple"><div class="full"><img id="coupleImg" src="assets/pages/p-06.jpg"></div></div>
+  <div class="layer" id="Ldoors"><div id="doors" class="full p3">
+    <div class="door" id="doorL" style="left:0;transform-origin:0 50%"><img src="assets/pages/p-05.jpg" style="left:0"></div>
+    <div class="door" id="doorR" style="left:540px;transform-origin:100% 50%"><img src="assets/pages/p-05.jpg" style="left:-540px"></div>
+  </div></div>
+  <div class="layer" id="Lhorse" style="background:#1d1d18"><div class="full"><img id="horseImg" src="assets/pages/p-08.jpg"></div></div>
+  <div class="layer" id="Lplate"><div class="full"><img id="plateImg" src="assets/pages/p-11.jpg"></div>
+    <svg class="abs" style="left:0;top:0" width="1080" height="1920"><circle id="plateRing" cx="540" cy="960" r="10" fill="none" stroke="#F8F2E7" stroke-width="3"/></svg></div>
+  <div class="layer" id="Lsun"><div class="full"><img id="sunImg" src="assets/pages/p-14.jpg"></div><div id="bloom"></div><div id="leak"></div></div>
+
+  <!-- ===== HOOK (die-cut sheet) ===== -->
+  <div class="layer" id="Lhook">
+    <canvas id="hookCv" width="1080" height="1920"></canvas>
+    <div id="h1" class="abs hline"><span class="mask"><span>רוב</span></span> <span class="mask"><span>המגזינים</span></span> <span class="mask"><span>נכתבים</span></span><br><span class="mask"><span>בשביל</span></span> <span class="mask"><span>מיליונים.</span></span></div>
+    <div id="h2" class="abs hline"><span class="mask"><span>המגזין</span></span> <span class="mask"><span>הזה</span></span><br><span class="mask"><span>נכתב</span></span> <span class="mask"><span>על</span></span> <span class="mask"><span><em>אחד.</em></span></span></div>
+  </div>
+
+  <!-- ===== TYPE OVERLAYS ===== -->
+  <div class="layer" id="Ltype" style="pointer-events:none">
+    <div id="cvKick" class="abs kick" style="top:250px">על השער</div>
+    <div id="gA1" class="abs giant" style="top:300px;font-size:210px"><span class="mask"><span>לא כוכב</span></span></div>
+    <div id="gA2" class="abs giant" style="top:1390px;font-size:200px"><span class="mask"><span>קולנוע.</span></span></div>
+    <div id="gB1" class="abs giant" style="top:300px;font-size:220px"><span class="mask"><span>מישהו</span></span></div>
+    <div id="gB2" class="abs giant" style="top:1400px;font-size:150px"><span class="mask"><span>שאתם</span></span> <span class="mask"><span>אוהבים.</span></span></div>
+    <div id="chaps"></div>
+    <div id="riffNum" class="abs ltr" style="left:70px;top:250px;font-family:var(--didone);font-style:italic;font-weight:500;font-size:150px;color:var(--khaki-l)"></div>
+    <div id="stA" class="abs giant" style="top:230px;font-size:120px;line-height:1.08"><span class="mask"><span>גיליון שלם.</span></span><br><span class="mask"><span style="color:var(--khaki-l)">על אדם אחד.</span></span></div>
+    <div id="sunA" class="abs sunCopy" style="top:560px"></div>
+    <div id="sunB" class="abs sunCopy" style="top:560px"></div>
+    <div id="endLine" class="abs"><span class="mask"><span>הסיפור שלהם.</span></span><br><span class="mask"><span>בעיתון אחד.</span></span></div>
+    <div id="endSub" class="abs"><b>מגזין אישי במתנה</b> · ליום הולדת, נישואין, להורים ולחברים</div>
+    <div id="endCta" class="abs">להזמנת גיליון בוואטסאפ<div id="ctaShine"></div></div>
+  </div>
+
+  <img id="grain" src="assets/grain0.png">
+  <div id="vig"></div>
+</div>
+
+<script>
+/* ================= core ================= */
+const BPM=110, B=60/BPM, FPS=30;
+const T=b=>b*B;
+const $=id=>document.getElementById(id);
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const seg=(t,a,b)=>clamp((t-a)/(b-a));
+const lerp=(a,b,p)=>a+(b-a)*p;
+const sstep=p=>p*p*(3-2*p);
+const E={
+  lin:p=>p,
+  outExpo:p=>p>=1?1:1-Math.pow(2,-10*p),
+  inExpo:p=>p<=0?0:Math.pow(2,10*p-10),
+  inOutExpo:p=>p<=0?0:p>=1?1:p<.5?Math.pow(2,20*p-10)/2:(2-Math.pow(2,-20*p+10))/2,
+  outCubic:p=>1-Math.pow(1-p,3), inCubic:p=>p*p*p,
+  inOutCubic:p=>p<.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2,
+  outQuart:p=>1-Math.pow(1-p,4), inOutQuart:p=>p<.5?8*p*p*p*p:1-Math.pow(-2*p+2,4)/2,
+  inOutSine:p=>-(Math.cos(Math.PI*p)-1)/2,
+  outBack:p=>{const c1=1.5,c3=c1+1;return 1+c3*Math.pow(p-1,3)+c1*Math.pow(p-1,2)},
+};
+const show=(el,v)=>{el.style.display=v?'':'none'};
+const P=i=>`assets/pages/p-${i==='back'?'back':String(i).padStart(2,'0')}.jpg`;
+const PW=1500,PH=2250, K=1080/1500; // page px -> object units
+
+/* keyframe interpolation: keys=[[t,{...},ease?]] */
+function kf(t,keys){
+  if(t<=keys[0][0]) return {...keys[0][1]};
+  for(let i=1;i<keys.length;i++){
+    const [t1,s1,e]=keys[i], [t0,s0]=keys[i-1];
+    if(t<=t1){ const p=(E[e||'inOutCubic'])(seg(t,t0,t1)); const o={}; for(const k in s1) o[k]=lerp(s0[k]??s1[k],s1[k],p); for(const k in s0) if(!(k in o)) o[k]=s0[k]; return o; }
+  }
+  return {...keys[keys.length-1][1]};
+}
+function objTf(s){ // place object (1080x1620) with its center at x,y,z
+  return `translate3d(${s.x}px,${s.y}px,${s.z||0}px) rotateZ(${s.rz||0}deg) rotateX(${s.rx||0}deg) rotateY(${s.ry||0}deg) scale(${s.s??1}) translate(-540px,-810px)`;
+}
+function maskReveal(el,t,t0,stagger=0.06,dur=0.55,out=null,outDur=0.35){
+  el.querySelectorAll('.mask>span').forEach((s,i)=>{
+    let p=E.outExpo(seg(t,t0+i*stagger,t0+i*stagger+dur));
+    let y=(1-p)*112;
+    if(out!=null){ const q=E.inCubic(seg(t,out+i*0.035,out+i*0.035+outDur)); y-=q*112; }
+    s.style.transform=`translateY(${y}%)`;
+  });
+}
+function place(img,w,h,cx,cy,zoom=1){
+  const s=Math.max(w/PW,h/PH)*zoom; let x=w/2-cx*PW*s, y=h/2-cy*PH*s;
+  x=Math.min(0,Math.max(w-PW*s,x)); y=Math.min(0,Math.max(h-PH*s,y));
+  img.style.width=PW+'px'; img.style.height=PH+'px'; img.style.transform=`translate(${x}px,${y}px) scale(${s})`;
+  return {s,x,y};
+}
+
+/* ================= magazine: under pages ================= */
+const under=$('under'); const underImgs={};
+[1,2,3,4,5,6,7,8,9,10,11,12,13,14,'back'].forEach(i=>{const im=document.createElement('img');im.className='pimg';im.src=P(i);under.appendChild(im);underImgs[i]=im;});
+let curUnder=null;
+function setUnder(i){ if(curUnder===i) return; if(curUnder!=null) underImgs[curUnder].style.display='none'; underImgs[i].style.display='block'; curUnder=i; }
+
+/* ================= magazine: curling leaf ================= */
+const NS=22, WS=1080/NS;
+const strips=[];
+(function buildLeaf(){
+  let parent=$('leafWrap');
+  for(let k=0;k<NS;k++){
+    const s=document.createElement('div'); s.className='strip';
+    s.style.width=WS+'px'; s.style.left = k===0 ? (1080-WS)+'px' : (-WS)+'px';
+    const f=document.createElement('div'); f.className='sf'; f.style.width=(WS+1.2)+'px'; f.style.left='-0.6px';
+    f.style.backgroundSize='1080px 1620px'; f.style.backgroundPosition=`${-(1080-(k+1)*WS)+0.6}px 0`;
+    const fs=document.createElement('div'); fs.className='sh'; f.appendChild(fs);
+    const b=document.createElement('div'); b.className='sb'; b.style.width=(WS+1.2)+'px'; b.style.left='-0.6px';
+    const bs=document.createElement('div'); bs.className='sh'; b.appendChild(bs);
+    s.appendChild(f); s.appendChild(b); parent.appendChild(s); strips.push({s,f,fs,b,bs}); parent=s;
+  }
+})();
+let leafSrc=null;
+function setLeaf(src,p,curl=70,lift=0){
+  const wrap=$('leafWrap');
+  if(src==null||p<=0.0001||p>=0.9999){ wrap.style.display='none'; $('underShade').style.background='none'; return; }
+  wrap.style.display='';
+  if(leafSrc!==src){ strips.forEach(o=>o.f.style.backgroundImage=`url(${src})`); leafSrc=src; }
+  const th=180*p;
+  const Bc=Math.sin(Math.PI*p)*curl;
+  // distribute bend toward free edge
+  let wsum=0; const w=[]; for(let k=0;k<NS;k++){ const v=Math.pow((k+1)/NS,1.6); w.push(v); wsum+=v; }
+  let cum=0;
+  for(let k=0;k<NS;k++){
+    let d = k===0 ? th + Bc*w[0]/wsum : Bc*w[k]/wsum;
+    if(cum+d>179.2) d=179.2-cum;
+    cum+=d;
+    const o=strips[k]; o.s.style.transform=`rotateY(${d.toFixed(3)}deg)`;
+    const c=Math.cos(cum*Math.PI/180), sn=Math.sin(cum*Math.PI/180);
+    // light from upper-front-left: shade by facing, specular streak near 35deg
+    const dark=clamp(0.5*(1-Math.abs(c)),0,0.55);
+    const spec=Math.max(0,Math.cos((cum-32)*Math.PI/180*3))*(cum<70?0.22:0);
+    o.fs.style.background=`rgba(0,0,0,${dark.toFixed(3)})`;
+    o.fs.style.boxShadow= spec>0.01?`inset 0 0 0 999px rgba(255,248,235,${spec.toFixed(3)})`:'none';
+    o.bs.style.background=`rgba(0,0,0,${(clamp(0.45*(1-Math.abs(c)),0,0.5)).toFixed(3)})`;
+  }
+  // shadow on the page underneath: soft band moving with the free edge
+  const xEdge = 1080 - 1080*Math.cos(Math.min(th+Bc*0.5,180)*Math.PI/180*0.5)*0; // unused
+  const a=Math.sin(Math.PI*p);
+  const prog=p*100;
+  $('underShade').style.background=`linear-gradient(90deg, rgba(0,0,0,0) ${Math.max(0,prog*0.9-30)}%, rgba(0,0,0,${0.42*a}) ${Math.max(0,prog*0.9)}%, rgba(0,0,0,${0.12*a}) 100%)`;
+}
+
+/* ================= lifted crops ================= */
+function mkLift(id,page,rect,poly,holeColor){
+  const L=$('lifts'), H=$('holes');
+  const [x,y,w,h]=rect.map(v=>v*K);
+  const d=document.createElement('div'); d.className='lift'; d.id=id;
+  d.style.cssText+=`left:${x}px;top:${y}px;width:${w}px;height:${h}px;background-image:url(${P(page)});background-size:1080px 1620px;background-position:${-x}px ${-y}px;transform-origin:50% 50%`;
+  if(poly) d.style.clipPath=`polygon(${poly.map(([px,py])=>`${px*K-x}px ${py*K-y}px`).join(',')})`;
+  L.appendChild(d);
+  const sh=document.createElement('div'); sh.className='hole'; sh.id=id+'_h';
+  sh.style.cssText=`left:${x}px;top:${y}px;width:${w}px;height:${h}px;background:${holeColor};transform:translateZ(.3px)`;
+  if(poly) sh.style.clipPath=d.style.clipPath;
+  H.appendChild(sh);
+  const sd=document.createElement('div'); sd.className='hole'; sd.id=id+'_s';
+  sd.style.cssText=`left:${x}px;top:${y}px;width:${w}px;height:${h}px;background:rgba(0,0,0,.6);filter:blur(26px);transform:translateZ(.4px)`;
+  H.appendChild(sd);
+  return {el:d,hole:sh,shadow:sd,page};
+}
+const LIFTS={
+  fam: mkLift('lfam',3,[28,683,530,447],[[30,700],[541,684],[556,1116],[45,1129]],'#ffffff'),
+  e1: mkLift('le1',4,[62,1442,453,425],null,'#17141a'),
+  e2: mkLift('le2',4,[535,1442,433,425],null,'#17141a'),
+  e3: mkLift('le3',4,[988,1442,452,425],null,'#17141a'),
+};
+function setLift(L,on,{z=0,dx=0,dy=0,rz=0,rx=0,ry=0,s=1}={},shadowA=1){
+  show(L.el,on); show(L.hole,on); show(L.shadow,on);
+  if(!on) return;
+  L.el.style.transform=`translate3d(${dx}px,${dy}px,${z}px) rotateZ(${rz}deg) rotateX(${rx}deg) rotateY(${ry}deg) scale(${s})`;
+  L.el.style.boxShadow=`0 ${10+z*0.12}px ${20+z*0.25}px rgba(0,0,0,${0.35*shadowA})`;
+  L.shadow.style.transform=`translate3d(${dx*0.6+z*0.08}px,${dy*0.6+z*0.18}px,.4px)`;
+  L.shadow.style.opacity=clamp(z/120)*0.8*shadowA;
+  L.hole.style.opacity=clamp(z/40);
+}
+
+/* ================= exploded stack ================= */
+const stackEls=[];
+(function(){
+  const st=$('stack');
+  for(let i=1;i<=14;i++){ const d=document.createElement('img'); d.src=P(i); d.className='obj'; d.style.boxShadow='0 30px 60px rgba(0,0,0,.35)'; st.appendChild(d); stackEls.push(d); }
+})();
+
+/* ================= hook canvas ================= */
+const cv=$('hookCv'), cx2=cv.getContext('2d');
+const ODO={font:'500 196px "Bodoni Moda"', y:1130}; let PIV=null;
+let digitW=0, commaW=0, oneBox=null;
+function hookValue(t){ const p=seg(t,0.35,2.25); return {v:Math.pow(10,6*(1-E.outQuart(p))), p}; }
+function crossTime(thr){ // time when value drops below thr
+  let lo=0.35, hi=2.25; for(let i=0;i<40;i++){ const m=(lo+hi)/2; if(hookValue(m).v>thr) lo=m; else hi=m; } return hi;
+}
+const ITEMS=[]; // odometer layout items
+function buildOdo(){
+  cx2.font=ODO.font; digitW=Math.max(...'0123456789'.split('').map(c=>cx2.measureText(c).width)); commaW=cx2.measureText(',').width;
+  const seq=['d6',',','d5','d4','d3',',','d2','d1','d0'];
+  seq.forEach(s=>{
+    if(s===',') ITEMS.push({type:'c',w:commaW});
+    else ITEMS.push({type:'d',e:+s[1],w:digitW});
+  });
+  // commas belong to the digit before them (left)
+  ITEMS[1].e=6; ITEMS[5].e=3;
+  ITEMS.forEach(it=>{ it.tc = it.e===0? 99 : crossTime(Math.pow(10,it.e)); it.dir = (it.e%2?1:-1); });
+}
+function drawHook(t){
+  const W=1080,H=1920; cx2.setTransform(1,0,0,1,0,0); cx2.clearRect(0,0,W,H);
+  const {v,p}=hookValue(t);
+  // weight morph of final "1": 500 -> 860
+  const wq=E.inOutCubic(seg(t,2.75,3.3));
+  const wt=Math.round(lerp(500,860,wq));
+  // sheet
+  cx2.globalCompositeOperation='source-over';
+  cx2.fillStyle='#6B0F1E'; cx2.fillRect(0,0,W,H);
+  // studio light on the sheet
+  const g=cx2.createRadialGradient(540,860,50,540,960,1200); g.addColorStop(0,'rgba(255,215,200,.10)'); g.addColorStop(1,'rgba(0,0,0,.30)');
+  cx2.fillStyle=g; cx2.fillRect(0,0,W,H);
+  const holeA=E.inOutCubic(seg(t,3.05,3.45));
+  const zoom=E.inExpo(seg(t,T(6),T(8)));
+  cx2.font=`${wt} 196px "Bodoni Moda"`;
+  const m=cx2.measureText('1');
+  const gx=540, gy=ODO.y;
+  const bw=m.actualBoundingBoxLeft+m.actualBoundingBoxRight, bh=m.actualBoundingBoxAscent;
+  const pivX=PIV?PIV.x:gx, pivY=PIV?PIV.y:gy-bh*0.45;
+  const pre=lerp(1,3.1,E.inOutCubic(seg(t,2.6,3.35))); const sc=pre*(1+zoom*11);
+  if(holeA>0 && GLY){
+    const f=GLY.f/196; // glyph bitmap is rendered at 1600px font
+    cx2.save();
+    cx2.translate(pivX,pivY); cx2.scale(sc,sc); cx2.translate(-pivX,-pivY);
+    cx2.imageSmoothingQuality='high';
+    cx2.globalCompositeOperation='destination-out'; cx2.globalAlpha=holeA;
+    cx2.drawImage(GLY.c, gx-GLY.ox/f, gy-GLY.oy/f, GLY.c.width/f, GLY.c.height/f);
+    cx2.globalAlpha=1; cx2.globalCompositeOperation='source-over';
+    if(sc<6){ cx2.globalAlpha=0.5*holeA*(1-sc/6); cx2.drawImage(GLY.edge, gx-GLY.ox/f-1.2, gy-GLY.oy/f-1.2, GLY.c.width/f, GLY.c.height/f); cx2.globalAlpha=1; }
+    cx2.restore();
+  }
+  // odometer digits (ivory) until the hole takes over
+  if(holeA<1){
+    cx2.save(); cx2.translate(pivX,pivY); cx2.scale(pre,pre); cx2.translate(-pivX,-pivY); cx2.globalAlpha=1-holeA; cx2.fillStyle='#F8F2E7'; cx2.textBaseline='alphabetic'; cx2.textAlign='left';
+    // effective widths
+    const eff=ITEMS.map(it=>{ if(it.e===0) return it.w; const dt=t-it.tc; return it.w*(1-sstep(clamp(dt/0.32))); });
+    const tot=eff.reduce((a,b)=>a+b,0);
+    let x=540-tot/2;
+    const lh=250;
+    const pop = t>2.25 ? 1+0.07*Math.exp(-(t-2.25)*8)*Math.cos((t-2.25)*20) : 1;
+    ITEMS.forEach((it,i)=>{
+      const dt=t-it.tc;
+      let fy=0, rot=0, al=1;
+      if(it.e!==0 && dt>0){ fy=0.5*5200*dt*dt; rot=dt*2.4*it.dir; al=1-clamp(dt/0.55); }
+      if(al<=0){ x+=eff[i]; return; }
+      cx2.save(); cx2.globalAlpha*=al;
+      const cxm=x+it.w/2;
+      cx2.translate(cxm,gy-80+fy); cx2.rotate(rot); cx2.translate(-cxm,-(gy-80));
+      if(it.e===0||true){ /* pop applies to whole */ }
+      if(it.type==='c'){ cx2.font=ODO.font; cx2.fillText(',',x,gy); }
+      else{
+        cx2.font = it.e===0? `${wt} 196px "Bodoni Moda"` : ODO.font;
+        let roll = (v/Math.pow(10,it.e))%10; if(p>=1) roll = it.e===0?1:0;
+        if(it.e>0 && dt>0) roll=0; // leading zero
+        // column clip
+        cx2.save(); cx2.beginPath(); cx2.rect(x-20,gy-205,it.w+40,lh); cx2.clip();
+        const base=Math.floor(roll), fr=roll-base;
+        for(let k=-1;k<=1;k++){
+          const d=((base+k)%10+10)%10;
+          cx2.fillText(String(d), x+(it.w-cx2.measureText(String(d)).width)/2, gy - (k - fr)*lh);
+        }
+        cx2.restore();
+      }
+      cx2.restore();
+      x+=eff[i];
+    });
+    cx2.restore();
+  }
+  // apply pop by CSS scale on canvas would scale sheet; skip
+}
+
+let GLY=null;
+function buildGlyph(){
+  const F=1600, c=document.createElement('canvas'); c.width=1400; c.height=1500; const g=c.getContext('2d');
+  g.font=`860 ${F}px "Bodoni Moda"`; g.textAlign='center'; g.fillStyle='#000';
+  const ox=700, oy=1300; g.fillText('1',ox,oy);
+  const e=document.createElement('canvas'); e.width=c.width; e.height=c.height; const ge=e.getContext('2d');
+  ge.drawImage(c,0,0); ge.globalCompositeOperation='source-in'; ge.fillStyle='#FFE9DC'; ge.fillRect(0,0,e.width,e.height);
+  GLY={c,edge:e,ox,oy,f:F};
+}
+function findPivot(){
+  const c=document.createElement('canvas'); c.width=1080; c.height=1920; const g=c.getContext('2d');
+  g.font='860 196px "Bodoni Moda"'; g.textAlign='center'; g.fillStyle='#000'; g.fillText('1',540,ODO.y);
+  const m=g.measureText('1'); const top=ODO.y-m.actualBoundingBoxAscent;
+  const y=Math.round(top+m.actualBoundingBoxAscent*0.55);
+  const row=g.getImageData(0,y,1080,1).data; let xs=[]; for(let x=0;x<1080;x++) if(row[x*4+3]>200) xs.push(x);
+  // longest run
+  let best=[0,0],cur=[xs[0],xs[0]]; for(let i=1;i<xs.length;i++){ if(xs[i]===xs[i-1]+1) cur[1]=xs[i]; else { if(cur[1]-cur[0]>best[1]-best[0]) best=cur.slice(); cur=[xs[i],xs[i]]; } } if(cur[1]-cur[0]>best[1]-best[0]) best=cur;
+  return {x:(best[0]+best[1])/2, y};
+}
+/* ================= chapter tabs ================= */
+const CH=[
+  {id:'c03',n:'03',t:'העולם של מתן',k:'THE THINGS THAT MAKE HIM',st:'right:60px;top:240px'},
+  {id:'c04',n:'04',t:'מתן וריף: הסדרה',k:'THE FAMILY ORIGINAL',st:'right:60px;top:240px'},
+  {id:'c07',n:'07',t:'חודש מחוץ לשגרה',k:'HONEYMOON DIARIES',st:'right:60px;top:240px'},
+  {id:'c08',n:'08',t:'אהבה עם ארבע רגליים',k:'',st:'right:60px;top:250px'},
+  {id:'c10',n:'10',t:'הבית לפי מתן',k:'',st:'right:60px;top:250px',light:1},
+  {id:'c11',n:'11',t:'יש עוד משהו לאכול?',k:'',st:'right:60px;top:250px'},
+];
+(function(){
+  const host=$('chaps');
+  CH.forEach(c=>{const d=document.createElement('div'); d.className='chap'+(c.light?' light':''); d.id=c.id; d.style.cssText+=c.st;
+    d.innerHTML=`<div class="n ltr"><span class="mask"><span>${c.n}</span></span></div><div class="t">${c.k?`<small><span class="mask"><span>${c.k}</span></span></small>`:''}<span class="mask"><span>${c.t}</span></span></div>`; host.appendChild(d);});
+  // vertical title for 05
+  const v=document.createElement('div'); v.className='vert'; v.id='c05';
+  v.innerHTML=`<span class="mask"><span><span class="ltr" style="font-family:var(--didone);font-style:italic;font-weight:500;color:var(--khaki-l)">05</span>&nbsp;&nbsp;שניים באותו ראש</span></span>`;
+  host.appendChild(v);
+})();
+function chap(id,t,a,b,light){ const el=$(id); const on=t>=a-0.02&&t<b; show(el,on); if(on) maskReveal(el,t,a+0.04,0.05,0.5,b-0.3,0.28); }
+
+/* word-split copy for blur-in */
+function words(el,text){ el.innerHTML=text.split('\n').map(line=>line.split(' ').map(w=>`<span class="w">${w}</span>`).join(' ')).join('<br>'); return [...el.querySelectorAll('.w')]; }
+const sunAW=words($('sunA'),'אתם מביאים\nאת הזיכרונות.');
+const sunBW=words($('sunB'),'אנחנו הופכים אותם\nלגיליון.');
+function blurIn(ws,t,t0,st,dur,out){
+  ws.forEach((w,i)=>{
+    const p=E.outCubic(seg(t,t0+i*st,t0+i*st+dur));
+    let o=p, bl=(1-p)*18, y=(1-p)*26, ls=(1-p)*0.08;
+    if(out!=null){ const q=E.inCubic(seg(t,out+i*0.05,out+i*0.05+0.4)); o*=1-q; bl+=q*14; y-=q*20; }
+    w.style.opacity=o; w.style.filter=`blur(${bl.toFixed(2)}px)`; w.style.transform=`translateY(${y}px)`; w.style.letterSpacing=ls+'em';
+  });
+}
+
+/* ================= MAG STATE over time ================= */
+// page-fit: center (540,960), s=1
+const FIT={x:540,y:960,z:0,rx:0,ry:0,rz:0,s:1};
+const MAGKEYS=[
+  [T(5.6),{x:540,y:960,z:0,rx:0,ry:0,rz:0,s:1.2}],
+  [T(8.4),{x:540,y:960,z:0,rx:0,ry:0,rz:0,s:1.0},'outCubic'],
+  [T(9.0),{x:540,y:960,z:0,rx:0,ry:0,rz:0,s:1.0}],
+  [T(11.0),{x:540,y:950,z:0,rx:7,ry:-26,rz:-2,s:.5},'inOutQuart'],
+  [T(13.5),{x:540,y:945,z:0,rx:4,ry:6,rz:1,s:.5},'inOutSine'],
+  [T(15.6),{x:540,y:950,z:0,rx:6,ry:24,rz:2,s:.5},'inOutSine'],
+  [T(17.0),FIT,'inOutQuart'],
+];
+function magState(t){ return kf(t,MAGKEYS); }
+
+/* ================= RENDER ================= */
+function render(t){
+  $('grain').src=`assets/grain${Math.floor(t*FPS)%6}.png`;
+  const beat=t/B;
+
+  /* ---------- HOOK ---------- */
+  const hookOn=t<T(8)+0.02;
+  show($('Lhook'),hookOn);
+  if(hookOn){
+    drawHook(t);
+    maskReveal($('h1'),t,-2,0.07,0.6,2.0);
+    maskReveal($('h2'),t,2.3,0.08,0.6,T(6)-0.05);
+    $('hookCv').style.filter = t>2.9?`drop-shadow(0 ${lerp(4,30,seg(t,3.0,T(8)))}px ${lerp(6,40,seg(t,3,T(8)))}px rgba(0,0,0,${lerp(.35,.6,seg(t,3,T(8)))}))`:'none';
+    $('hookCv').style.display = (t>T(7.95))?'none':'';
+  }
+
+  /* ---------- reset 3D bits ---------- */
+  const mag=$('mag'), sheet=$('sheet'), stack=$('stack');
+  show(sheet,false); show(stack,false); show(mag,true);
+  Object.values(LIFTS).forEach(L=>setLift(L,false));
+  setLeaf(null,0);
+  $('sheen').style.opacity=0;
+  $('dof').style.display='none';
+  $('studio').style.background='#6B0F1E';
+  $('L3d').style.filter='none';
+  $('floorShadow').style.opacity=0;
+  let ms=null, camTf='';
+
+  /* ---------- COVER OBJECT 6 -> 17 ---------- */
+  if(t<T(17)){
+    ms=magState(t); setUnder(1);
+    // gloss sweeps
+    const sw1=seg(t,T(8.1),T(9.6)), sw2=seg(t,T(12.6),T(14.2)), sw3=seg(t,T(15.2),T(16.6));
+    const sw = sw1>0&&sw1<1?sw1: sw2>0&&sw2<1?sw2 : sw3>0&&sw3<1?sw3 : -1;
+    if(sw>=0){ $('sheen').style.opacity=Math.sin(Math.PI*sw)*0.95; $('sheen').style.backgroundPosition=`${lerp(130,-30,E.inOutCubic(sw))}% 0`; }
+    $('floorShadow').style.opacity = seg(t,T(9),T(11))*(1-seg(t,T(16),T(17)));
+  }
+  /* ---------- OPEN COVER 17 -> 18.6, CONTENTS 18.6 -> 20 ---------- */
+  else if(t<T(20)){
+    const p=E.inOutCubic(seg(t,T(17),T(18.7)));
+    setUnder(2); setLeaf(P(1),p,85);
+    const c=E.inOutCubic(seg(t,T(18.4),T(20)));
+    ms={...FIT, s:lerp(1,1.42,c), x:lerp(540,540-0.22*1080*1.42,c), y:lerp(960,960-0.12*1620*1.42,c), rx:lerp(0,8,c), ry:lerp(0,-6,c)};
+  }
+  /* ---------- m1 03: turn 2->3, tilt + lift polaroid 20 -> 22 ---------- */
+  else if(t<T(22)){
+    const p=E.inOutCubic(seg(t,T(20),T(20.75)));
+    setUnder(3); setLeaf(p<1?P(2):null,p,95);
+    const c=E.inOutQuart(seg(t,T(20.5),T(21.6)));
+    const from={...FIT,s:1.42,x:540-0.22*1080*1.42,y:960-0.12*1620*1.42,rx:8,ry:-6};
+    const to={x:760,y:1060,z:0,rx:38,ry:-8,rz:-7,s:1.25};
+    ms={}; for(const k in to) ms[k]=lerp(from[k],to[k],c);
+    const lp=E.outBack(seg(t,T(21),T(21.8)));
+    setLift(LIFTS.fam,t>T(20.9),{z:lerp(0,190,lp),dy:lerp(0,-40,lp),rz:lerp(0,-5,lp),rx:lerp(0,-22,lp)});
+    $('dof').style.display=''; const dq=seg(t,T(20.6),T(21.2));
+    $('dof').style.webkitMaskImage=$('dof').style.maskImage=`linear-gradient(180deg, rgba(0,0,0,${dq}) 0%, rgba(0,0,0,0) 34%, rgba(0,0,0,0) 62%, rgba(0,0,0,${dq}) 100%)`;
+  }
+  /* ---------- m2 04: whip -> lift 3 episodes 22 -> 24 ---------- */
+  else if(t<T(24)){
+    const w=seg(t,T(22),T(22.55));
+    const ein=E.inOutExpo(w);
+    if(ein<0.5){ setUnder(3); ms={x:lerp(760,760+2200,ein*2),y:1060,z:0,rx:38,ry:-8,rz:-7,s:1.25};
+      setLift(LIFTS.fam,true,{z:190,dy:-40,rz:-5,rx:-22}); }
+    else { setUnder(4); const q=(ein-0.5)*2; ms={x:lerp(-1700,540,q),y:960,z:0,rx:0,ry:lerp(-14,0,q),rz:0,s:1.0}; }
+    const st=[T(22.7),T(23.05),T(23.4)];
+    const dx=[300,0,-300];
+    // three "episodes" leave the page and stack into a column: 01 top, 02 middle, 03 bottom
+    const tgt=[[333,-700,-4],[0,-262,3],[-334,176,-3]];
+    [LIFTS.e1,LIFTS.e2,LIFTS.e3].forEach((L,i)=>{
+      const q=E.outBack(seg(t,st[i],st[i]+0.5));
+      const [tx,ty,tr]=tgt[i];
+      setLift(L,t>st[i],{z:lerp(0,220,q),dx:lerp(0,tx,q),dy:lerp(0,ty,q),rz:lerp(0,tr,q),rx:lerp(0,-8,q)*(1-q)+0,s:lerp(1,1.3,q)});
+    });
+    // dim page behind
+    const dim=seg(t,T(22.7),T(23.4));
+    $('underShade').style.background=`rgba(0,0,0,${0.55*dim})`;
+  }
+  /* ---------- m3 05: low-angle turn with roll 24 -> 26 ---------- */
+  else if(t<T(26)){
+    const p=E.inOutCubic(seg(t,T(24.2),T(25.3)));
+    setUnder(5); setLeaf(P(4),p,110);
+    const c=seg(t,T(24),T(26));
+    const k1=E.inOutSine(seg(t,T(24),T(25.2))), k2=E.inOutQuart(seg(t,T(25.2),T(26)));
+    ms={x:540,y:lerp(990,960,k2),z:lerp(-180,0,k2),rx:lerp(lerp(0,22,k1),0,k2),ry:lerp(lerp(0,-12,k1),0,k2),rz:lerp(lerp(0,-5,k1),0,k2),s:lerp(lerp(1,.82,k1),1,k2)};
+  }
+  /* ---------- m5 07: sheet drop 28 -> 30 (m4 doors are flat) ---------- */
+  else if(t>=T(28)&&t<T(30.6)){
+    show(mag,false); show(sheet,true);
+    const q=E.outQuart(seg(t,T(28),T(28.9)));
+    const set=seg(t,T(28.9),T(30.6));
+    const bounce= t>T(28.9)? Math.exp(-(t-T(28.9))*7)*Math.sin((t-T(28.9))*22)*2.2 : 0;
+    const s={x:lerp(560,545,q),y:lerp(800,1010,q),z:lerp(1500,0,q),rx:lerp(-10,26,q)+bounce,ry:lerp(18,0,q),rz:lerp(18,-4,q),s:0.78*(1+0.03*set)};
+    sheet.style.transform=objTf(s);
+    $('sheetShadow').style.opacity=lerp(0,1,q); $('sheetShadow').style.transform=`translate3d(${lerp(160,24,q)}px,${lerp(240,40,q)}px,-2px)`;
+    $('studio').style.background='#5A0C19';
+    // color drain into horse
+    const dr=seg(t,T(29.6),T(30.4));
+    $('L3d').style.filter=`grayscale(${dr}) brightness(${1-0.6*dr})`;
+  }
+  /* ---------- m7 10: flat -> isometric model 32 -> 34 ---------- */
+  else if(t>=T(32)&&t<T(34.6)){
+    show(mag,false); show(sheet,true); $('sheetImg').src=P(10);
+    $('studio').style.background='#EFE7DA';
+    const q=E.inOutQuart(seg(t,T(32.25),T(33.4)));
+    const d=seg(t,T(33.4),T(34.6));
+    const s={x:540,y:lerp(960,1040,q),z:0,rx:lerp(0,52,q),ry:0,rz:lerp(0,-38,q)-6*d,s:lerp(1.62,0.86,q)};
+    sheet.style.transform=`translate3d(${s.x}px,${s.y}px,0) rotateX(${s.rx}deg) rotateZ(${s.rz}deg) scale(${s.s}) translate(${-0.5*1080}px,${-0.55*1620}px)`;
+    $('sheetShadow').style.opacity=q; $('sheetShadow').style.transform=`translate3d(10px,20px,-30px)`;
+  }
+  /* ---------- m9 riffle 36 -> 38 ---------- */
+  else if(t>=T(36)&&t<T(38.2)){
+    const p1=E.inOutCubic(seg(t,T(36.2),T(36.95))), p2=E.inOutCubic(seg(t,T(36.95),T(37.7)));
+    if(p1<1){ setUnder(12); setLeaf(P(11),p1,120); } else { setUnder(13); setLeaf(P(12),p2,120); }
+    const k=seg(t,T(36),T(38.2));
+    ms={...FIT,s:lerp(1.0,0.96,E.inOutSine(k)),rz:lerp(0,0,k)};
+  }
+  /* ---------- EXPLODED 38 -> 45 ---------- */
+  else if(t>=T(38.2)&&t<T(45)){
+    show(mag,false); show(stack,true);
+    $('studio').style.background='#5E0D1A';
+    const out=E.inOutQuart(seg(t,T(38.2),T(40)));      // pull back + orbit in
+    const hold=seg(t,T(40),T(42));
+    const back=E.inOutQuart(seg(t,T(43.1),T(44.6)));     // align p14 to fill
+    const orbY=lerp(0,-38,out)+lerp(0,-8,hold), orbX=lerp(0,14,out), sc=lerp(1,0.46,out)*lerp(1,1.04,hold);
+    const gap=lerp(0,95,out);
+    const camY=lerp(960,1150,out);
+    for(let i=1;i<=14;i++){
+      const el=stackEls[i-1];
+      const idx=13-i; // p13 at 0, p14 at -1 (behind)
+      let z=idx*gap, x=0, y=0, rz=0, ry=0, op=1;
+      // pages in front of p13 stream in from the camera
+      if(i<13){ const arr=E.outQuart(seg(t,T(38.4)+ (12-i)*0.035, T(39.6)+(12-i)*0.035)); z=lerp(2600,z,arr); x=lerp((i%2?1:-1)*700,0,arr); rz=lerp((i%2?1:-1)*20,0,arr); op=arr>0?1:0; }
+      // deal-off cascade
+      const dl=seg(t,T(42)+(i-1)*0.07,T(42)+(i-1)*0.07+0.5);
+      if(i<14 && dl>0){ const q=E.inCubic(dl); x+=(i%2?1:-1)*q*1900; y+=-q*260; rz+=(i%2?1:-1)*q*35; z+=q*400; op=q<1?1:0; }
+      el.style.display=op?'':'none';
+      // assemble world transform
+      const S= lerp(sc,1.186,back);
+      const oy=lerp(orbY,0,back), ox=lerp(orbX,0,back), cy=lerp(camY,960,back);
+      el.style.transform=`translate3d(540px,${cy}px,0) scale(${S}) rotateX(${ox}deg) rotateY(${oy}deg) translate3d(${x}px,${y}px,${z}px) rotateZ(${rz}deg) translate(-540px,-810px)`;
+      el.style.zIndex=20-i;
+    }
+    // dof blur on near pages via backdrop not possible per page; skip
+  }
+
+  if(ms){ mag.style.transform=objTf(ms);
+    $('floorShadow').style.transform=`translate3d(${ms.x-540}px,${ms.y-960+150+ (1620*ms.s)*0.55}px,-60px) scale(${ms.s*0.9},${ms.s*0.12})`; }
+
+  /* ---------- FLAT: doors (m4) 26 -> 28 ---------- */
+  const doorsOn=t>=T(26)&&t<T(26.9);
+  show($('Ldoors'),doorsOn);
+  if(doorsOn){ const q=E.inOutCubic(seg(t,T(26),T(26.85)));
+    $('doorL').style.transform=`rotateY(${q*-105}deg)`; $('doorR').style.transform=`rotateY(${q*105}deg)`;
+    $('doorL').style.filter=$('doorR').style.filter=`brightness(${1-0.5*q})`; }
+  const coupleOn=t>=T(26)&&t<T(28.9);
+  show($('Lcouple'),coupleOn);
+  if(coupleOn){ const q=seg(t,T(26),T(28.9)); place($('coupleImg'),1080,1920,.62,.46,lerp(1.18,1.0,E.outCubic(q)));
+    $('Lcouple').style.clipPath = t>T(28.6)? `inset(0 0 ${E.inCubic(seg(t,T(28.6),T(28.9)))*0}% 0)`:'none'; }
+  // the drop covers the couple: couple must sit under L3d during the drop -> we instead hide couple once the sheet fills
+  if(t>=T(28)&&t<T(28.9)){ $('Lcouple').style.opacity = 1-E.inCubic(seg(t,T(28),T(28.35))); } else $('Lcouple').style.opacity=1;
+
+  /* ---------- FLAT: horse (m6) 30.4 -> 32 ---------- */
+  const horseOn=t>=T(29.9)&&t<T(32);
+  show($('Lhorse'),horseOn);
+  if(horseOn){ const q=seg(t,T(29.9),T(32)); place($('horseImg'),1080,1920,.29,.33,1.62*(1+0.07*E.inOutSine(q)));
+    const r=E.inOutCubic(seg(t,T(29.9),T(30.6)))*150;
+    $('Lhorse').style.webkitMaskImage=$('Lhorse').style.maskImage=`radial-gradient(circle at 46% 34%, #000 ${r*0.85}%, transparent ${r}%)`; }
+
+  /* ---------- FLAT: plate iris (m8) 34 -> 36 ---------- */
+  const plateOn=t>=T(34)&&t<T(36.25);
+  show($('Lplate'),plateOn);
+  if(plateOn){
+    // framing: full-bleed then push to receipt, then back to page-fit for the hand-off
+    const push=E.inOutCubic(seg(t,T(34.7),T(35.3))), back=E.inOutQuart(seg(t,T(35.45),T(36.2)));
+    const img=$('plateImg');
+    let s0=Math.max(1080/PW,1920/PH)*lerp(1.0,1.95,push);
+    let fx=lerp(0.3, 0.2, push), fy=lerp(0.52,0.64,push);
+    let x=540-fx*PW*s0, y=960-fy*PH*s0; x=Math.min(0,Math.max(1080-PW*s0,x)); y=Math.min(0,Math.max(1920-PH*s0,y));
+    // page-fit target
+    const sF=1080/PW, xF=0, yF=150;
+    const S=lerp(s0,sF,back), X=lerp(x,xF,back), Y=lerp(y,yF,back);
+    img.style.width=PW+'px'; img.style.height=PH+'px'; img.style.transform=`translate(${X}px,${Y}px) scale(${S})`;
+    $('Lplate').style.background = back>0? '#6B0F1E':'transparent';
+    // iris from plate centre (page px 230,1150)
+    const pcx=X+230*S, pcy=Y+1150*S;
+    const ir=E.inOutExpo(seg(t,T(34),T(34.6)));
+    const R=lerp(0,640*S,ir)*(ir<1?1:3.5);
+    $('Lplate').querySelector('.full').style.clipPath = ir<1?`circle(${R}px at ${pcx}px ${pcy}px)`:'none';
+    const ring=$('plateRing'); ring.setAttribute('cx',pcx); ring.setAttribute('cy',pcy); ring.setAttribute('r',Math.max(1,R)); ring.style.opacity = ir<1? 0.9*Math.sin(Math.PI*ir):0;
+  }
+
+  /* ---------- SUN 44.6 -> 52.4 ---------- */
+  const sunOn=t>=T(44.55)&&t<T(53.8);
+  show($('Lsun'),sunOn);
+  if(sunOn){
+    const q=seg(t,T(44.6),T(53.8));
+    const z=1.0+0.08*E.inOutSine(q);
+    place($('sunImg'),1080,1920,.5,.42-0.03*q,z);
+    const pulse=0.55+0.15*Math.sin(t*2.2);
+    $('bloom').style.background=`radial-gradient(circle at ${lerp(71,70,q)}% ${lerp(31,30,q)}%, rgba(255,190,120,${0.5*pulse}) 0%, rgba(255,140,80,${0.18*pulse}) 14%, rgba(0,0,0,0) 34%)`;
+    const lk=seg(t,T(45.2),T(47.6));
+    $('leak').style.background=`linear-gradient(115deg, rgba(0,0,0,0) ${lerp(-40,110,lk)-25}%, rgba(255,170,110,${0.22*Math.sin(Math.PI*lk)}) ${lerp(-40,110,lk)}%, rgba(0,0,0,0) ${lerp(-40,110,lk)+25}%)`;
+  }
+  /* ---------- CLOSE + END 52 -> 60 ---------- */
+  if(t>=T(52)){
+    show($('Lsun'),false);
+    show(mag,true); show(stack,false); show(sheet,false);
+    $('studio').style.background='#6B0F1E';
+    const p=E.inOutCubic(seg(t,T(52),T(53.5)));
+    setUnder(14);
+    // closing = back cover leaf travels 180 -> 0 (reverse turn)
+    setLeaf(P('back'),1-p,90);
+    if(p>=1){ setUnder('back'); }
+    const k=E.inOutQuart(seg(t,T(53.4),T(55.2)));
+    const fl=seg(t,T(55.2),T(60.5));
+    const st={x:540,y:lerp(960,690,k),z:0,rx:lerp(0,8,k)-2*fl,ry:lerp(0,-16,k)+28*E.inOutSine(fl),rz:lerp(0,-2,k)+2*fl,s:lerp(1.186,0.5,k)};
+    mag.style.transform=objTf(st);
+    $('floorShadow').style.opacity=k; $('floorShadow').style.transform=`translate3d(0px,${st.y-960+150+1620*st.s*0.55}px,-60px) scale(${st.s*0.9},${st.s*0.12})`;
+    const sw=seg(t,T(55.6),T(57.4)); if(sw>0&&sw<1){ $('sheen').style.opacity=Math.sin(Math.PI*sw); $('sheen').style.backgroundPosition=`${lerp(130,-30,E.inOutCubic(sw))}% 0`; }
+  }
+
+  /* ---------- TYPE ---------- */
+  const tA = t>T(10.6)&&t<T(14.4), tB=t>T(13.6)&&t<T(16.8);
+  show($('gA1'),tA); show($('gA2'),tA); show($('gB1'),tB); show($('gB2'),tB); show($('cvKick'),t>T(10.5)&&t<T(16.6));
+  if(tA){ maskReveal($('gA1'),t,T(10.7),0.05,0.6,T(13.6)); maskReveal($('gA2'),t,T(11.1),0.05,0.6,T(13.7));
+    $('gA1').style.transform=`translateX(${lerp(-40,40,seg(t,T(10.6),T(14.4)))}px)`; $('gA2').style.transform=`translateX(${lerp(40,-40,seg(t,T(10.6),T(14.4)))}px)`; }
+  if(tB){ maskReveal($('gB1'),t,T(13.9),0.05,0.6,T(16.1)); maskReveal($('gB2'),t,T(14.3),0.09,0.6,T(16.2));
+    $('gB1').style.transform=`translateX(${lerp(-40,40,seg(t,T(13.6),T(16.8)))}px)`; $('gB2').style.transform=`translateX(${lerp(40,-40,seg(t,T(13.6),T(16.8)))}px)`; }
+  $('cvKick').style.opacity=E.outCubic(seg(t,T(10.5),T(11.3)))*(1-seg(t,T(15.9),T(16.5)));
+  // the giant type sits BEHIND the magazine: put type layer under L3d? -> we achieve by z-order trick below
+  // chapters
+  chap('c03',t,T(20.8),T(22));
+  chap('c04',t,T(22.55),T(24));
+  { const el=$('c05'); const on=t>=T(24.3)&&t<T(26); show(el,on); if(on){ maskReveal(el,t,T(24.4),0.05,0.6,T(25.7),0.25); el.style.transform=`translate(1010px,300px) rotate(90deg)`; } }
+  chap('c07',t,T(28.7),T(29.8));
+  chap('c08',t,T(30.5),T(32));
+  chap('c10',t,T(32.3),T(34.2));
+  chap('c11',t,T(34.5),T(35.4));
+  // riffle numbers
+  const rn=$('riffNum'); const rOn=t>=T(36.2)&&t<T(38.1); show(rn,rOn);
+  if(rOn){ rn.textContent = t<T(36.6)?'11': t<T(37.35)?'12':'13'; rn.style.opacity=1; }
+  // exploded copy
+  const sOn=t>T(39.4)&&t<T(43.2); show($('stA'),sOn); if(sOn) maskReveal($('stA'),t,T(39.6),0.18,0.7,T(42.5));
+  // sun copy
+  const sa=t>T(45.4)&&t<T(48.6), sb=t>T(48.4)&&t<T(52.2);
+  show($('sunA'),sa); show($('sunB'),sb);
+  if(sa) blurIn(sunAW,t,T(45.5),0.13,0.9,T(47.9));
+  if(sb) blurIn(sunBW,t,T(48.5),0.13,0.9,T(51.5));
+  // end copy
+  const eOn=t>=T(54.6); show($('endLine'),eOn); show($('endSub'),eOn); show($('endCta'),eOn);
+  if(eOn){ maskReveal($('endLine'),t,T(54.8),0.12,0.8);
+    const sub=E.outCubic(seg(t,T(56),T(57)));
+    $('endSub').style.opacity=sub; $('endSub').style.transform=`translateY(${(1-sub)*18}px)`;
+    const c=E.outBack(seg(t,T(56.6),T(57.6)));
+    $('endCta').style.opacity=clamp(c*1.6); $('endCta').style.transform=`translateX(-50%) scale(${lerp(.8,1,c)})`;
+    const sh=seg(t,T(58),T(59.4)); $('ctaShine').style.backgroundPosition=`${lerp(130,-30,sh)}% 0`; $('ctaShine').style.opacity=sh>0&&sh<1?1:0;
+  }
+  // giant type must be behind magazine: Ltype is on top, so we move giant words into a layer under the 3D scene
+}
+
+/* giant words: move them below the 3D world so the magazine occludes them */
+(function(){
+  const host=document.createElement('div'); host.className='layer'; host.id='Lbehind'; host.style.pointerEvents='none';
+  const L3d=$('L3d'); L3d.insertBefore(host,$('cam'));
+  ['cvKick','gA1','gA2','gB1','gB2'].forEach(id=>host.appendChild($(id)));
+})();
+
+window.DURATION=T(60)+0.4;
+window.render=render;
+window.ready=(async()=>{
+  const fams=['500 196px "Bodoni Moda"','860 196px "Bodoni Moda"','italic 500 150px "Bodoni Moda"','900 80px "Frank Ruhl Libre"','700 80px "Frank Ruhl Libre"','300 30px "Heebo"','500 30px "Heebo"','600 30px "Heebo"'];
+  for(const f of fams) await document.fonts.load(f,'0123456789אבג');
+  await document.fonts.ready;
+  await Promise.all([...document.images].map(i=>i.decode().catch(()=>{})));
+  for(let k=0;k<6;k++){const im=new Image();im.src=`assets/grain${k}.png`;await im.decode();}
+  buildOdo();
+  PIV=findPivot(); buildGlyph();
+  render(0);
+  return true;
+})();
+</script>
+</body>
+</html>
