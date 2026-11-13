@@ -1,0 +1,486 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>GLOSS | Written About One</title>
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<style>
+:root{
+  --bur:#6B0F1E; --bur-d:#4E0915; --ivory:#F8F2E7; --paper:#F3ECDF;
+  --khaki:#8C7A55; --khaki-l:#C9B98F; --ink:#24130F;
+  --serif:"Frank Ruhl Libre",serif; --sans:"Heebo",sans-serif; --didone:"Bodoni Moda",serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
+#stage{position:relative;width:1080px;height:1920px;overflow:hidden;background:var(--bur);
+  -webkit-font-smoothing:antialiased;font-family:var(--sans);color:var(--ivory)}
+.abs{position:absolute}
+.layer{position:absolute;inset:0;overflow:hidden}
+.win{position:absolute;overflow:hidden}
+.win img{position:absolute;left:0;top:0;transform-origin:0 0;will-change:transform}
+.ltr{direction:ltr;unicode-bidi:isolate}
+.mask{overflow:hidden;display:inline-block;vertical-align:top;padding:0 .04em}
+.mask>span{display:inline-block;will-change:transform}
+
+/* S1 hook */
+#s1line{left:0;right:0;top:440px;text-align:center;font-family:var(--serif);font-weight:700;font-size:86px;line-height:1.22;color:var(--ivory)}
+#s1line2{left:0;right:0;top:440px;text-align:center;font-family:var(--serif);font-weight:700;font-size:86px;line-height:1.22;color:var(--ivory)}
+#s1line2 em{font-style:normal;color:var(--khaki-l)}
+#counter{left:0;right:0;top:800px;height:330px;text-align:center;font-family:var(--didone);font-weight:400;
+  font-size:190px;line-height:330px;letter-spacing:-.01em;font-variant-numeric:lining-nums tabular-nums;color:var(--ivory)}
+#s1kick{left:0;right:0;top:1180px;text-align:center;font-family:var(--didone);font-style:italic;font-size:34px;color:var(--khaki-l);letter-spacing:.02em}
+#holeSvg{position:absolute;left:0;top:0}
+
+/* covers */
+.shadowed{box-shadow:0 40px 90px rgba(0,0,0,.45),0 8px 24px rgba(0,0,0,.3)}
+#band-top,#band-bot{left:0;right:0;font-family:var(--sans);font-weight:400;font-size:24px;letter-spacing:.32em;color:rgba(248,242,231,.62);display:flex;justify-content:space-between;padding:0 64px}
+#s3copy{left:0;right:0;top:1440px;text-align:center;font-family:var(--serif);font-weight:700;font-size:72px;line-height:1.25}
+#s3copy .k{display:block;font-family:var(--sans);font-weight:300;font-size:28px;letter-spacing:.3em;color:var(--khaki-l);margin-bottom:14px}
+
+/* 3D book */
+#book{position:absolute;left:0;top:0;transform-origin:0 0;transform-style:preserve-3d}
+#bookScene{position:absolute;inset:0;perspective:2600px;perspective-origin:540px 900px}
+.pg{position:absolute;left:0;top:0;width:1080px;height:1620px;backface-visibility:hidden}
+#coverLeaf{position:absolute;left:0;top:0;width:1080px;height:1620px;transform-origin:100% 50%;transform-style:preserve-3d}
+#coverLeaf .back{transform:rotateY(180deg);background:#F6F1E8}
+#leafShade{position:absolute;inset:0;background:#000;opacity:0;pointer-events:none}
+
+/* montage */
+.mhead{position:absolute;right:64px;top:300px;display:flex;align-items:flex-end;gap:26px;direction:rtl}
+.mnum{font-family:var(--didone);font-style:italic;font-weight:500;font-variation-settings:"opsz" 10;font-size:170px;line-height:.8;color:var(--khaki)}
+.mtitle{font-family:var(--serif);font-weight:900;font-size:76px;line-height:1.02;color:var(--bur);padding-bottom:6px;max-width:700px}
+.mtitle small{display:block;font-family:var(--sans);font-weight:300;font-size:24px;letter-spacing:.34em;color:var(--khaki);margin-bottom:12px}
+.dark .mnum{color:var(--khaki-l)} .dark .mtitle{color:var(--ivory)} .dark .mtitle small{color:var(--khaki-l)}
+.rule{position:absolute;height:2px;background:var(--khaki)}
+.foot{position:absolute;left:64px;right:64px;top:1500px;display:flex;justify-content:space-between;font-family:var(--sans);font-size:22px;letter-spacing:.3em;color:var(--khaki)}
+
+/* grid */
+#world{position:absolute;left:0;top:0;transform-origin:0 0}
+.tile{position:absolute;overflow:hidden;background:#fff}
+.tile img{width:100%;height:100%;display:block}
+#gridCopy{left:0;right:0;top:330px;text-align:center;font-family:var(--serif);font-weight:900;font-size:70px;line-height:1.15;color:var(--bur)}
+#gridCopy .k{display:block;font-family:var(--didone);font-style:italic;font-weight:400;font-size:36px;color:var(--khaki);margin-top:10px}
+
+/* p14 copy */
+.sunCopy{left:0;right:0;text-align:center;font-family:var(--serif);font-weight:900;font-size:84px;line-height:1.2;color:#FFF9EF;text-shadow:0 2px 30px rgba(60,10,10,.55)}
+
+/* end card */
+#endCard{background:var(--ivory)}
+#endLogo{left:120px;top:520px;width:840px}
+#endLine{left:0;right:0;top:880px;text-align:center;font-family:var(--serif);font-weight:900;font-size:100px;line-height:1.12;color:var(--bur)}
+#endSub{left:0;right:0;top:1170px;text-align:center;font-family:var(--sans);font-weight:400;font-size:38px;line-height:1.55;color:var(--ink)}
+#endSub b{font-weight:600;color:var(--bur)}
+#endCta{left:50%;top:1350px;transform:translateX(-50%);background:var(--bur);color:var(--ivory);font-family:var(--sans);font-weight:500;font-size:40px;padding:28px 64px;border-radius:999px;white-space:nowrap}
+#endRule{left:490px;width:100px;top:1128px;height:2px;background:var(--khaki)}
+#endTop{left:0;right:0;top:390px;text-align:center;font-family:var(--sans);font-weight:300;font-size:24px;letter-spacing:.42em;color:var(--khaki)}
+
+#grain{position:absolute;inset:0;width:1080px;height:1920px;mix-blend-mode:overlay;opacity:.09;pointer-events:none}
+#fade{position:absolute;inset:0;background:#000;pointer-events:none;opacity:0}
+</style>
+</head>
+<body>
+<div id="stage">
+
+  <!-- ============ L1: COVER WORLD (book) ============ -->
+  <div class="layer" id="Lbook" style="background:var(--bur)">
+    <div id="band-top" class="abs" style="top:70px"><span>על השער</span><span class="ltr">No. 34</span></div>
+    <div id="bookScene">
+      <div id="book">
+        <img class="pg" id="pg02" src="assets/pages/p-02.jpg">
+        <div id="coverLeaf">
+          <img class="pg" id="pg01" src="assets/pages/p-01.jpg">
+          <div class="pg back"></div>
+          <div id="leafShade"></div>
+        </div>
+      </div>
+    </div>
+    <div id="s3copy" class="abs"><span class="k" id="s3k">על השער</span><span id="s3a" class="mask"><span>לא כוכב קולנוע.</span></span><br><span id="s3b" class="mask"><span>מישהו שאתם אוהבים.</span></span></div>
+  </div>
+
+  <!-- ============ L0: HOOK (burgundy with hole) ============ -->
+  <div class="layer" id="Lhook">
+    <svg id="holeSvg" width="1080" height="1920" viewBox="0 0 1080 1920">
+      <defs>
+        <mask id="hm" maskUnits="userSpaceOnUse" x="0" y="0" width="1080" height="1920">
+          <rect width="1080" height="1920" fill="#fff"/>
+          <g id="holeG"><text id="holeT" x="540" y="1060" text-anchor="middle" font-family="Bodoni Moda" font-size="190" fill="#000">1</text></g>
+        </mask>
+      </defs>
+      <rect id="hookBg" width="1080" height="1920" fill="#6B0F1E" mask="url(#hm)"/>
+    </svg>
+    <div id="s1line" class="abs"><span class="mask"><span>רוב</span></span> <span class="mask"><span>המגזינים</span></span> <span class="mask"><span>נכתבים</span></span><br><span class="mask"><span>בשביל</span></span> <span class="mask"><span>מיליונים.</span></span></div>
+    <div id="s1line2" class="abs"><span class="mask"><span>המגזין</span></span> <span class="mask"><span>הזה</span></span><br><span class="mask"><span>נכתב</span></span> <span class="mask"><span>על</span></span> <span class="mask"><span><em>אחד.</em></span></span></div>
+    <div id="counter" class="abs ltr">1,000,000</div>
+  </div>
+
+  <!-- ============ L2: MONTAGE ============ -->
+  <div class="layer" id="Lmont"></div>
+
+  <!-- ============ L3: GRID / ISSUE OVERVIEW ============ -->
+  <div class="layer" id="Lgrid" style="background:var(--paper)">
+    <div id="world"></div>
+    <div id="gridCopy" class="abs"><span id="gc1" class="mask"><span>גיליון שלם.</span></span><br><span id="gc2" class="mask"><span>על אדם אחד.</span></span></div>
+    <div id="sunA" class="abs sunCopy" style="top:600px"><span class="mask"><span>אתם מביאים</span></span><br><span class="mask"><span>את הזיכרונות.</span></span></div>
+    <div id="sunB" class="abs sunCopy" style="top:600px"><span class="mask"><span>אנחנו הופכים אותם</span></span><br><span class="mask"><span>לגיליון.</span></span></div>
+  </div>
+
+  <!-- ============ L4: END CARD ============ -->
+  <div class="layer" id="endCard">
+    <div id="endTop" class="abs">THE PERSONAL ISSUE</div>
+    <img id="endLogo" class="abs" src="assets/gloss-logo.png">
+    <div id="endLine" class="abs"><span class="mask"><span>הסיפור שלהם.</span></span><br><span class="mask"><span>בעיתון אחד.</span></span></div>
+    <div id="endRule" class="abs"></div>
+    <div id="endSub" class="abs"><b>מגזין אישי במתנה</b><br>ליום הולדת, ליום נישואין, להורים ולחברים</div>
+    <div id="endCta" class="abs">להזמנת גיליון בוואטסאפ</div>
+  </div>
+
+  <img id="grain" src="assets/grain0.png">
+  <div id="fade"></div>
+</div>
+
+<script>
+const BPM=110, B=60/BPM, FPS=30;
+const T = b => b*B;
+const $ = id => document.getElementById(id);
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const seg=(t,a,b)=>clamp((t-a)/(b-a));
+const lerp=(a,b,p)=>a+(b-a)*p;
+const E={
+  outExpo:p=>p>=1?1:1-Math.pow(2,-10*p),
+  inExpo:p=>p<=0?0:Math.pow(2,10*p-10),
+  inOutExpo:p=>p<=0?0:p>=1?1:p<.5?Math.pow(2,20*p-10)/2:(2-Math.pow(2,-20*p+10))/2,
+  outCubic:p=>1-Math.pow(1-p,3),
+  inOutCubic:p=>p<.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2,
+  inCubic:p=>p*p*p,
+  outQuart:p=>1-Math.pow(1-p,4),
+  inOutQuart:p=>p<.5?8*p*p*p*p:1-Math.pow(-2*p+2,4)/2,
+  outBack:p=>{const c1=1.4,c3=c1+1;return 1+c3*Math.pow(p-1,3)+c1*Math.pow(p-1,2)},
+};
+const PW=1500, PH=2250; // page raster
+const show=(el,v)=>{el.style.display=v?'':'none'};
+
+/* word-mask reveal: each .mask>span slides up */
+function maskReveal(container,t,t0,stagger=0.06,dur=0.55,out=null){
+  const spans=container.querySelectorAll('.mask>span');
+  spans.forEach((s,i)=>{
+    let p=E.outExpo(seg(t,t0+i*stagger,t0+i*stagger+dur));
+    let y=(1-p)*110;
+    let o=1;
+    if(out){ const q=E.inCubic(seg(t,out+i*0.03,out+i*0.03+0.35)); y-=q*110; }
+    s.style.transform=`translateY(${y}%)`;
+    s.style.opacity=o;
+  });
+}
+
+/* image placement inside a window: cover-fit * zoom, focus (cx,cy) normalized */
+function place(img,w,h,cx,cy,zoom=1,W=PW,H=PH){
+  const s=Math.max(w/W,h/H)*zoom;
+  let x=w/2-cx*W*s, y=h/2-cy*H*s;
+  x=Math.min(0,Math.max(w-W*s,x)); y=Math.min(0,Math.max(h-H*s,y));
+  img.style.width=W+'px'; img.style.height=H+'px';
+  img.style.transform=`translate(${x}px,${y}px) scale(${s})`;
+}
+
+/* ---------------- montage build ---------------- */
+const M0=21; // beat montage starts
+const SHOTS=[
+ {n:'03',t:'העולם של מתן',k:'THE THINGS THAT MAKE HIM',p:3,cx:.5,cy:.47,z:1.0,lay:'A',enter:'wipeR'},
+ {n:'04',t:'מתן וריף: הסדרה',k:'THE FAMILY ORIGINAL',p:4,cx:.5,cy:.30,z:1.0,lay:'F',enter:'scale'},
+ {n:'05',t:'שניים באותו ראש',k:'LIKE FATHER, LIKE SON',p:5,cx:.5,cy:.5,z:1,lay:'P',enter:'rise'},
+ {n:'06',t:'נפגשנו פעמיים',k:'US, AGAIN.',p:6,cx:.66,cy:.48,z:1.0,lay:'S',enter:'slices'},
+ {n:'07',t:'חודש מחוץ לשגרה',k:'HONEYMOON DIARIES',p:7,cx:.5,cy:.47,z:1.05,lay:'A',enter:'wipeL'},
+ {n:'08',t:'אהבה עם ארבע רגליים',k:'',p:8,cx:.29,cy:.33,z:1.62,lay:'F',enter:'cut'},
+ {n:'10',t:'הבית לפי מתן',k:'',p:10,cx:.48,cy:.55,z:1.05,lay:'A',enter:'iris'},
+ {n:'11',t:'יש עוד משהו לאכול?',k:'',p:11,cx:.33,cy:.6,z:1.0,lay:'F',enter:'push'},
+ {n:'13',t:'מצב חופשה',k:'',p:13,lay:'G',enter:'grid'},
+];
+const Lmont=$('Lmont');
+SHOTS.forEach((s,i)=>{
+  const sh=document.createElement('div'); sh.className='layer'+(s.lay==='N'||s.lay==='F'?' dark':''); sh.id='shot'+i;
+  if(s.lay==='N') sh.style.background='#262620';
+  else sh.style.background='var(--paper)';
+  let html='';
+  if(s.lay==='A'){
+    html+=`<div class="win" id="w${i}" style="left:64px;top:560px;width:952px;height:1160px"><img src="assets/pages/p-${String(s.p).padStart(2,'0')}.jpg"></div>`;
+  } else if(s.lay==='F'){
+    html+=`<div class="win" id="w${i}" style="left:0;top:0;width:1080px;height:1920px"><img src="assets/pages/p-${String(s.p).padStart(2,'0')}.jpg"></div>`;
+    html+=`<div class="abs" style="left:0;right:0;top:0;height:760px;background:linear-gradient(rgba(20,6,8,.78),rgba(20,6,8,0))"></div>`;
+  } else if(s.lay==='P'){
+    html+=`<div class="abs shadowed" id="w${i}" style="left:150px;top:560px;width:780px;height:1170px;transform-origin:50% 50%"><img src="assets/pages/p-05.jpg" style="width:100%;height:100%;display:block"></div>`;
+  } else if(s.lay==='S'){
+    for(let k=0;k<3;k++){
+      html+=`<div class="win" id="w${i}_${k}" style="left:${64+k*(952/3)}px;top:560px;width:${952/3+1}px;height:1160px"><img src="assets/pages/p-06.jpg"></div>`;
+    }
+  } else if(s.lay==='N'){
+    html+=`<div class="win" id="w${i}" style="left:0;top:0;width:1080px;height:1920px;opacity:.0"><img src="assets/pages/p-08.jpg"></div>`;
+    html+=`<svg class="abs" style="left:0;top:0" width="1080" height="1920"><defs><clipPath id="numClip"><text x="540" y="1420" text-anchor="middle" font-family="Bodoni Moda" font-style="italic" font-size="880" letter-spacing="-30">08</text></clipPath></defs>
+      <g clip-path="url(#numClip)"><image id="horseImg" href="assets/pages/p-08.jpg" x="0" y="0" width="1500" height="2250" preserveAspectRatio="none"/></g></svg>`;
+  }
+  if(s.lay!=='G'){
+    html+=`<div class="mhead" id="h${i}"><div class="mnum ltr"><span class="mask"><span>${s.n}</span></span></div><div class="mtitle">${s.k?`<small class="ltr" style="direction:rtl"><span class="mask"><span>${s.k}</span></span></small>`:''}<span class="mask"><span>${s.t}</span></span></div></div>`;
+    if(s.lay==='A'||s.lay==='P'||s.lay==='S') html+=`<div class="rule" id="r${i}" style="right:64px;top:520px;width:952px;transform-origin:100% 50%"></div>`;
+  }
+  sh.innerHTML=html; Lmont.appendChild(sh);
+});
+
+/* ---------------- grid build ---------------- */
+const GX=48, GG=18, TW=(1080-2*GX-4*GG)/5, TH=TW*1.5, GTOP=560;
+const tiles={};
+const world=$('world');
+for(let i=1;i<=15;i++){
+  const r=Math.floor((i-1)/5), c=(i-1)%5; // RTL: c=0 is rightmost
+  const x=1080-GX-TW-c*(TW+GG), y=GTOP+r*(TH+GG);
+  const d=document.createElement('div'); d.className='tile'; d.style.cssText=`left:${x}px;top:${y}px;width:${TW}px;height:${TH}px`;
+  if(i<=14) d.innerHTML=`<img src="assets/pages/p-${String(i).padStart(2,'0')}.jpg">`;
+  else { d.style.background='#6B0F1E'; d.innerHTML=`<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--didone);font-style:italic;color:#F8F2E7;font-size:30px;text-align:center;line-height:1.2">The<br>Personal<br>Issue</div>`; }
+  world.appendChild(d); tiles[i]={x,y,w:TW,h:TH,el:d};
+}
+function camFor(i,mode){ // returns {s,cx,cy}
+  const t=tiles[i]; const s= mode==='fill'? 1920/t.h : 1080/t.w;
+  return {s,cx:t.x+t.w/2,cy:t.y+t.h/2};
+}
+const camAll={s:1,cx:540,cy:GTOP+(3*TH+2*GG)/2};
+function setCam(c){ world.style.transform=`translate(540px,960px) scale(${c.s}) translate(${-c.cx}px,${-c.cy}px)`; }
+function lerpCam(a,b,p){ // zoom in log space, keep motion feeling natural
+  const s=Math.exp(lerp(Math.log(a.s),Math.log(b.s),p));
+  // position interpolated so the screen-space path is smooth: weight by scale
+  const w=(1/s-1/a.s)/((1/b.s-1/a.s)||1e-9);
+  const q=isFinite(w)?clamp(w):p;
+  return {s,cx:lerp(a.cx,b.cx,q),cy:lerp(a.cy,b.cy,q)};
+}
+
+/* ---------------- render(t) ---------------- */
+function render(t){
+  const beat=t/B;
+  $('grain').src=`assets/grain${Math.floor(t*FPS)%6}.png`;
+
+  /* ===== HOOK 0 -> 8B ===== */
+  const hookOn = t < T(8)+0.05;
+  show($('Lhook'),hookOn);
+  if(hookOn){
+    // line 1
+    maskReveal($('s1line'),t,-1.5,0.07,0.6,2.05);
+    maskReveal($('s1line2'),t,2.25,0.08,0.6, T(6)-0.1);
+    // counter: 1,000,000 -> 1
+    const p=seg(t,0.45,2.2);
+    const lg=6*(1-E.outCubic(p));
+    let v=Math.max(1,Math.round(Math.pow(10,lg)));
+    if(p>=1) v=1;
+    const counter=$('counter');
+    counter.textContent=v.toLocaleString('en-US');
+    const pop = t>2.2 ? 1+0.06*Math.exp(-(t-2.2)*9)*Math.cos((t-2.2)*18) : 1;
+    counter.style.transform=`scale(${pop})`;
+    counter.style.opacity = 1;
+    // hole: from 2.85 the ivory "1" becomes a window
+    const holeP=seg(t,2.9,3.35);
+    counter.style.opacity = t>=2.9 ? 1-E.inOutCubic(holeP) : counter.style.opacity;
+    const hg=$('holeG');
+    const z=E.inExpo(seg(t,T(6),T(8)));
+    const sc = 1 + z*95;
+    // pivot = stem center of the "1"
+    const px=544, py=990;
+    hg.setAttribute('transform',`translate(${px} ${py}) scale(${sc}) translate(${-px} ${-py})`);
+    $('holeT').style.opacity = t>=2.9?1:0;
+  }
+
+  /* ===== BOOK: cover 4.36 -> open -> contents ===== */
+  const bookOn = t>=T(6)-0.01 && t< T(21)+0.6;
+  show($('Lbook'),bookOn);
+  if(bookOn){
+    // base cover rect: x=0 y=150 w=1080 h=1620 (scale 1)
+    let s=1, x=0, y=150;
+    // parallax during hole zoom
+    const zp=E.outCubic(seg(t,T(6),T(8)+0.4));
+    s=lerp(1.22,1.0,zp);
+    // slow push while hold
+    s*=1+0.025*seg(t,T(8),T(12));
+    // shrink to object  12B -> 13.5B
+    const sh=E.inOutQuart(seg(t,T(12),T(13.6)));
+    const sObj=0.62;
+    let S=lerp(s,sObj,sh);
+    // book open 17B -> 19B : scale up to full page fit for contents
+    const op=E.inOutCubic(seg(t,T(17),T(19)));
+    S=lerp(S,1.0,op);
+    // then push into the TOC list 19.4B -> 21B
+    const tp=E.inOutCubic(seg(t,T(19.4),T(21)));
+    S*=lerp(1,1.55,tp);
+    const w=1080*S, h=1620*S;
+    let cx=540, cy=lerp(lerp(960,880,sh),960,op);
+    // focus TOC rows (page coords ~ x .70, y .62)
+    const fx=lerp(540, 540 - (0.70-0.5)*1080*S, tp), fy=lerp(cy, cy-(0.60-0.5)*1620*S, tp);
+    x=fx-w/2; y=fy-h/2;
+    $('book').style.transform=`translate(${x}px,${y}px) scale(${S})`;
+    $('book').classList.toggle('shadowed', sh>0.02 && op<0.98);
+    $('pg02').style.visibility = t>=T(16.9)?'visible':'hidden';
+    // leaf rotation (hinge right edge, swings open to the right)
+    const lp=E.inOutCubic(seg(t,T(17),T(18.8)));
+    $('coverLeaf').style.transform=`rotateY(${lp*178}deg)`;
+    $('leafShade').style.opacity=Math.sin(lp*Math.PI)*0.25;
+    // bands
+    $('band-top').style.opacity = (1-sh)*E.outCubic(seg(t,T(8),T(9)));
+    // background shifts to paper as contents arrives
+    $('Lbook').style.background = op>0 ? mixHex('#6B0F1E','#F3ECDF',E.inOutCubic(seg(t,T(17.5),T(19)))) : '#6B0F1E';
+    // s3 copy
+    const s3=$('s3copy');
+    const kin=E.outExpo(seg(t,T(13),T(14)));
+    $('s3k').style.opacity=kin*(1-seg(t,T(16.4),T(17)));
+    maskReveal($('s3a'),t,T(13.2),0.05,0.6,T(15));
+    maskReveal($('s3b'),t,T(15.2),0.05,0.6,T(16.6));
+    s3.style.display = t<T(17.2)?'':'none';
+    $('s3a').style.display = t<T(15.4)?'inline-block':'none';
+    $('s3b').style.display = t>=T(15.1)?'inline-block':'none';
+    $('s3a').nextElementSibling && 0;
+  }
+
+  /* ===== MONTAGE 21B -> 39B ===== */
+  const montOn = t>=T(M0)-0.01 && t<T(39)+0.02;
+  show($('Lmont'),montOn);
+  SHOTS.forEach((s,i)=>{
+    const a=T(M0+i*2), b=T(M0+i*2+2);
+    const el=$('shot'+i);
+    const on = montOn && t>=a-0.001 && t<b+(i<8?0.0:0.05) && s.lay!=='G';
+    // allow previous shot to remain under during entering transitions
+    const nxt=SHOTS[i+1]; const under = nxt && ['wipeR','wipeL','iris','slices','rise'].includes(nxt.enter) && t>=b && t<b+0.45;
+    el.style.display = (on||under)?'':'none';
+    el.style.zIndex = on?2:1;
+    const entering = on && ['slices','rise'].includes(s.enter) && t<a+0.45;
+    el.style.background = entering ? 'transparent' : (s.lay==='N'?'#262620':'var(--paper)');
+    { const hh=$('h'+i), rr=$('r'+i); const o = (under && !on) ? '0' : '1'; if(hh) hh.style.opacity=o; if(rr) rr.style.opacity=o; }
+    if(!(on||under)) return;
+    const lt=t-a, p=seg(t,a,b);
+    const ein=E.outExpo(seg(t,a,a+0.5));
+    // header reveal
+    const h=$('h'+i); if(h) maskReveal(h,t,a+0.08,0.06,0.5);
+    const r=$('r'+i); if(r) r.style.transform=`scaleX(${E.outExpo(seg(t,a+0.05,a+0.6))})`;
+    const drift=1+0.045*p;
+    if(s.lay==='A'){
+      const w=$('w'+i), img=w.querySelector('img');
+      place(img,952,1160,s.cx,s.cy,s.z*drift);
+      let clip='inset(0 0 0 0)';
+      if(s.enter==='wipeR') clip=`inset(0 0 0 ${100*(1-ein)}%)`;
+      if(s.enter==='wipeL') clip=`inset(0 ${100*(1-ein)}% 0 0)`;
+      if(s.enter==='iris'){const q=(1-ein)*50; clip=`inset(${q}% ${q}% ${q}% ${q}%)`;}
+      w.style.clipPath=clip;
+      el.style.clipPath='none';
+      if(s.enter==='wipeR'||s.enter==='wipeL'||s.enter==='iris'){ el.style.clipPath = s.enter==='wipeR'?`inset(0 0 0 ${100*(1-ein)}%)`: s.enter==='wipeL'?`inset(0 ${100*(1-ein)}% 0 0)`:`inset(${(1-ein)*50}% 0 ${(1-ein)*50}% 0)`; }
+    }
+    if(s.lay==='F'){
+      const w=$('w'+i), img=w.querySelector('img');
+      let z=s.z*drift;
+      if(s.enter==='scale') z*=lerp(1.18,1,E.outExpo(seg(t,a,a+0.6)));
+      place(img,1080,1920,s.cx,s.cy,z);
+      el.style.clipPath='none';
+      el.style.transform = s.enter==='push' ? `translateX(${-(1-E.outExpo(seg(t,a,a+0.55)))*1080}px)` : 'none';
+    }
+    if(s.lay==='P'){
+      const w=$('w'+i);
+      const q=E.outExpo(seg(t,a,a+0.7));
+      w.style.transform=`translateY(${(1-q)*1300}px) rotate(${lerp(9,-2.5,q)-1.2*p}deg) scale(${1+0.03*p})`;
+      el.style.clipPath='none';
+    }
+    if(s.lay==='S'){
+      for(let k=0;k<3;k++){
+        const w=$(`w${i}_${k}`), img=w.querySelector('img');
+        // place full window then offset by strip
+        const s0=Math.max(952/PW,1160/PH)*s.z*drift;
+        let x=952/2-s.cx*PW*s0, y=1160/2-s.cy*PH*s0; x=Math.min(0,Math.max(952-PW*s0,x)); y=Math.min(0,Math.max(1160-PH*s0,y));
+        img.style.width=PW+'px';img.style.height=PH+'px';
+        img.style.transform=`translate(${x-k*(952/3)}px,${y}px) scale(${s0})`;
+        const q=E.outExpo(seg(t,a+(2-k)*0.07,a+(2-k)*0.07+0.6));
+        w.style.transform=`translateY(${(1-q)*(k%2?-1:1)*1400}px)`;
+      }
+      el.style.clipPath='none';
+    }
+    if(s.lay==='N'){
+      const img=$('horseImg');
+      const sc=1.0+0.06*p;
+      // position horse head inside numeral area
+      const k=0.62*sc; img.setAttribute('transform',`translate(${560-480*k-25*p} ${1010-640*k}) scale(${k})`);
+      const w=$('w'+i); w.style.opacity=0.10; place(w.querySelector('img'),1080,1920,.3,.35,1.05+0.03*p);
+      el.style.clipPath='none';
+    }
+  });
+
+  /* ===== GRID 37B(shot9) -> 43B, SUN 43B -> 51B ===== */
+  const gridOn = t>=T(37)-0.01 && t<T(51)+0.6;
+  show($('Lgrid'),gridOn);
+  if(gridOn){
+    const c13=camFor(13,'fit'), c14=camFor(14,'fill');
+    let cam;
+    // enter page 13: rise from below as a sheet 37B->37.6B
+    if(t<T(39)){
+      const q=E.outExpo(seg(t,T(37),T(37.8)));
+      cam={...c13, s:c13.s*lerp(1.25,1,q)};
+      $('Lgrid').style.clipPath=`inset(${(1-q)*100}% 0 0 0)`;
+    } else if(t<T(41.6)){
+      $('Lgrid').style.clipPath='none';
+      const q=E.inOutQuart(seg(t,T(39),T(40.4)));
+      cam=lerpCam(c13,camAll,q);
+      cam.s*=1+0.03*seg(t,T(40.4),T(41.6));
+    } else {
+      $('Lgrid').style.clipPath='none';
+      const q=E.inOutQuart(seg(t,T(41.6),T(43.2)));
+      const from={...camAll,s:camAll.s*1.03};
+      cam=lerpCam(from,c14,q);
+      // slow push on p14
+      const push=seg(t,T(43.2),T(51.5));
+      cam.s*=1+0.07*E.inOutCubic(push);
+      cam.cy+= -40*E.inOutCubic(push);
+    }
+    setCam(cam);
+    // other tiles visibility
+    const others=E.outCubic(seg(t,T(39),T(39.6)));
+    for(let i=1;i<=15;i++){ if(i!==13) tiles[i].el.style.opacity = t<T(41.6)?others:1; }
+    tiles[13].el.style.boxShadow='none';
+    // grid copy
+    const gc=$('gridCopy');
+    gc.style.display = (t>T(39.2)&&t<T(42.4))?'':'none';
+    maskReveal($('gc1'),t,T(39.6),0.05,0.6,T(41.6));
+    maskReveal($('gc2'),t,T(40.2),0.05,0.6,T(41.65));
+    // sun copy
+    const sa=$('sunA'), sb=$('sunB');
+    sa.style.display=(t>T(44.5)&&t<T(47.5))?'':'none';
+    sb.style.display=(t>T(47.4)&&t<T(51))?'':'none';
+    maskReveal(sa,t,T(44.6),0.12,0.8,T(46.6));
+    maskReveal(sb,t,T(47.6),0.12,0.8,T(50.4));
+  }
+
+  /* ===== END CARD 51B -> ===== */
+  const endOn = t>=T(51)-0.01;
+  show($('endCard'),endOn);
+  if(endOn){
+    const q=E.inOutQuart(seg(t,T(51),T(52.4)));
+    $('endCard').style.transform=`translateY(${(1-q)*1920}px)`;
+    $('endCard').style.boxShadow=`0 -30px 80px rgba(0,0,0,${0.35*(1-q)})`;
+    const lg=E.outExpo(seg(t,T(52),T(53.6)));
+    $('endLogo').style.opacity=lg; $('endLogo').style.transform=`translateY(${(1-lg)*40}px) scale(${lerp(1.04,1,lg)})`;
+    $('endTop').style.opacity=E.outCubic(seg(t,T(52.3),T(53.5)))*1; $('endTop').style.letterSpacing=lerp(.7,.42,E.outExpo(seg(t,T(52.3),T(54))))+'em';
+    maskReveal($('endLine'),t,T(53),0.1,0.8);
+    $('endRule').style.transform=`scaleX(${E.outExpo(seg(t,T(54),T(55)))})`;
+    const sub=E.outCubic(seg(t,T(54.3),T(55.3)));
+    $('endSub').style.opacity=sub; $('endSub').style.transform=`translateY(${(1-sub)*20}px)`;
+    const cta=E.outBack(seg(t,T(55.2),T(56.2)));
+    $('endCta').style.opacity=clamp(cta*1.5); $('endCta').style.transform=`translateX(-50%) scale(${lerp(.85,1,cta)})`;
+  }
+  // fade tail
+  $('fade').style.opacity = 0;
+}
+function mixHex(a,b,p){const pa=[1,3,5].map(i=>parseInt(a.substr(i,2),16)),pb=[1,3,5].map(i=>parseInt(b.substr(i,2),16));return 'rgb('+pa.map((v,i)=>Math.round(lerp(v,pb[i],p))).join(',')+')';}
+
+window.DURATION = T(59);
+window.render=render;
+window.ready = (async()=>{
+  await document.fonts.load('190px "Bodoni Moda"');
+  await document.fonts.load('italic 170px "Bodoni Moda"');
+  await document.fonts.load('900 70px "Frank Ruhl Libre"');
+  await document.fonts.load('700 70px "Frank Ruhl Libre"');
+  await document.fonts.load('400 30px "Heebo"');await document.fonts.load('300 30px "Heebo"');await document.fonts.load('500 30px "Heebo"');await document.fonts.load('600 30px "Heebo"');
+  await document.fonts.ready;
+  await Promise.all([...document.images].map(i=>i.decode().catch(()=>{})));
+  for(let k=0;k<6;k++){const im=new Image();im.src=`assets/grain${k}.png`;await im.decode();}
+  render(0);
+  return true;
+})();
+</script>
+</body>
+</html>

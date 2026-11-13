@@ -1,0 +1,264 @@
+"""GLOSS | Written About One - original score, synthesized from scratch.
+Locked to the same 110 BPM grid as index.html (B = 60/110)."""
+import numpy as np
+from scipy.signal import butter, sosfilt, fftconvolve
+import wave, sys
+
+SR = 48000
+BPM = 110
+B = 60 / BPM
+DUR = 59 * B + 1.2
+N = int(DUR * SR)
+rng = np.random.default_rng(3)
+L = np.zeros(N); R = np.zeros(N)          # dry bus
+RV_L = np.zeros(N); RV_R = np.zeros(N)    # reverb send
+
+def T(b): return b * B
+def mtof(m): return 440 * 2 ** ((m - 69) / 12)
+NOTE = {'C':0,'Db':1,'D':2,'Eb':3,'E':4,'F':5,'Gb':6,'G':7,'Ab':8,'A':9,'Bb':10,'B':11}
+def n(s):  # 'D3' -> midi
+    name, octv = s[:-1], int(s[-1]); return 12 * (octv + 1) + NOTE[name]
+
+def filt(x, kind, f, order=2):
+    sos = butter(order, f, btype=kind, fs=SR, output='sos'); return sosfilt(sos, x)
+
+def add(sig, t, gain=1.0, pan=0.0, rev=0.0):
+    i = int(t * SR)
+    if i >= N: return
+    sig = sig[:N - i]
+    gl = np.cos((pan + 1) * np.pi / 4); gr = np.sin((pan + 1) * np.pi / 4)
+    L[i:i+len(sig)] += sig * gain * gl * 1.414
+    R[i:i+len(sig)] += sig * gain * gr * 1.414
+    if rev:
+        RV_L[i:i+len(sig)] += sig * gain * rev * gl
+        RV_R[i:i+len(sig)] += sig * gain * rev * gr
+
+def env_t(d): return np.arange(int(d * SR)) / SR
+
+# ---------- instruments ----------
+def piano(m, dur=3.0, vel=1.0):
+    t = env_t(dur); f0 = mtof(m); out = np.zeros_like(t)
+    Binh = 0.00035
+    for k in range(1, 10):
+        fk = k * f0 * np.sqrt(1 + Binh * k * k)
+        if fk > 16000: break
+        a = (1 / k ** 1.25) * (1 if k == 1 else 0.8)
+        dec = 1.1 + 0.55 * k + f0 / 600
+        out += a * np.sin(2 * np.pi * fk * t + rng.uniform(0, 6)) * (0.75*np.exp(-t * dec) + 0.25*np.exp(-t * dec*0.18))
+    att = np.minimum(1, t / 0.004)
+    hammer = filt(rng.normal(0, 1, len(t)), 'bandpass', [min(f0*2, 4000), min(f0*8, 12000)]) * np.exp(-t * 60) * 0.08
+    rel = np.minimum(1, (dur - t) / 0.25)
+    return (out * att + hammer) * rel * vel * 0.32
+
+def pad(ms, dur, vel=1.0, cutoff=1400):
+    t = env_t(dur); out = np.zeros_like(t)
+    for m in ms:
+        f = mtof(m)
+        for det in (-0.07, 0.0, 0.08):
+            ff = f * 2 ** (det / 12)
+            ph = rng.uniform(0, 1)
+            saw = 2 * ((ff * t + ph) % 1) - 1
+            out += saw
+    out = filt(out, 'lowpass', cutoff, 2)
+    a = np.minimum(1, t / 0.9); r = np.minimum(1, (dur - t) / 1.2)
+    return out * a * np.clip(r, 0, 1) * vel * 0.045 / max(1, len(ms) / 3)
+
+def kick(vel=1.0, low=44):
+    t = env_t(0.6)
+    f = low + 95 * np.exp(-t * 32)
+    ph = 2 * np.pi * np.cumsum(f) / SR
+    body = np.sin(ph) * np.exp(-t * 6.5)
+    click = filt(rng.normal(0, 1, len(t)), 'highpass', 2500) * np.exp(-t * 300) * 0.25
+    return np.tanh((body + click) * 1.4) * vel * 0.8
+
+def sub_boom(vel=1.0):
+    t = env_t(3.5)
+    f = 34 + 40 * np.exp(-t * 8)
+    ph = 2 * np.pi * np.cumsum(f) / SR
+    return np.tanh(np.sin(ph) * np.exp(-t * 1.3) * 1.6) * vel * 0.9
+
+def snap(vel=1.0):
+    t = env_t(0.35)
+    x = filt(rng.normal(0, 1, len(t)), 'bandpass', [1100, 5200]) * (np.exp(-t * 38) + 0.4*np.exp(-np.maximum(0,t-0.012)*38)*(t>0.012))
+    return x * vel * 0.55
+
+def hat(vel=1.0, open_=False):
+    t = env_t(0.25 if open_ else 0.06)
+    x = filt(rng.normal(0, 1, len(t)), 'highpass', 7500) * np.exp(-t * (14 if open_ else 90))
+    return x * vel * 0.22
+
+def tick(vel=1.0):
+    t = env_t(0.03)
+    x = filt(rng.normal(0, 1, len(t)), 'bandpass', [2500, 9000]) * np.exp(-t * 400)
+    x += np.sin(2*np.pi*1800*t) * np.exp(-t * 250) * 0.4
+    return x * vel * 0.5
+
+def stamp(vel=1.0):  # letterpress clack
+    t = env_t(0.8)
+    body = np.sin(2*np.pi*(60 + 60*np.exp(-t*40))*t) * np.exp(-t * 9)
+    wood = filt(rng.normal(0,1,len(t)), 'bandpass', [300, 2200]) * np.exp(-t * 45)
+    click = filt(rng.normal(0,1,len(t)), 'highpass', 3000) * np.exp(-t * 500)
+    return np.tanh((body*1.2 + wood*0.6 + click*0.5)) * vel
+
+def paper(dur=0.35, vel=1.0, bright=1.0):  # page turn / slap
+    t = env_t(dur)
+    nse = rng.normal(0, 1, len(t))
+    # crinkle: amplitude-modulated noise grains
+    grains = (rng.random(len(t)) < 0.004).astype(float)
+    grains = np.convolve(grains, np.exp(-np.arange(200) / 25), 'same')
+    x = filt(nse, 'bandpass', [900 * bright, 7000]) * (0.55 + 0.9 * grains)
+    e = np.sin(np.pi * np.clip(t / dur, 0, 1)) ** 1.6
+    return x * e * vel * 0.35
+
+def whoosh(dur=1.0, vel=1.0, rise=True):
+    t = env_t(dur); x = rng.normal(0, 1, len(t)); out = np.zeros_like(t)
+    # sweep bandpass by blocks
+    nb = 40; bl = len(t) // nb + 1
+    for j in range(nb):
+        p = j / nb if rise else 1 - j / nb
+        fc = 300 * (20 ** p)
+        seg = x[j*bl:(j+1)*bl+400]
+        if len(seg) < 10: continue
+        y = filt(seg, 'bandpass', [fc * 0.7, min(fc * 1.6, 20000)])
+        w = np.hanning(len(y)); out[j*bl:j*bl+len(y)] += (y * w)[:len(out) - j*bl]
+    e = (t / dur) ** 2.2 if rise else np.exp(-t * 4)
+    return out * e * vel * 0.5
+
+def bass(m, dur, vel=1.0):
+    t = env_t(dur); f = mtof(m)
+    x = np.sin(2*np.pi*f*t) + 0.25*np.sin(4*np.pi*f*t) + 0.08*np.sin(6*np.pi*f*t)
+    e = np.minimum(1, t/0.01) * np.exp(-t * 1.2) * np.clip((dur - t)/0.05, 0, 1)
+    return np.tanh(x * e * 1.3) * vel * 0.45
+
+# ---------- harmony ----------
+CH = [  # bass, voicing
+    ('D2', ['D3','A3','C4','E4','F4']),        # Dm9
+    ('Bb1', ['D3','F3','A3','C4']),            # Bbmaj7(9)
+    ('G1', ['G3','Bb3','D4','F4','A4']),       # Gm9
+    ('A1', ['E3','G3','A3','D4']),             # A7sus4
+]
+def chord_at(bar): return CH[bar % 4]
+
+# ---------- arrangement ----------
+# 1. HOOK 0 -> 8B : counter ticks synced to the visual counter
+FPS = 30
+last = None
+for f in range(int(0.45 * FPS), int(2.2 * FPS) + 1):
+    t = f / FPS
+    p = min(1, max(0, (t - 0.45) / (2.2 - 0.45)))
+    lg = 6 * (1 - (1 - (1 - p) ** 3))
+    v = max(1, round(10 ** lg))
+    if v != last:
+        vel = 0.35 + 0.65 * (1 - p) ** 0.5
+        add(tick(vel), t, 0.6, pan=rng.uniform(-.3, .3), rev=0.05)
+    last = v
+add(stamp(1.0), 2.2, 0.9, rev=0.35)
+add(piano(n('A4'), 3.0, 0.45), 2.2, 0.6, pan=0.2, rev=0.6)
+add(piano(n('D5'), 3.0, 0.3), 2.22, 0.5, pan=-0.2, rev=0.7)
+# low drone underneath the hook
+add(pad([n('D2'), n('A2')], T(8) + 0.3, 0.9, cutoff=500), 0.0, 1.0, rev=0.3)
+add(whoosh(T(8) - T(5.8), 1.0, True), T(5.8), 0.9, rev=0.4)
+add(paper(0.8, 0.5, 0.6), 3.3, 0.5, rev=0.3)
+
+# 2. DROP at 8B + intro bars (8 -> 21B)
+add(sub_boom(1.0), T(8), 0.9)
+add(kick(1.0, 40), T(8), 0.8)
+for bar in range(0, 13):
+    b0 = 8 + bar * 4
+    if b0 >= 51: break
+# chords bars from beat 8 to 43 (pads + piano)
+for bar, b0 in enumerate(range(8, 43, 4)):
+    bs, vo = chord_at(bar)
+    dur = T(4) + 0.4
+    add(pad([n(x) for x in vo], dur + 0.8, 0.9 if b0 < 21 else 0.75, 1600), T(b0), 1.0, rev=0.5)
+    for k, x in enumerate(vo):
+        add(piano(n(x), 3.2, 0.55 if b0 == 8 else 0.4), T(b0) + k * 0.012, 0.8, pan=-0.3 + 0.15 * k, rev=0.5)
+    if b0 >= 12:
+        add(bass(n(bs) + 12, T(4) - 0.02, 0.9), T(b0), 0.9)
+# intro pulse 12 -> 21: half-time kick + soft hats
+for b in range(12, 21):
+    if b % 2 == 0: add(kick(0.65), T(b), 0.7)
+    add(hat(0.5), T(b + 0.5), 0.6, pan=0.3)
+# cover shrink + copy accents
+add(whoosh(T(1.6), 0.5, True), T(12) - 0.1, 0.35, rev=0.3)
+add(piano(n('E5'), 2.5, 0.35), T(13.2), 0.5, pan=0.3, rev=0.7)
+add(piano(n('A5'), 2.5, 0.3), T(15.2), 0.5, pan=-0.3, rev=0.7)
+# book opens: page turn
+add(paper(1.0, 1.0, 0.8), T(17.1), 1.0, pan=0.35, rev=0.25)
+add(paper(0.3, 0.6, 1.4), T(18.7), 0.6, pan=0.1, rev=0.2)
+add(whoosh(T(2), 0.6, True), T(19), 0.5, rev=0.3)
+
+# 3. MONTAGE 21 -> 39B : full groove, a paper cut on every shot change
+for b in range(21, 39):
+    add(kick(0.9), T(b), 0.85) if (b - 21) % 2 == 0 else add(snap(0.9), T(b), 0.6, pan=0.05, rev=0.25)
+    if (b - 21) % 4 == 3: add(kick(0.5), T(b + 0.5), 0.5)
+    for h in (0, 0.5):
+        add(hat(0.7 if h else 0.4), T(b + h + 0.0) + (0.012 if h else 0), 0.55, pan=0.35)
+    add(hat(0.4, True), T(b + 0.75), 0.25, pan=-0.35) if (b % 2) else None
+# arpeggio (plucked piano 8ths)
+for b in range(21, 39):
+    bar = (b - 8) // 4
+    bs, vo = chord_at(bar)
+    seq = [n(x) + 12 for x in vo] + [n(vo[1]) + 24]
+    for h in range(2):
+        m = seq[((b - 21) * 2 + h) % len(seq)]
+        add(piano(m, 0.9, 0.5), T(b + h * 0.5), 0.45, pan=0.4 * np.sin(b + h), rev=0.35)
+for i in range(9):
+    add(paper(0.22, 0.9, 1.2 + 0.1 * (i % 3)), T(21 + 2 * i) - 0.03, 0.7, pan=rng.uniform(-.4, .4), rev=0.15)
+
+# 4. GRID PULL-BACK 39 -> 43 : drums out, air in
+add(whoosh(T(1.5), 0.8, False), T(39), 0.6, rev=0.4)
+add(sub_boom(0.5), T(39), 0.5)
+add(piano(n('D5'), 3.0, 0.5), T(39.6), 0.6, rev=0.7); add(piano(n('F5'), 3.0, 0.4), T(40.2), 0.5, rev=0.7)
+add(whoosh(T(43.2) - T(41.6), 0.9, True), T(41.6), 0.7, rev=0.5)
+
+# 5. SUNSET 43 -> 51B : breakdown, warm pad + melody
+for bar, b0 in enumerate(range(43, 51, 4)):
+    vo = [['F3','A3','C4','E4','G4'], ['Bb2','D3','F3','A3','C4']][bar % 2]
+    bs = ['F1', 'Bb1'][bar % 2]
+    add(pad([n(x) for x in vo], T(4) + 1.5, 1.1, 1200), T(b0), 1.0, rev=0.6)
+    add(bass(n(bs) + 12, T(4), 0.7), T(b0), 0.8)
+    for k, x in enumerate(vo):
+        add(piano(n(x), 3.5, 0.35), T(b0) + 0.02 * k, 0.8, pan=-0.3 + 0.15 * k, rev=0.6)
+add(sub_boom(0.7), T(43.2), 0.6)
+mel = [(43.2, 'A5'), (44.6, 'G5'), (45.6, 'F5'), (47.5, 'E5'), (48.5, 'D5'), (49.5, 'C5')]
+for b, m in mel:
+    add(piano(n(m), 3.0, 0.6), T(b), 0.75, pan=0.15, rev=0.75)
+# heartbeat-like soft kick under the copy
+for b in range(45, 51, 2): add(kick(0.35, 50), T(b), 0.45)
+add(whoosh(T(1.5), 0.8, True), T(49.5), 0.6, rev=0.4)
+
+# 6. END CARD 51B -> : resolve on Dmaj9-ish (D A E F# C#), logo stamp
+add(paper(0.6, 1.0, 0.7), T(51), 0.8, pan=-0.2, rev=0.3)
+add(sub_boom(0.8), T(52), 0.7)
+add(stamp(0.6), T(52), 0.5, rev=0.5)
+end = ['D3', 'A3', 'E4', 'Gb4', 'A4', 'Db5']
+for k, x in enumerate(end):
+    add(piano(n(x), 6.0, 0.55), T(52) + 0.03 * k, 0.85, pan=-0.35 + 0.14 * k, rev=0.8)
+add(pad([n(x) for x in end[:5]], 7.0, 1.0, 1500), T(52), 1.0, rev=0.6)
+add(bass(n('D2'), 4.0, 0.7), T(52), 0.8)
+add(piano(n('D6'), 3, 0.35), T(55.2), 0.6, rev=0.85)   # CTA chime
+add(piano(n('A5'), 3, 0.3), T(55.2) + 0.09, 0.5, rev=0.85)
+
+# ---------- reverb ----------
+def ir(seconds=2.6, seed=0):
+    r = np.random.default_rng(seed); t = env_t(seconds)
+    x = r.normal(0, 1, len(t)) * np.exp(-t * 3.0 / seconds * 2.2)
+    x = filt(x, 'lowpass', 6000); x[:int(0.02*SR)] *= np.linspace(0, 1, int(0.02*SR))
+    return x / np.sqrt(np.sum(x ** 2))
+wl = fftconvolve(RV_L, ir(2.6, 1))[:N]; wr = fftconvolve(RV_R, ir(2.6, 2))[:N]
+mixL = L + wl * 0.9; mixR = R + wr * 0.9
+
+# master: gentle glue + limiter + fades
+mix = np.stack([mixL, mixR])
+mix = filt(mix, 'highpass', 28)
+peak = np.max(np.abs(mix)); mix = mix / peak * 1.25
+mix = np.tanh(mix) * 0.93
+fade_out = int(1.0 * SR)
+mix[:, -fade_out:] *= np.linspace(1, 0, fade_out) ** 2
+mix[:, :int(0.01*SR)] *= np.linspace(0, 1, int(0.01*SR))
+out = sys.argv[1] if len(sys.argv) > 1 else 'score.wav'
+pcm = (mix.T * 32767).astype(np.int16)
+with wave.open(out, 'wb') as w:
+    w.setnchannels(2); w.setsampwidth(2); w.setframerate(SR); w.writeframes(pcm.tobytes())
+print('wrote', out, f'{DUR:.2f}s')
