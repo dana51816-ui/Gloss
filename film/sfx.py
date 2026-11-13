@@ -25,7 +25,7 @@ def pad(t0,t1,freqs,g):
     n=int((t1-t0)*SR); tt=np.arange(n)/SR; s=sum(np.sin(2*np.pi*f*tt+i) for i,f in enumerate(freqs))/len(freqs)
     e=np.minimum(1,tt/.3)*np.minimum(1,(t1-t0-tt)/.6); add(s*e*(.85+.15*np.sin(2*np.pi*4*tt)),t0,g)
 # shutters / flashes
-for t in [0,.25,.5,.75,2.0,2.5,4.5,13.5]: add(shutter(),t,.9,pan=rng.uniform(-.4,.4))
+for t in [0,.25,.5,.75,2.0,2.5,4.5,13.5,15.38]: add(shutter(),t,.9,pan=rng.uniform(-.4,.4))
 for t in np.arange(5.5,9.5,.5): add(shutter(),t,.55)
 # beat 120bpm
 for t in np.arange(.75,11.75,.5): add(kick(),t,.95)
