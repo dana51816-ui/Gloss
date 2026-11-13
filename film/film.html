@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>GLOSS Fashion Film</title>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;700;900&family=Heebo:wght@300;400;500;700;900&family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;0,6..96,900;1,6..96,500&display=swap" rel="stylesheet">
+<style>
+:root{--b:#6B0F1E;--ox:#3A0610;--k:#8C7A55;--kl:#C9B48A;--iv:#F8F2E7;--pink:#F3C6CF;--ink:#1A0A0D;
+--serif:'Frank Ruhl Libre',serif;--sans:'Heebo',sans-serif;--bod:'Bodoni Moda',serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
+#st{position:absolute;inset:0;overflow:hidden;background:#000}
+.sc{position:absolute;inset:0;display:none;overflow:hidden}
+.L{position:absolute;will-change:transform,filter}
+.disp{font-family:var(--serif);font-weight:900;letter-spacing:-.035em;line-height:.86}
+.full{position:absolute;inset:0}
+#flash{position:absolute;inset:0;background:#fff;opacity:0;z-index:60;pointer-events:none}
+#grain{position:absolute;inset:-20px;background:url(../video/grain.png);opacity:.12;mix-blend-mode:overlay;z-index:58;pointer-events:none}
+#vig{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 45%,rgba(0,0,0,0) 55%,rgba(0,0,0,.42) 100%);z-index:57;pointer-events:none}
+.sheen{position:absolute;inset:0;background:linear-gradient(110deg,rgba(255,255,255,0) 40%,rgba(255,255,255,.5) 50%,rgba(255,255,255,0) 60%);background-size:300% 100%;mix-blend-mode:screen}
+.tile{position:absolute;width:360px;height:640px;overflow:hidden}
+.tile img{position:absolute;width:560px;left:-100px;top:150px}
+.tag{font:italic 500 34px/1 var(--bod);letter-spacing:.18em;color:var(--kl);direction:ltr}
+</style>
+</head>
+<body>
+<div id="st">
+
+<!-- S1: paparazzi -->
+<div class="sc" id="S1" style="background:var(--ox)">
+  <img id="s1img" class="L" src="cut/hero.png" style="width:2400px;left:0;top:0;transform-origin:0 0">
+</div>
+
+<!-- S2: הוא לא סלב -->
+<div class="sc" id="S2" style="background:var(--b)">
+  <div class="L disp" id="s2t" style="left:0;right:0;top:250px;text-align:center;font-size:330px;color:var(--iv)">הוא לא<br>סלב.</div>
+  <img id="s2img" class="L" src="cut/hero.png" style="width:1700px;left:-430px;top:600px">
+</div>
+
+<!-- S3: עד היום -->
+<div class="sc" id="S3" style="background:var(--iv)">
+  <div class="L disp" id="s3t" style="left:0;right:0;top:330px;text-align:center;font-size:380px;color:var(--b)">עד<br>היום.</div>
+  <img id="s3img" class="L" src="cut/body.png" style="height:1260px;left:270px;top:900px">
+</div>
+
+<!-- S4: cover build -->
+<div class="sc" id="S4" style="background:linear-gradient(#9CC3E6,#D9E7F2 70%)">
+  <div class="L" id="mast" style="left:0;right:0;top:120px;text-align:center;direction:ltr;font:500 260px/1 var(--bod);letter-spacing:-.01em;white-space:nowrap;color:var(--b)"><span>M</span><span>A</span><span>T</span><span>A</span><span>N</span></div>
+  <div class="L" id="cl1" style="left:0;right:0;top:420px;text-align:center;direction:ltr;font:500 30px/1 var(--bod);letter-spacing:.42em;color:var(--b)">THE PERSONAL ISSUE</div>
+  <img id="s4img" class="L" src="cut/hero.png" style="width:1550px;left:-260px;top:420px">
+  <div class="L" id="cl2" style="left:70px;top:760px;font:900 78px/1.02 var(--serif);color:var(--ox);text-align:left;direction:rtl;width:420px">האיש<br>שמאחורי<br>כל הסיפורים</div>
+  <div class="L" id="cl3" style="left:80px;top:530px;font:italic 500 200px/1 var(--bod);color:var(--b)">34</div>
+  <div class="L" id="realcov" style="left:0;top:0;width:1080px;height:1920px;background:var(--b)">
+    <div id="rcard" style="position:absolute;left:90px;top:300px;width:900px;height:1350px;box-shadow:0 60px 120px rgba(0,0,0,.55);overflow:hidden">
+      <img src="../carousel/assets/page-01.jpg" style="width:100%;height:100%;display:block"><div class="sheen" id="rsh"></div></div>
+    <div id="rtag" style="position:absolute;left:0;right:0;bottom:150px;text-align:center" class="tag">ON THE COVER</div>
+  </div>
+</div>
+
+<!-- S5: tabloid montage -->
+<div class="sc" id="S5" style="background:#000">
+  <img id="m_img" class="L" src="" style="left:0;top:0;transform-origin:0 0">
+  <div class="full" style="background:linear-gradient(to top,rgba(58,6,16,.96) 0,rgba(58,6,16,.7) 22%,rgba(58,6,16,0) 48%)"></div>
+  <div class="L tag" style="left:80px;top:150px;font-size:30px;color:var(--iv)">EXCLUSIVE</div>
+  <div class="L" style="right:80px;top:140px;font:700 34px/1 var(--sans);color:var(--iv);letter-spacing:.06em">בלעדי</div>
+  <div class="L disp" id="m_txt" style="left:70px;right:70px;bottom:330px;text-align:right;font-size:190px;color:var(--iv)"></div>
+</div>
+
+<!-- S6: pop grid -->
+<div class="sc" id="S6" style="background:var(--iv)">
+  <div id="grid"></div>
+  <div class="L" id="band" style="left:0;right:0;top:700px;height:520px;background:var(--b);transform-origin:100% 50%"></div>
+  <div class="L disp" id="g1" style="left:0;right:0;top:760px;text-align:center;font-size:150px;color:var(--iv)">כל אחד ראוי</div>
+  <div class="L disp" id="g2" style="left:0;right:0;top:930px;text-align:center;font-size:150px;color:var(--pink)">לשער אחד</div>
+  <div class="L disp" id="g3" style="left:0;right:0;top:1080px;text-align:center;font-size:110px;color:var(--iv)">בחיים.</div>
+</div>
+
+<!-- S7: end -->
+<div class="sc" id="S7" style="background:var(--b)">
+  <div class="L" id="e_logo" style="left:0;right:0;top:170px;text-align:center"><img src="../carousel/assets/logo-ivory.png" style="width:620px"></div>
+  <div class="L" id="e_card" style="left:290px;top:430px;width:500px;height:750px;box-shadow:0 50px 100px rgba(0,0,0,.55);overflow:hidden">
+    <img src="../carousel/assets/page-01.jpg" style="width:100%;height:100%;display:block"><div class="sheen" id="esh"></div></div>
+  <div class="L disp" id="e_t" style="left:0;right:0;top:1250px;text-align:center;font-size:150px;color:var(--iv)">תנו לו את השער.</div>
+  <div class="L" id="e_cta" style="left:0;right:0;top:1450px;text-align:center">
+    <span style="display:inline-flex;align-items:center;gap:30px;background:var(--iv);color:var(--b);padding:26px 48px">
+      <span style="font:900 62px/1 var(--serif)">300 ₪</span><span style="width:2px;height:52px;background:var(--k)"></span><span style="font:700 40px/1 var(--sans)">מגזין אישי · הזמנה בוואטסאפ</span></span>
+    <div style="font:300 34px/1 var(--sans);color:#EBDCCB;margin-top:30px">הקישור בביו</div>
+  </div>
+</div>
+
+<div id="vig"></div><div id="grain"></div><div id="flash"></div>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const P=(t,a,b)=>cl((t-a)/(b-a));
+const expo=x=>x>=1?1:1-Math.pow(2,-10*x);
+const eio=x=>x<.5?8*x**4:1-Math.pow(-2*x+2,4)/2;
+const back=x=>{const c=1.6;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2)};
+const lerp=(a,b,x)=>a+(b-a)*x;
+const SC=[['S1',0,.75],['S2',.75,2.0],['S3',2.0,3.0],['S4',3.0,5.5],['S5',5.5,9.5],['S6',9.5,11.75],['S7',11.75,16]];
+const FLASH=[0,.25,.5,.75,2.0,2.5,4.5,5.5,6.5,7.5,8.5,9.5,11.75,13.5];
+const SHOTS=[[6,620,760,2.0,'הרומן.'],[5,260,360,2.6,'היורש.'],[4,550,450,1.7,'הסדרה.'],[8,420,620,1.9,'האהבה<br>הראשונה.'],
+ [11,330,1000,1.8,'התפריט.'],[12,550,900,1.6,'התמונות<br>שלא פורסמו.'],[13,880,1300,2.6,'החופשה.'],[14,550,1150,1.5,'המשפחה.']];
+// slam: scale+blur in
+function slam(el,t,a,dur=.22,from=1.35){const q=P(t,a,a+dur),e=expo(q);
+  el.style.opacity=t<a?0:Math.min(1,q*3); el.style.transform=`scale(${lerp(from,1,e)})`; el.style.filter=`blur(${(1-e)*18}px)`;}
+// grid tiles
+const COLS=['#6B0F1E','#F3C6CF','#8C7A55','#3A0610','#F8F2E7','#6B0F1E','#C9B48A','#F3C6CF','#3A0610'];
+for(let i=0;i<9;i++){const d=document.createElement('div');d.className='tile';d.id='tl'+i;
+  d.style.left=(i%3)*360+'px';d.style.top=Math.floor(i/3)*640+'px';d.style.background=COLS[i];
+  const f=[ 'grayscale(1) contrast(1.4) brightness(1.1)','none','sepia(.6) contrast(1.2)','grayscale(1) contrast(1.6)','none','grayscale(1) brightness(1.2) contrast(1.3)','none','sepia(.3) saturate(1.6)','grayscale(1) contrast(1.4)'][i];
+  d.innerHTML=`<img src="cut/hero.png" style="filter:${f}">`;$('grid').appendChild(d);}
+window.DUR=15.5;
+window.render=function(t){
+  for(const [id,a,b] of SC) $(id).style.display=(t>=a&&t<b)?'block':'none';
+  $('grain').style.backgroundPosition=`${(Math.sin(t*91.7)*1e4)%512|0}px ${(Math.cos(t*57.3)*1e4)%512|0}px`;
+  // flash
+  let fl=0; for(const f of FLASH){ if(t>=f) fl=Math.max(fl,1-P(t,f,f+.12)); } $('flash').style.opacity=fl*(t<.8?1:.85);
+  // S1 paparazzi: three framings of the face
+  { const fr=[[-1180,240,1],[-1530,100,1.2],[-930,330,.85]]; const k=t<.25?0:t<.5?1:2; const [x,y,s]=fr[k];
+    const d=1+.05*P(t,k*.25,k*.25+.25);
+    $('s1img').style.transform=`translate(${x}px,${y}px) scale(${s*d})`;
+    const lastF=k*.25; $('s1img').style.filter=`brightness(${lerp(1.9,1.05,P(t,lastF,lastF+.2))}) contrast(1.25)`; }
+  // S2
+  { const s=.75; slam($('s2t'),t,s+.02,.25,1.5);
+    const e=expo(P(t,s,s+.35)); $('s2img').style.transform=`translateY(${(1-e)*400}px) scale(${1+.05*P(t,s,2)})`;
+    $('s2img').style.filter=`brightness(${lerp(1.6,1,P(t,s,s+.25))}) contrast(1.15)`; }
+  // S3
+  { const s=2.0; slam($('s3t'),t,s+.02,.25,1.6);
+    const e=expo(P(t,s,s+.4)); $('s3img').style.transform=`translateY(${(1-e)*300}px) scale(${1+.04*P(t,s,3)})`;
+    $('s3img').style.filter=`brightness(${lerp(1.5,1,P(t,t>=2.5?2.5:s,(t>=2.5?2.5:s)+.2))})`; }
+  // S4 cover build
+  { const s=3.0; [...$('mast').children].forEach((c,i)=>{const a=s+.02+i*.09,e=back(P(t,a,a+.28));
+      c.style.display='inline-block'; c.style.opacity=t<a?0:1; c.style.transform=`translateY(${(1-e)*-260}px)`;});
+    const ie=expo(P(t,s,s+.5)); $('s4img').style.transform=`translateY(${(1-ie)*700}px) scale(${1+.04*P(t,s,4.5)})`;
+    slam($('cl1'),t,s+.55,.25,1.2); slam($('cl2'),t,s+.85,.25,1.3); slam($('cl3'),t,s+1.05,.25,1.6);
+    const rc=t>=4.5; $('realcov').style.display=rc?'block':'none';
+    const q=expo(P(t,4.5,5.1)); $('rcard').style.transform=`scale(${lerp(1.25,1,q)}) rotate(${lerp(0,-3,q)}deg)`;
+    $('rsh').style.backgroundPosition=`${lerp(140,-60,eio(P(t,4.75,5.4)))}% 0`;
+    slam($('rtag'),t,4.9,.3,1.2); }
+  // S5 montage
+  { const s=5.5; const k=Math.min(7,Math.floor((t-s)/.5)); if(t>=s&&k>=0){ const [n,fx,fy,sc,txt]=SHOTS[k]; const a=s+k*.5;
+      const img=$('m_img'); const src=`../carousel/assets/page-${String(n).padStart(2,'0')}.jpg`; if(!img.src.endsWith(src.slice(2))) img.src=src;
+      const z=sc*lerp(1.18,1,expo(P(t,a,a+.3)))*(1+.04*P(t,a+.3,a+.5));
+      const W=1100*z,H=1650*z; const tx=cl(540-fx*z,1080-W,0), ty=cl(960-fy*z,1920-H,0);
+      img.style.width='1100px'; img.style.transform=`translate(${tx}px,${ty}px) scale(${z})`;
+      img.style.filter=k%2?'contrast(1.1)':'contrast(1.15) saturate(.9)';
+      const mt=$('m_txt'); if(mt.dataset.k!=k){mt.innerHTML=txt;mt.dataset.k=k;} slam(mt,t,a+.03,.2,1.4); } }
+  // S6 pop grid
+  { const s=9.5; const ord=[4,0,8,2,6,1,7,3,5];
+    ord.forEach((i,j)=>{const a=s+.02+j*.07,e=expo(P(t,a,a+.2)),el=$('tl'+i); el.style.opacity=t<a?0:1; el.style.transform=`scale(${lerp(1.3,1,e)})`;});
+    const be=expo(P(t,s+.8,s+1.15)); $('band').style.transform=`scaleX(${be})`;
+    slam($('g1'),t,s+1.0,.22,1.3); slam($('g2'),t,s+1.25,.22,1.3); slam($('g3'),t,s+1.5,.22,1.3);
+    $('grid').style.transform=`scale(${1+.05*P(t,s,11.75)})`; }
+  // S7 end
+  { const s=11.75; const ce=expo(P(t,s,s+.55));
+    $('e_card').style.transform=`translateY(${(1-ce)*900}px) rotate(${lerp(8,-2.5,ce)}deg) scale(${1+.03*P(t,s+.5,15.5)})`;
+    $('esh').style.backgroundPosition=`${lerp(140,-60,eio(P(t,13.5,14.3)))}% 0`;
+    slam($('e_logo'),t,s+.35,.3,1.15); slam($('e_t'),t,s+.75,.25,1.4);
+    const q=expo(P(t,s+1.25,s+1.75)); $('e_cta').style.opacity=q; $('e_cta').style.transform=`translateY(${(1-q)*40}px)`; }
+};
+render(0);
+</script>
+</body>
+</html>
