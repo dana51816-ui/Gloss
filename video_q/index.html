@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>GLOSS | The Questionnaire</title>
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<style>
+:root{--bur:#6B0F1E;--ivory:#F8F2E7;--paper:#FBF7EF;--khaki:#8C7A55;--khaki-l:#CDBD93;--ink:#6B0F1E;--txt:#2A1714;
+  --bell:"Bellefair",serif;--kara:"Karantina",sans-serif;--hand:"Playpen Sans Hebrew",cursive;--sans:"Heebo",sans-serif;--serif:"Frank Ruhl Libre",serif;--didone:"Bodoni Moda",serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
+#stage{position:relative;width:1080px;height:1920px;overflow:hidden;background:var(--bur);-webkit-font-smoothing:antialiased;color:var(--ivory)}
+.abs{position:absolute}.layer{position:absolute;inset:0;overflow:hidden}.p3{transform-style:preserve-3d}
+.ltr{direction:ltr;unicode-bidi:isolate}
+.mask{overflow:hidden;display:inline-block;vertical-align:top;padding:0 .05em .06em}.mask>span{display:inline-block}
+#studio{position:absolute;inset:0;background:var(--bur)}
+#studioLight{position:absolute;inset:0;background:radial-gradient(ellipse 70% 45% at 50% 45%,rgba(255,215,195,.17),rgba(0,0,0,0) 70%),radial-gradient(ellipse 120% 80% at 50% 50%,rgba(0,0,0,0) 40%,rgba(0,0,0,.42) 100%)}
+#L3d{perspective:2200px;perspective-origin:540px 960px}
+#world{position:absolute;inset:0}
+.obj{position:absolute;left:0;top:0;transform-origin:0 0}
+.face{position:absolute;left:0;top:0;backface-visibility:hidden}
+
+/* questionnaire card */
+.card{position:absolute;left:0;top:0;width:860px;height:600px;transform-origin:0 0}
+.card .front{position:absolute;inset:0;backface-visibility:hidden;border-radius:6px;background:
+  linear-gradient(180deg,rgba(0,0,0,0) 0,rgba(0,0,0,0) 100%),var(--paper);
+  box-shadow:0 2px 0 rgba(0,0,0,.04) inset;overflow:hidden}
+.card .front:before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 30% 20%,rgba(255,255,255,.7),rgba(255,255,255,0) 60%)}
+.card .num{position:absolute;right:60px;top:52px;font-family:var(--sans);font-weight:300;font-size:24px;letter-spacing:.34em;color:var(--khaki)}
+.card .num b{font-family:var(--didone);font-style:italic;font-weight:500;letter-spacing:0;font-size:40px;color:var(--bur);margin-left:6px}
+.card .brand{position:absolute;left:60px;top:58px;font-family:var(--didone);font-style:italic;font-size:26px;color:var(--khaki)}
+.card .q{position:absolute;right:60px;left:60px;top:150px;font-family:var(--serif);font-weight:900;font-size:62px;line-height:1.1;color:var(--txt)}
+.card .line{position:absolute;left:60px;right:60px;height:2px;background:rgba(140,122,85,.35)}
+.card .ans{position:absolute;right:60px;left:40px;top:330px;font-family:var(--hand);font-weight:400;font-size:84px;line-height:1.2;color:var(--ink);white-space:nowrap}
+.pen{position:absolute;width:16px;height:16px;border-radius:50%;background:var(--ink);box-shadow:0 0 0 5px rgba(107,15,30,.15)}
+.cshadow{position:absolute;inset:0;background:rgba(0,0,0,.55);filter:blur(34px);border-radius:20px}
+
+/* type */
+.bell{font-family:var(--bell);font-weight:400;line-height:1.02;text-align:center;left:0;right:0;color:var(--ivory)}
+.kick{left:0;right:0;text-align:center;font-family:var(--sans);font-weight:300;font-size:26px;letter-spacing:.45em;color:var(--khaki-l)}
+.hand{font-family:var(--hand);color:var(--ink);white-space:nowrap}
+.full{position:absolute;inset:0;overflow:hidden}.full img{position:absolute;left:0;top:0;transform-origin:0 0}
+#sheen{position:absolute;left:0;top:0;width:1080px;height:1620px;pointer-events:none;mix-blend-mode:screen;background:linear-gradient(105deg,rgba(255,255,255,0) 38%,rgba(255,250,240,.12) 45%,rgba(255,255,255,.6) 50%,rgba(255,250,240,.12) 55%,rgba(255,255,255,0) 62%);background-size:300% 100%;background-repeat:no-repeat;transform:translateZ(1px)}
+.edge{position:absolute;background:repeating-linear-gradient(90deg,#efe8db 0 2px,#d9d0c0 2px 3px)}
+.edgeH{position:absolute;background:repeating-linear-gradient(0deg,#efe8db 0 2px,#d9d0c0 2px 3px)}
+#floorShadow{position:absolute;left:0;top:0;width:1080px;height:1620px;background:radial-gradient(ellipse 50% 50% at 50% 50%,rgba(0,0,0,.55),rgba(0,0,0,0) 70%);filter:blur(20px);transform-origin:50% 50%}
+#endCta{left:50%;top:1420px;background:var(--bur);color:var(--ivory);font-family:var(--sans);font-weight:500;font-size:38px;padding:24px 62px;border-radius:999px;white-space:nowrap;overflow:hidden}
+#ctaShine{position:absolute;inset:0;background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.55) 50%,transparent 65%);background-size:300% 100%}
+#grain{position:absolute;inset:0;width:1080px;height:1920px;mix-blend-mode:overlay;opacity:.08;pointer-events:none}
+#vig{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 85% 70% at 50% 50%,rgba(0,0,0,0) 55%,rgba(0,0,0,.25) 100%)}
+</style>
+</head>
+<body>
+<div id="stage">
+  <div class="layer" id="L3d">
+    <div id="studio"><div id="studioLight"></div></div>
+    <div id="behind" class="layer"></div>
+    <div id="world" class="p3">
+      <div id="floorShadow"></div>
+      <div id="stack" class="p3 obj"></div>
+      <div id="mag" class="obj p3" style="width:1080px;height:1620px">
+        <img class="face" src="assets/pages/p-back.jpg" style="width:1080px;height:1620px;transform:translateZ(-14px) rotateY(180deg)">
+        <div class="edge" style="left:0;top:0;width:14px;height:1620px;transform-origin:0 0;transform:rotateY(90deg)"></div>
+        <div class="edge" style="left:1080px;top:0;width:14px;height:1620px;transform-origin:0 0;transform:rotateY(90deg)"></div>
+        <div class="edgeH" style="left:0;top:0;width:1080px;height:14px;transform-origin:0 0;transform:rotateX(-90deg)"></div>
+        <div class="edgeH" style="left:0;top:1620px;width:1080px;height:14px;transform-origin:0 0;transform:rotateX(-90deg)"></div>
+        <img class="face" id="magFront" src="assets/pages/p-01.jpg" style="width:1080px;height:1620px">
+        <div id="stripGlow" style="position:absolute;left:596px;top:1477px;width:430px;height:54px;box-shadow:0 0 0 0 rgba(255,236,200,0);transform:translateZ(.5px)"></div>
+        <div id="sheen"></div>
+      </div>
+      <!-- page that a card flips into -->
+      <div id="flipPage" class="obj p3" style="width:1080px;height:1620px"><img class="face" src="assets/pages/p-07.jpg" style="width:1080px;height:1620px"></div>
+      <!-- 4 questionnaire cards -->
+      <div id="cards"></div>
+    </div>
+  </div>
+  <!-- full-bleed scenes -->
+  <div class="layer" id="Lhorse" style="background:#1b1b16"><div class="full"><img id="horseImg" src="assets/pages/p-08.jpg"></div></div>
+  <div class="layer" id="Lword"><svg width="1080" height="1920" style="position:absolute;left:0;top:0">
+      <defs><clipPath id="wclip"><text id="wtext" x="540" y="1180" text-anchor="middle" direction="rtl" font-family="Karantina" font-weight="700" font-size="560">סוסים</text></clipPath></defs>
+      <g clip-path="url(#wclip)"><rect width="1080" height="1920" fill="#2a2a22"/><image id="wimg" href="assets/pages/p-08.jpg" width="1500" height="2250" preserveAspectRatio="none"/></g></svg></div>
+  <div class="layer" id="Lsun"><div class="full"><img id="sunImg" src="assets/pages/p-14.jpg"></div>
+    <svg width="1080" height="1920" style="position:absolute;left:0;top:0"><circle id="inkRing" cx="0" cy="0" r="0" fill="none" stroke="#6B0F1E" stroke-width="26"/></svg></div>
+  <div class="layer" id="Lhand" style="pointer-events:none"><div id="flyHand" class="abs hand" style="font-size:84px;transform-origin:50% 50%">תמיד בתנועה. תמיד רעב.</div></div>
+
+  <!-- type -->
+  <div class="layer" id="Ltype" style="pointer-events:none">
+    <div id="hd1" class="abs bell" style="top:200px;font-size:132px"><span class="mask"><span>עונים על שאלון.</span></span></div>
+    <div id="hd2" class="abs bell" style="top:345px;font-size:132px;color:var(--khaki-l)"><span class="mask"><span>והקסם מתחיל.</span></span></div>
+    <div id="asm1" class="abs bell" style="top:230px;font-size:120px"><span class="mask"><span>שאלון אחד.</span></span></div>
+    <div id="asm2" class="abs bell" style="top:1450px;font-size:120px;color:var(--khaki-l)"><span class="mask"><span>גיליון שלם.</span></span></div>
+    <img id="endLogo" class="abs" src="assets/gloss-logo.png" style="left:290px;top:230px;width:500px">
+    <div id="end1" class="abs bell" style="top:1130px;font-size:104px;color:var(--bur)"><span class="mask"><span>מגזין בעיצוב אישי</span></span><br><span class="mask"><span style="color:var(--khaki)">למישהו שאוהבים.</span></span></div>
+    <div id="endCta" class="abs">עונים על שאלון בוואטסאפ<div id="ctaShine"></div></div>
+  </div>
+  <img id="grain" src="assets/grain0.png"><div id="vig"></div>
+</div>
+<script>
+const BPM=120,B=60/BPM,FPS=30,T=b=>b*B;
+const $=id=>document.getElementById(id);
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x)),seg=(t,a,b)=>clamp((t-a)/(b-a)),lerp=(a,b,p)=>a+(b-a)*p;
+const E={outExpo:p=>p>=1?1:1-Math.pow(2,-10*p),inExpo:p=>p<=0?0:Math.pow(2,10*p-10),inOutExpo:p=>p<=0?0:p>=1?1:p<.5?Math.pow(2,20*p-10)/2:(2-Math.pow(2,-20*p+10))/2,
+ outCubic:p=>1-Math.pow(1-p,3),inCubic:p=>p*p*p,inOutCubic:p=>p<.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2,outQuart:p=>1-Math.pow(1-p,4),inOutQuart:p=>p<.5?8*p*p*p*p:1-Math.pow(-2*p+2,4)/2,
+ inOutSine:p=>-(Math.cos(Math.PI*p)-1)/2,outBack:p=>{const c1=1.6,c3=c1+1;return 1+c3*Math.pow(p-1,3)+c1*Math.pow(p-1,2)}};
+const show=(el,v)=>{el.style.display=v?'':'none'};
+const P=i=>`assets/pages/p-${String(i).padStart(2,'0')}.jpg`, PW=1500, PH=2250, K=1080/1500;
+function maskReveal(el,t,t0,st=0.06,dur=0.5,out=null,od=0.3){el.querySelectorAll('.mask>span').forEach((s,i)=>{let p=E.outExpo(seg(t,t0+i*st,t0+i*st+dur));let y=(1-p)*112;if(out!=null){y-=E.inCubic(seg(t,out+i*.04,out+i*.04+od))*112;}s.style.transform=`translateY(${y}%)`;});}
+function place(img,w,h,cx,cy,zoom=1){const s=Math.max(w/PW,h/PH)*zoom;let x=w/2-cx*PW*s,y=h/2-cy*PH*s;x=Math.min(0,Math.max(w-PW*s,x));y=Math.min(0,Math.max(h-PH*s,y));img.style.width=PW+'px';img.style.height=PH+'px';img.style.transform=`translate(${x}px,${y}px) scale(${s})`;return{s,x,y};}
+const tf=(s,w,h)=>`translate3d(${s.x}px,${s.y}px,${s.z||0}px) rotateZ(${s.rz||0}deg) rotateX(${s.rx||0}deg) rotateY(${s.ry||0}deg) scale(${s.s??1}) translate(${-w/2}px,${-h/2}px)`;
+
+/* ---------- cards ---------- */
+const Q=[
+ {q:'משפט אחד שמתאר אותו:',a:'תמיד בתנועה. תמיד רעב.'},
+ {q:'מה הוא הכי אוהב?',a:'סוסים.'},
+ {q:'רגע שלא תשכחו:',a:'ירח הדבש שלנו.'},
+ {q:'מי הכי אוהב אותו?',a:'דנה וריף.'},
+];
+const cards=Q.map((c,i)=>{const d=document.createElement('div');d.className='card p3';d.innerHTML=`<div class="cshadow"></div><div class="front">
+  <div class="num">שאלה <span class="ltr"><b>0${i+1}</b> / 04</span></div><div class="brand ltr">The GLOSS questionnaire</div>
+  <div class="q">${c.q}</div><div class="line" style="top:440px"></div><div class="line" style="top:540px"></div>
+  <div class="ans"><span class="w">${c.a}</span></div><div class="pen"></div></div>`;$('cards').appendChild(d);
+  return {el:d,sh:d.querySelector('.cshadow'),ans:d.querySelector('.ans'),w:d.querySelector('.w'),pen:d.querySelector('.pen'),front:d.querySelector('.front')};});
+// handwriting: reveal right->left with a soft edge, a pen tip rides the edge
+function write(C,t,t0,t1){
+  const p=seg(t,t0,t1); const W=C.w.getBoundingClientRect?C.w.offsetWidth:600;
+  // uneven human speed
+  const q=clamp(p+0.04*Math.sin(p*18));
+  const edge=q*100;
+  C.ans.style.webkitMaskImage=C.ans.style.maskImage=`linear-gradient(to left, #000 ${edge-3}%, transparent ${edge+1}%)`;
+  C.ans.style.webkitMaskSize=C.ans.style.maskSize=`${W+20}px 100%`; C.ans.style.webkitMaskPosition=C.ans.style.maskPosition='right 0';C.ans.style.webkitMaskRepeat=C.ans.style.maskRepeat='no-repeat';
+  const x=860-60-q*W; const y=330+70+12*Math.sin(t*38)+(p>0&&p<1?0:0);
+  C.pen.style.transform=`translate(${x-8}px,${y-8}px)`; C.pen.style.left='0';C.pen.style.top='0';
+  C.pen.style.opacity=(p>0&&p<1)?1:0;
+}
+function setCard(C,on,s,shadow=1){show(C.el,on);if(!on)return;C.el.style.transform=tf(s,860,600);C.sh.style.opacity=shadow;C.sh.style.transform=`translate3d(${20+(s.z||0)*0.05}px,${40+(s.z||0)*0.1}px,-40px)`;}
+
+/* ---------- stack ---------- */
+const stackEls=[];for(let i=1;i<=14;i++){const d=document.createElement('img');d.src=P(i);d.className='obj';d.style.cssText+='width:1080px;height:1620px;box-shadow:0 20px 40px rgba(0,0,0,.25)';$('stack').appendChild(d);stackEls.push(d);}
+
+/* ---------- RENDER ---------- */
+function render(t){
+  $('grain').src=`assets/grain${Math.floor(t*FPS)%6}.png`;
+  const mag=$('mag'), fp=$('flipPage');
+  show(mag,false); show(fp,false); show($('stack'),false); cards.forEach(c=>show(c.el,false));
+  ['Lhorse','Lword','Lsun','Lhand'].forEach(id=>show($(id),false));
+  $('sheen').style.opacity=0; $('floorShadow').style.opacity=0; $('studio').style.background='#6B0F1E';
+  const sheen=(a,b)=>{const sw=seg(t,a,b);if(sw>0&&sw<1){$('sheen').style.opacity=Math.sin(Math.PI*sw);$('sheen').style.backgroundPosition=`${lerp(130,-30,E.inOutCubic(sw))}% 0`;}};
+
+  /* ===== S0/S1: Q1 -> cover (0 -> 6.5B) ===== */
+  if(t<T(6.6)){
+    const C=cards[0];
+    const fall=E.inCubic(seg(t,T(3.6),T(4.6)));
+    const idle=Math.sin(t*1.7);
+    setCard(C,fall<1,{x:540,y:lerp(1010,1500,fall),z:lerp(0,-300,fall),rx:lerp(4+idle,70,fall),ry:-6+2*idle,rz:lerp(-2.5,8,fall),s:1},1-fall);
+    C.front.style.filter=`brightness(${1-0.4*fall})`;
+    write(C,t,0.12,T(3.1));
+    // handwriting detaches and flies onto the printed cover line
+    const fly=E.inOutCubic(seg(t,T(3.6),T(5.2)));
+    if(t>=T(3.6)){ C.ans.style.visibility='hidden'; show($('Lhand'),fly<1);
+      const fh=$('flyHand');
+      // start = answer position on card (screen), end = cover strip (page-fit)
+      const sx=540+ (860/2-60-C.w.offsetWidth/2) * 1, sy=1010-300+330+50;
+      const ex=809, ey=1653;
+      const arc=Math.sin(Math.PI*fly)*-260;
+      fh.style.left=(lerp(sx,ex,fly)-C.w.offsetWidth/2)+'px'; fh.style.top=(lerp(sy,ey,fly)-55+arc)+'px';
+      fh.style.transform=`scale(${lerp(1,0.52,fly)}) rotate(${lerp(-2,-1,fly)+Math.sin(Math.PI*fly)*-6}deg)`;
+      fh.style.opacity=1-seg(t,T(4.9),T(5.25)); fh.style.filter=`blur(${seg(t,T(4.9),T(5.25))*6}px)`; fh.style.color= fly>0.6? '#F8F2E7':'#6B0F1E';
+    } else C.ans.style.visibility='visible';
+    // cover arrives from depth
+    const ca=E.outQuart(seg(t,T(3.7),T(5.0)));
+    if(t>=T(3.7)){ show(mag,true);
+      const out=E.inOutQuart(seg(t,T(5.6),T(6.6)));
+      mag.style.transform=tf({x:540,y:lerp(960,1000,out),z:lerp(-2600,0,ca),rx:lerp(30,0,ca)+lerp(0,8,out),ry:lerp(-40,0,ca)+lerp(0,-22,out),rz:lerp(-12,0,ca)+lerp(0,-3,out),s:lerp(1,0.62,out)},1080,1620);
+      $('stripGlow').style.boxShadow=`0 0 ${40*Math.sin(Math.PI*seg(t,T(4.9),T(5.9)))}px ${18*Math.sin(Math.PI*seg(t,T(4.9),T(5.9)))}px rgba(255,236,200,.65)`;
+      sheen(T(5.4),T(6.6));
+    }
+    maskReveal($('hd1'),t,-1,0.06,0.5,T(4.0)); maskReveal($('hd2'),t,T(1.6),0.06,0.6,T(4.1));
+  }
+  show($('hd1'),t<T(4.6)); show($('hd2'),t>T(1.4)&&t<T(4.7));
+
+  /* ===== S2: Q2 -> "סוסים" photo-word -> horse (6.5 -> 9.5B) ===== */
+  if(t>=T(6.4)&&t<T(9.7)){
+    // magazine recedes behind
+    if(t<T(8.2)){ show(mag,true); const r=seg(t,T(6.4),T(8.2)); mag.style.transform=tf({x:540,y:1000,z:-380-500*r,rx:8,ry:-22-10*r,rz:-3,s:0.62},1080,1620); mag.style.filter=`blur(${6*r}px) brightness(${1-.4*r})`; }
+    const C=cards[1];
+    const ein=E.outQuart(seg(t,T(6.4),T(7.1))), out=E.inCubic(seg(t,T(8.0),T(8.5)));
+    setCard(C,out<1,{x:lerp(1700,540,ein)+lerp(0,-1400,out),y:980,z:0,rx:4,ry:lerp(-30,-4,ein),rz:lerp(12,2,ein)+lerp(0,-14,out),s:1});
+    C.ans.style.visibility='visible'; write(C,t,T(6.9),T(7.7));
+    // the word becomes a window onto the horse
+    const wOn=t>=T(7.9); show($('Lword'),wOn&&t<T(9.4));
+    if(wOn){ const a=E.outExpo(seg(t,T(7.9),T(8.4)));
+      const z=E.inExpo(seg(t,T(8.6),T(9.4)));
+      const sc=lerp(0.6,1,a)*(1+z*14);
+      $('wtext').setAttribute('transform',`translate(540 1000) scale(${sc}) translate(-540 -1000)`);
+      $('Lword').style.opacity=a*(1-seg(t,T(8.85),T(9.2)));
+      const s=1.05+0.08*seg(t,T(7.9),T(9.4)); $('wimg').setAttribute('transform',`translate(${540-430*s} ${1000-780*s}) scale(${s})`);
+      $('Lword').style.background=`rgba(27,27,22,${a})`;
+    }
+    const hOn=t>=T(8.7); show($('Lhorse'),hOn);
+    if(hOn){ const q=seg(t,T(8.7),T(9.7)); place($('horseImg'),1080,1920,.29,.33,1.62*(1.12-0.1*E.outCubic(q))); $('Lhorse').style.opacity=E.inOutCubic(seg(t,T(8.65),T(8.95))); }
+  }
+  /* ===== S3: Q3 -> card flips into page 07 (9.5 -> 12.5B) ===== */
+  if(t>=T(9.5)&&t<T(12.7)){
+    if(t<T(10.2)){ show($('Lhorse'),true); place($('horseImg'),1080,1920,.29,.33,1.62*1.02); $('Lhorse').style.opacity=1; }
+    $('studio').style.background='#5E0D1A';
+    const C=cards[2];
+    const drop=E.outBack(seg(t,T(9.5),T(10.2)));
+    const fl=E.inOutCubic(seg(t,T(11.0),T(11.9)));
+    const ang=fl*180;
+    const grow=E.inOutCubic(seg(t,T(11.0),T(12.0)));
+    if(ang<90){ setCard(C,true,{x:540,y:lerp(-300,960,drop),z:lerp(0,200,grow),rx:lerp(-20,3,drop),ry:ang,rz:lerp(-8,-1.5,drop),s:lerp(1,1.15,grow)}); C.ans.style.visibility='visible'; write(C,t,T(10.1),T(10.9)); }
+    else { show(fp,true); const pz=E.outCubic(seg(t,T(11.45),T(12.3)));
+      fp.style.transform=tf({x:540,y:960,z:lerp(200,0,pz),ry:ang-180,rz:lerp(-1.5,0,pz),s:lerp(0.6,1,pz)},1080,1620); }
+    if(t>=T(10.2)) show($('Lhorse'),t<T(10.6)), $('Lhorse').style.opacity=1-seg(t,T(10.2),T(10.6));
+  }
+  /* ===== S4: Q4 -> ink bloom -> p14 (12.5 -> 15.5B) ===== */
+  if(t>=T(12.4)&&t<T(15.8)){
+    if(t<T(13.3)){ show(fp,true); const r=seg(t,T(12.4),T(13.3)); fp.style.transform=tf({x:540,y:960,z:-300*r,rx:10*r,ry:12*r,s:1-0.2*r},1080,1620); fp.style.filter=`brightness(${1-.45*r})`; }
+    const C=cards[3];
+    const ein=E.outQuart(seg(t,T(12.4),T(13.1)));
+    setCard(C,t<T(15.0),{x:lerp(-700,540,ein),y:1000,z:0,rx:3,ry:lerp(30,3,ein),rz:lerp(-14,-2,ein),s:1});
+    C.ans.style.visibility='visible'; write(C,t,T(12.9),T(13.6));
+    const sOn=t>=T(13.8); show($('Lsun'),sOn);
+    if(sOn){ const q=E.inOutExpo(seg(t,T(13.8),T(14.8)));
+      place($('sunImg'),1080,1920,.5,.42,lerp(1.25,1.02,E.outCubic(seg(t,T(13.8),T(15.8)))));
+      const cx=330, cy=1010, R=lerp(0,2300,q);
+      $('Lsun').querySelector('.full').style.clipPath=`circle(${R}px at ${cx}px ${cy}px)`;
+      const ring=$('inkRing'); ring.setAttribute('cx',cx); ring.setAttribute('cy',cy); ring.setAttribute('r',R); ring.setAttribute('stroke-width',lerp(40,4,q)); ring.style.opacity=q<1?1:0;
+    }
+  }
+  /* ===== S5: assembly + spin (15.5 -> 20B) ===== */
+  if(t>=T(15.5)&&t<T(20.2)){
+    show($('stack'),true);
+    // p14 shrinks into the bottom of the stack, then 13..1 land on top
+    const shrink=E.inOutQuart(seg(t,T(15.5),T(16.4)));
+    const S=lerp(1.186,0.56,shrink);
+    const spin=E.inOutCubic(seg(t,T(18.2),T(20.2)));
+    const tilt=E.outCubic(seg(t,T(15.8),T(17)));
+    const W=`translate3d(540px,${lerp(960,980,shrink)}px,0) scale(${S}) rotateX(${lerp(0,14,tilt)-14*spin}deg) rotateY(${lerp(0,-26,tilt)+lerp(0,386,spin)}deg)`;
+    for(let i=1;i<=14;i++){
+      const el=stackEls[i-1]; let x=0,y=0,z=(14-i)*2.2,rz=0,ry=0,op=1;
+      if(i<14){ const a=T(16.0)+(13-i)*0.085; const q=E.outQuart(seg(t,a,a+0.42));
+        const ang=i*2.4; x=Math.cos(ang)*1800*(1-q); y=Math.sin(ang)*2200*(1-q); z+= (1-q)*1600; rz=(1-q)*(i%2?40:-40); ry=(1-q)*(i%2?-50:50); op=t>=a?1:0; }
+      el.style.display=op?'':'none';
+      el.style.transform=`${W} translate3d(${x}px,${y}px,${z}px) rotateZ(${rz}deg) rotateY(${ry}deg) translate(-540px,-810px)`;
+    }
+    $('stack').style.transform='none';
+    show($('Lsun'),t<T(15.55));
+  }
+  /* ===== S6: end (20 -> 29B) ===== */
+  const endP=E.inOutCubic(seg(t,T(19.6),T(20.6)));
+  if(t>=T(19.6)){
+    $('studio').style.background= `rgb(${Math.round(lerp(107,246,endP))},${Math.round(lerp(15,240,endP))},${Math.round(lerp(30,229,endP))})`;
+    $('studioLight').style.opacity=1-0.7*endP;
+  } else $('studioLight').style.opacity=1;
+  if(t>=T(20.2)){
+    show(mag,true); mag.style.filter='none'; $('magFront').src=P(1);
+    const k=E.inOutQuart(seg(t,T(20.2),T(21.5))); const fl=seg(t,T(21.5),T(29.5));
+    mag.style.transform=tf({x:540,y:lerp(980,790,k),z:0,rx:lerp(0,6,k)-2*fl,ry:lerp(26,-16,k)+24*E.inOutSine(fl),rz:lerp(0,-2,k)+2*fl,s:lerp(0.56,0.37,k)},1080,1620);
+    $('floorShadow').style.opacity=0.6*k; $('floorShadow').style.transform=`translate3d(0px,${790-960+150+1620*0.37*0.56}px,-60px) scale(${0.37*0.9},${0.37*0.12})`;
+    sheen(T(22.6),T(24.4)); sheen(T(26.5),T(28));
+  }
+  // assembly copy
+  show($('asm1'),t>T(16.2)&&t<T(19.8)); show($('asm2'),t>T(16.8)&&t<T(19.8));
+  maskReveal($('asm1'),t,T(16.3),0.05,0.5,T(19.3)); maskReveal($('asm2'),t,T(17.0),0.05,0.5,T(19.35));
+  // end copy
+  const eOn=t>=T(20.6); show($('endLogo'),eOn); show($('end1'),eOn); show($('endCta'),eOn);
+  if(eOn){ const l=E.outExpo(seg(t,T(20.8),T(22.2))); $('endLogo').style.opacity=l; $('endLogo').style.transform=`translateY(${(1-l)*30}px) scale(${lerp(1.06,1,l)})`;
+    maskReveal($('end1'),t,T(21.4),0.14,0.7);
+    const c=E.outBack(seg(t,T(23.2),T(24.2))); $('endCta').style.opacity=clamp(c*1.6); $('endCta').style.transform=`translateX(-50%) scale(${lerp(.8,1,c)})`;
+    const sh=seg(t,T(25.5),T(26.8)); $('ctaShine').style.backgroundPosition=`${lerp(130,-30,sh)}% 0`; $('ctaShine').style.opacity=sh>0&&sh<1?1:0; }
+}
+window.FAST=[[T(3.6),T(5.2),8],[T(6.4),T(7.1),8],[T(8.0),T(9.5),10],[T(9.5),T(10.2),8],[T(11),T(12.3),8],[T(12.4),T(13.1),8],[T(13.8),T(14.8),8],[T(15.5),T(17.5),12],[T(18.2),T(20.4),10]];
+window.DURATION=T(29)+0.4; window.render=render;
+window.ready=(async()=>{
+  for(const f of ['400 130px "Bellefair"','700 560px "Karantina"','400 84px "Playpen Sans Hebrew"','900 62px "Frank Ruhl Libre"','300 26px "Heebo"','500 38px "Heebo"','italic 500 40px "Bodoni Moda"']) await document.fonts.load(f,'אבגabc01');
+  await document.fonts.ready; await Promise.all([...document.images].map(i=>i.decode().catch(()=>{})));
+  for(let k=0;k<6;k++){const im=new Image();im.src=`assets/grain${k}.png`;await im.decode();}
+  render(0); return true;})();
+</script>
+</body></html>
