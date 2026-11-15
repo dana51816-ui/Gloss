@@ -1,0 +1,14 @@
+Studio GLOSS · "הערב, על השער" — third-party assets
+
+Logo: Studio GLOSS logo (gloss-logo.png, gloss-logo-pink.png), owned by Studio GLOSS.
+Fonts (SIL Open Font License 1.1, licence files in fonts/):
+  Frank Ruhl Libre — https://github.com/google/fonts/tree/main/ofl/frankruhllibre
+  Bellefair — https://github.com/google/fonts/tree/main/ofl/bellefair
+  Heebo by Oded Ezer — https://github.com/OdedEzer/heebo
+
+Instruments:
+Drums: "MuldjordKit" by Lars Muldjord (drumgizmo.org), FreePats version, licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/)
+Samples (CC0): Karoryfer Samples / sfzinstruments, VS Chamber Orchestra: Community Edition (Versilian Studios), Versilian Community Sample Library (Versilian Studios)
+
+Drawing engine adapted from the Art Deco style's engine (deco.js, type.js), recoloured for this film.
+All foley synthesised in code for this film.
