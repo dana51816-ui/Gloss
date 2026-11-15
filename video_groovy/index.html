@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>GLOSS | Groovy</title>
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<style>
+:root{--sand:#E8DBC7;--cream:#F7F0E4;--terra:#C47A55;--terraD:#A9542F;--rose:#D9A797;--sage:#9BA585;--mus:#D9A05B;--cocoa:#4A3426;--olive:#7A7350}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
+#stage{position:relative;width:1080px;height:1920px;overflow:hidden;background:var(--cream);color:var(--cocoa);-webkit-font-smoothing:antialiased;font-family:Heebo,sans-serif}
+.abs{position:absolute}.layer{position:absolute;inset:0;overflow:hidden}
+svg{overflow:visible}
+.kara{font-family:Karantina,sans-serif;font-weight:700;line-height:.9}
+.bell{font-family:Bellefair,serif;line-height:1.02}
+.pill{position:absolute;left:50%;white-space:nowrap;padding:6px 46px 2px;border-radius:26px;filter:drop-shadow(0 12px 0 rgba(74,52,38,.22));transform-origin:50% 50%}
+.stk{position:absolute;width:250px;height:250px;margin:-125px 0 0 -125px;filter:drop-shadow(0 10px 0 rgba(74,52,38,.22))}
+.stk .lb{position:absolute;left:-40px;right:-40px;bottom:-12px;text-align:center;font-family:Karantina;font-weight:700;font-size:62px;color:var(--cocoa);white-space:nowrap}
+.wheel{position:absolute;width:300px;height:300px;margin:-150px 0 0 -150px;border-radius:50%;display:flex;align-items:center;justify-content:center;filter:drop-shadow(0 12px 0 rgba(74,52,38,.22))}
+.wheel b{font-family:Karantina;font-size:260px;line-height:1;color:var(--cream);margin-top:30px}
+.stepT{position:absolute;right:0;left:0;text-align:center;font-family:Karantina;font-weight:700;font-size:112px;white-space:nowrap}
+.band{position:absolute;left:-400px;width:1900px;height:150px;display:flex;align-items:center;white-space:nowrap;font-family:Karantina;font-weight:700;font-size:120px;filter:drop-shadow(0 10px 0 rgba(74,52,38,.2))}
+#cta{left:50%;top:1450px;background:var(--terraD);color:var(--cream);font-weight:600;font-size:42px;padding:26px 70px;border-radius:999px;white-space:nowrap;overflow:hidden;filter:drop-shadow(0 10px 0 rgba(74,52,38,.25))}
+#ctaShine{position:absolute;inset:0;background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.5) 50%,transparent 65%);background-size:300% 100%}
+#grain{position:absolute;inset:0;width:1080px;height:1920px;mix-blend-mode:multiply;opacity:.12;pointer-events:none}
+#vig{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 85% 70% at 50% 50%,rgba(0,0,0,0) 55%,rgba(110,60,25,.18) 100%)}
+</style>
+</head>
+<body>
+<div id="stage">
+  <svg id="art" class="abs" width="1080" height="1920" style="left:0;top:0">
+    <defs>
+      <filter id="cut" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="12" stdDeviation="0" flood-color="#4A3426" flood-opacity=".22"/></filter>
+    </defs>
+    <rect id="bg" width="1080" height="1920" fill="#F7F0E4"/>
+    <g id="burst"></g>
+    <g id="waves"></g>
+    <g id="daisies"></g>
+  </svg>
+  <div class="layer" id="L">
+    <!-- S1 -->
+    <div id="p1" class="pill kara" style="top:430px;font-size:150px;background:#F7F0E4;color:#A9542F">רגע,</div>
+    <div id="p2" class="pill kara" style="top:640px;font-size:230px;background:#C47A55;color:#F7F0E4">עוד לא</div>
+    <div id="p3" class="pill kara" style="top:930px;font-size:200px;background:#9BA585;color:#F7F0E4">מצאתם מתנה?</div>
+    <!-- S2 -->
+    <div id="i1" class="abs bell" style="left:0;right:0;top:560px;text-align:center;font-size:200px;color:#F7F0E4;text-shadow:0 10px 0 rgba(74,52,38,.25)">יש לנו</div>
+    <div id="i2" class="abs kara" style="left:0;right:0;top:800px;text-align:center;font-size:380px;color:#F7F0E4;text-shadow:0 14px 0 rgba(74,52,38,.25)">רעיון.</div>
+    <!-- S3 -->
+    <div id="m1" class="abs kara" style="left:0;right:0;top:430px;text-align:center;font-size:440px;color:#F7F0E4;text-shadow:0 16px 0 rgba(74,52,38,.25)">מגזין</div>
+    <div id="m2" class="pill bell" style="top:880px;font-size:120px;background:#D9A05B;color:#4A3426">בעיצוב אישי</div>
+    <div id="m3" class="pill kara" style="top:1090px;font-size:170px;background:#F7F0E4;color:#A9542F">שכולו עליהם.</div>
+    <!-- S4 -->
+    <div id="c16" class="abs" style="left:0;right:0;top:760px;text-align:center"><div class="kara" style="font-size:360px;color:#A9542F;text-shadow:0 14px 0 rgba(74,52,38,.18)">16</div><div class="kara" style="font-size:110px;margin-top:-30px">עמודים, רק עליהם</div></div>
+    <div id="stks"></div>
+    <!-- S5 -->
+    <div id="h5" class="abs kara" style="left:0;right:0;top:230px;text-align:center;font-size:150px">שלושה צעדים:</div>
+    <div id="w1" class="wheel" style="background:#C47A55"><b>1</b></div>
+    <div id="w2" class="wheel" style="background:#9BA585"><b>2</b></div>
+    <div id="w3" class="wheel" style="background:#D9A05B"><b>3</b></div>
+    <div id="st1" class="stepT" style="top:0">עונים על שאלון</div>
+    <div id="st2" class="stepT" style="top:0">שולחים תמונות</div>
+    <div id="st3" class="stepT" style="top:0">מקבלים מגזין!</div>
+    <!-- S6 -->
+    <div id="bands" class="abs" style="left:0;top:0;width:1080px;height:1920px"></div>
+    <div id="h6" class="pill kara" style="top:240px;font-size:150px;background:#F7F0E4;color:#4A3426">מתנה מושלמת</div>
+    <!-- S7 -->
+    <div id="badge" class="abs" style="left:190px;top:330px;width:700px;height:700px">
+      <svg width="700" height="700" viewBox="0 0 700 700" style="position:absolute;inset:0">
+        <circle cx="350" cy="350" r="340" fill="#A9542F"/>
+        <circle cx="350" cy="350" r="250" fill="#F7F0E4"/>
+        <defs><path id="ring" d="M 350 350 m -292 0 a 292 292 0 1 1 584 0 a 292 292 0 1 1 -584 0"/></defs>
+        <g id="ringRot"></g>
+      </svg>
+      <img src="assets/gloss-logo.png" style="position:absolute;left:150px;top:290px;width:400px">
+    </div>
+    <div id="e1" class="abs kara" style="left:0;right:0;top:1110px;text-align:center;font-size:170px">מגזין אישי במתנה</div>
+    <div id="e2" class="abs bell" style="left:0;right:0;top:1300px;text-align:center;font-size:64px;color:#A9542F">ליום הולדת · נישואין · הורים · חברים</div>
+    <div id="cta" class="abs">להזמנה בוואטסאפ<div id="ctaShine"></div></div>
+  </div>
+  <img id="grain" src="assets/grain0.png"><div id="vig"></div>
+</div>
+<script>
+const BPM=120,B=60/BPM,FPS=30,T=b=>b*B;
+const $=id=>document.getElementById(id);
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x)),seg=(t,a,b)=>clamp((t-a)/(b-a)),lerp=(a,b,p)=>a+(b-a)*p;
+const E={outExpo:p=>p>=1?1:1-Math.pow(2,-10*p),outCubic:p=>1-Math.pow(1-p,3),inCubic:p=>p*p*p,inOutCubic:p=>p<.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2,
+ inOutQuart:p=>p<.5?8*p*p*p*p:1-Math.pow(-2*p+2,4)/2,inOutSine:p=>-(Math.cos(Math.PI*p)-1)/2,
+ outBack:p=>{const c1=1.8,c3=c1+1;return 1+c3*Math.pow(p-1,3)+c1*Math.pow(p-1,2)},
+ outElastic:p=>p<=0?0:p>=1?1:Math.pow(2,-10*p)*Math.sin((p*10-.75)*2*Math.PI/3)+1};
+const show=(el,v)=>{el.style.display=v?'':'none'};
+const rnd=k=>{const x=Math.sin(k*91.7+3.1)*43758.5;return x-Math.floor(x);};
+const COL={cream:'#F7F0E4',sand:'#E8DBC7',terra:'#C47A55',terraD:'#A9542F',rose:'#D9A797',sage:'#9BA585',mus:'#D9A05B',cocoa:'#4A3426'};
+
+/* ---------- sunburst ---------- */
+function setBurst(c1,c2,rot,cx=540,cy=960,n=24,op=1){
+  let h='';const R=2400;for(let i=0;i<n;i++){const a0=(i/n)*Math.PI*2+rot,a1=a0+Math.PI/n;h+=`<path d="M ${cx} ${cy} L ${cx+Math.cos(a0)*R} ${cy+Math.sin(a0)*R} L ${cx+Math.cos(a1)*R} ${cy+Math.sin(a1)*R} Z" fill="${c2}"/>`;}
+  $('burst').innerHTML=`<rect width="1080" height="1920" fill="${c1}"/>`+h; $('burst').style.opacity=op;}
+/* ---------- wavy stripes ---------- */
+function setWaves(t,rise,cols,amp=40){
+  // rise: 0 = below screen, 1 = covering
+  let h='';const n=cols.length, H=1920/n*1.25;
+  for(let i=0;i<n;i++){const base=lerp(1920+i*260,i*(1920/n)-60,rise);let d=`M -20 ${2400} L -20 ${base}`;
+    for(let x=-20;x<=1100;x+=30){const y=base+Math.sin(x/140+t*3+i*.9)*amp;d+=` L ${x} ${y.toFixed(1)}`;} d+=` L 1100 2400 Z`;
+    h+=`<path d="${d}" fill="${cols[i]}" filter="url(#cut)"/>`;}
+  $('waves').innerHTML=h;}
+/* ---------- daisies ---------- */
+function daisy(x,y,r,s,rot,petal='#F7F0E4',core='#D9A05B'){let h='';const n=10;for(let i=0;i<n;i++){const a=i/n*360;h+=`<ellipse cx="0" cy="${-r*.62}" rx="${r*.24}" ry="${r*.45}" fill="${petal}" transform="rotate(${a})"/>`;}
+  return `<g transform="translate(${x} ${y}) rotate(${rot}) scale(${s})" filter="url(#cut)">${h}<circle r="${r*.3}" fill="${core}"/></g>`;}
+function setDaisies(t,list){ $('daisies').innerHTML=list.map(([x,y,r,t0,pet,core],i)=>{const p=E.outElastic(seg(t,t0,t0+.8));if(p<=0)return'';return daisy(x+Math.sin(t*1.3+i)*10,y+Math.cos(t*1.1+i)*12,r,p,t*30*(i%2?1:-1)+i*20,pet,core);}).join(''); }
+/* pill pop */
+function pill(el,t,t0,rot=0,out=null,dir=1){const p=E.outElastic(seg(t,t0,t0+.7));let s=p,o=clamp(seg(t,t0,t0+.1)*1.5),r=rot+(1-p)*20*dir,y=0;
+  if(out!=null){const q=E.inCubic(seg(t,out,out+.35));y=q*1400;r+=q*30*dir;}
+  el.style.transform=`translateX(-50%) translateY(${y}px) scale(${s}) rotate(${r+Math.sin(t*3+rot)*1.2}deg)`;el.style.opacity=o;}
+function slam(el,t,t0,out=null){const p=seg(t,t0,t0+.5);const sq=p<.25?lerp(2.2,.82,E.outCubic(p/.25)):lerp(.82,1,E.outElastic((p-.25)/.75));
+  let o=clamp(p*8),y=0;if(out!=null){const q=E.inCubic(seg(t,out,out+.35));y=-q*1500;}
+  el.style.transform=`translateY(${y}px) scale(${sq},${2-sq})`;el.style.opacity=o;}
+
+/* ---------- stickers (S4) ---------- */
+const ST=[['ראיון בלעדי','bubble',COL.rose],['טופ 5','star',COL.mus],['פלייליסט','note',COL.sage],['מתכון','bowl',COL.terra],['תשבץ','grid',COL.sand],['אלבום','cam',COL.rose],['ברכות','heart',COL.terra],['שער אישי','sun',COL.mus]];
+const SHAPES={
+ bubble:c=>`<path d="M 30 40 Q 30 10 60 10 L 190 10 Q 220 10 220 40 L 220 130 Q 220 160 190 160 L 110 160 L 60 210 L 70 160 L 60 160 Q 30 160 30 130 Z" fill="${c}"/><text x="125" y="115" text-anchor="middle" font-family="Bellefair" font-size="120" fill="#4A3426">”</text>`,
+ star:c=>{let p='';for(let i=0;i<10;i++){const r=i%2?50:110,a=-Math.PI/2+i*Math.PI/5;p+=`${125+Math.cos(a)*r},${105+Math.sin(a)*r} `;}return `<polygon points="${p}" fill="${c}"/><text x="125" y="140" text-anchor="middle" font-family="Karantina" font-weight="700" font-size="100" fill="#4A3426">5</text>`;},
+ note:c=>`<circle cx="125" cy="105" r="100" fill="#4A3426"/><circle cx="125" cy="105" r="36" fill="${c}"/><circle cx="125" cy="105" r="70" fill="none" stroke="rgba(255,255,255,.15)" stroke-width="3"/><circle cx="125" cy="105" r="6" fill="#F7F0E4"/>`,
+ bowl:c=>`<path d="M 25 90 A 100 100 0 0 0 225 90 Z" fill="${c}"/><rect x="20" y="82" width="210" height="14" rx="7" fill="#A9542F"/><path d="M 95 70 C 80 50 110 35 95 10 M 135 70 C 120 50 150 35 135 10" fill="none" stroke="#7A7350" stroke-width="7" stroke-linecap="round"/>`,
+ grid:c=>{let g='';for(let r=0;r<3;r++)for(let k=0;k<3;k++)g+=`<rect x="${50+k*52}" y="${20+r*52}" width="48" height="48" fill="${(r*3+k)%4===1?'#4A3426':'#F7F0E4'}" stroke="#4A3426" stroke-width="4"/>`;return `<rect x="38" y="8" width="174" height="174" rx="10" fill="${c}"/>`+g;},
+ cam:c=>`<rect x="25" y="45" width="200" height="140" rx="22" fill="${c}"/><rect x="85" y="25" width="80" height="34" rx="8" fill="${c}"/><circle cx="125" cy="115" r="48" fill="#F7F0E4"/><circle cx="125" cy="115" r="28" fill="#4A3426"/>`,
+ heart:c=>`<path d="M 125 190 C 30 130 10 80 40 45 C 70 15 110 30 125 60 C 140 30 180 15 210 45 C 240 80 220 130 125 190 Z" fill="${c}"/>`,
+ sun:c=>{let r='';for(let i=0;i<12;i++){const a=i/12*Math.PI*2;r+=`<line x1="${125+Math.cos(a)*70}" y1="${100+Math.sin(a)*70}" x2="${125+Math.cos(a)*105}" y2="${100+Math.sin(a)*105}" stroke="${c}" stroke-width="14" stroke-linecap="round"/>`;}return r+`<circle cx="125" cy="100" r="56" fill="${c}"/>`;},
+};
+$('stks').innerHTML=ST.map(([l,s,c],i)=>`<div class="stk" id="sk${i}"><svg width="250" height="220" viewBox="0 0 250 220">${SHAPES[s](c)}</svg><div class="lb">${l}</div></div>`).join('');
+const ORB=ST.map((_,i)=>{const a=-Math.PI/2+i/8*Math.PI*2;return [540+Math.cos(a)*400,960+Math.sin(a)*600];});
+
+/* ---------- marquee bands (S6) ---------- */
+const OCC=['ליום הולדת','ליום נישואין','להורים','לסבא וסבתא','לחברים','לאהבה של החיים'];
+const BANDS=[[560,-8,COL.terra,COL.cream,1],[860,6,COL.cream,COL.terraD,-1],[1160,-5,COL.sage,COL.cream,1],[1460,7,COL.mus,COL.cocoa,-1]];
+$('bands').innerHTML=BANDS.map(([y,r,bg,fg],i)=>`<div class="band" id="bd${i}" style="top:${y}px;background:${bg};color:${fg};transform:rotate(${r}deg)"><div class="bin" style="display:flex;gap:50px">${[...OCC,...OCC,...OCC].slice(i,i+12).map(w=>`<span>${w}</span><span style="opacity:.6">•</span>`).join('')}</div></div>`).join('');
+
+(function(){ // Hebrew letters placed one by one around the ring (reading right-to-left = clockwise from the top)
+  const txt='מגזין אישי במתנה • הסיפור שלהם בעיתון אחד • ';const chars=[...txt];const R=292;let h='';
+  const step=360/chars.length;
+  chars.forEach((c,i)=>{const a=-i*step; h+=`<text x="350" y="${350-R+22}" text-anchor="middle" font-family="Karantina" font-weight="700" font-size="64" fill="#F7F0E4" transform="rotate(${a} 350 350)">${c===' '?'':c}</text>`;});
+  document.getElementById('ringRot').innerHTML=h;})();
+/* ---------- render ---------- */
+function render(t){
+  $('grain').src=`assets/grain${Math.floor(t*FPS)%6}.png`;
+  const all=['p1','p2','p3','i1','i2','m1','m2','m3','c16','stks','h5','w1','w2','w3','st1','st2','st3','bands','h6','badge','e1','e2','cta'];
+  all.forEach(id=>show($(id),false));
+  $('waves').innerHTML='';
+  let dz=[];
+  /* S1 0-4.6 : sunburst cream/sand, pills */
+  if(t<T(4.6)){
+    setBurst(COL.cream,'#EFDCC2',t*.25);
+    ['p1','p2','p3'].forEach(id=>show($(id),true));
+    pill($('p1'),t,-1,-4,T(3.9),-1); pill($('p2'),t,-0.85,3,T(4.0),1); pill($('p3'),t,T(.6),-2,T(4.1),-1);
+    dz=[[170,330,90,T(1.6),COL.cream,COL.mus],[910,520,80,T(1.8),COL.rose,COL.terraD],[150,1350,110,T(2),COL.sage,COL.cream],[930,1250,95,T(2.2),COL.cream,COL.terra],[540,1620,120,T(2.4),COL.mus,COL.cocoa]];
+    if(t>T(3.9)) dz=dz.map(d=>[d[0],d[1]+E.inCubic(seg(t,T(3.9),T(4.5)))*1500,...d.slice(2)]);
+  }
+  /* S2 4-8.4 : wavy stripes rise, "יש לנו רעיון." */
+  if(t>=T(3.8)&&t<T(8.6)){
+    if(t>=T(4.6)) setBurst(COL.terra,COL.terra,0);
+    const rise=E.inOutQuart(seg(t,T(3.8),T(5)));
+    const fall=E.inOutQuart(seg(t,T(7.8),T(8.6)));
+    setWaves(t,rise*(1-fall*0)-fall*1.2,[COL.rose,COL.terra,COL.mus,COL.sage,COL.terraD],36);
+    show($('i1'),t>T(4.8)&&t<T(8.2)); show($('i2'),t>T(5.2)&&t<T(8.2));
+    slam($('i1'),t,T(4.9),T(7.8)); slam($('i2'),t,T(5.4),T(7.85));
+    dz=[[200,1650,100,T(6),COL.cream,COL.mus],[880,420,80,T(6.3),COL.cream,COL.terraD]];
+  }
+  /* S3 8-12.4 : terracotta, "מגזין / בעיצוב אישי / שכולו עליהם." */
+  if(t>=T(8.2)&&t<T(12.6)){
+    setBurst(COL.terra,'#C98663',-t*.3);
+    ['m1','m2','m3'].forEach(id=>show($(id),true));
+    slam($('m1'),t,T(8.4),T(12)); pill($('m2'),t,T(9.4),-3,T(12.05),1); pill($('m3'),t,T(10.2),2,T(12.1),-1);
+    dz=[[160,300,90,T(9),COL.cream,COL.mus],[930,1520,110,T(9.4),COL.rose,COL.cream],[140,1600,80,T(10.6),COL.mus,COL.terraD],[920,330,70,T(10.8),COL.sage,COL.cream]];
+  }
+  /* S4 12-17 : 16 pages + stickers burst into orbit */
+  if(t>=T(12.2)&&t<T(17.2)){
+    const iris=E.inOutCubic(seg(t,T(12.2),T(12.9)));
+    setBurst(COL.sand,'#E1CDB3',t*.2);
+    if(iris<1){ $('burst').innerHTML+=`<rect width="1080" height="1920" fill="${COL.terra}" opacity="1" mask="url(#none)"/>`; $('burst').innerHTML=`<rect width="1080" height="1920" fill="${COL.terra}"/><circle cx="540" cy="960" r="${iris*1200}" fill="${COL.sand}"/>`; }
+    show($('c16'),true); show($('stks'),true);
+    const c=E.outElastic(seg(t,T(12.6),T(13.6))); $('c16').style.transform=`scale(${c}) rotate(${(1-c)*-10}deg)`; $('c16').style.opacity=clamp(c*3);
+    ST.forEach((_,i)=>{const el=$('sk'+i);const t0=T(13.4)+i*.09;const p=E.outBack(seg(t,t0,t0+.55));const [ox,oy]=ORB[i];
+      const orb=Math.max(0,t-t0)*.25;const a=Math.atan2(oy-960,ox-540)+orb*.4;const rx=400,ry=600;
+      const x=540+Math.cos(a)*rx*p, y=960+Math.sin(a)*ry*p;
+      const out=E.inCubic(seg(t,T(16.6),T(17.1)));
+      el.style.left=x+'px'; el.style.top=(y+out*-1500*(i%2?1:.7))+'px'; el.style.transform=`scale(${p*1.35}) rotate(${(1-p)*180*(i%2?1:-1)+Math.sin(t*2+i)*6}deg)`; el.style.opacity=clamp(p*3);});
+    const o=E.inCubic(seg(t,T(16.6),T(17.1))); $('c16').style.opacity=clamp(c*3)*(1-o);
+  }
+  /* S5 17-22 : three wheels roll in */
+  if(t>=T(16.8)&&t<T(22.4)){
+    setBurst(COL.cream,'#F1E4D1',-t*.2);
+    const sw=E.inOutQuart(seg(t,T(16.8),T(17.5))); setWaves(t,1-sw,[COL.sand,COL.rose,COL.sage],30);
+    show($('h5'),true); const h=E.outElastic(seg(t,T(17.2),T(18))); $('h5').style.transform=`scale(${h})`; $('h5').style.opacity=clamp(h*3);
+    [['w1','st1',17.8,520],['w2','st2',19.0,960],['w3','st3',20.2,1400]].forEach(([w,s,b,y],i)=>{show($(w),true);show($(s),true);
+      const p=E.outCubic(seg(t,T(b),T(b+.9)));const x=lerp(1400,i%2?760:320,p); const settle=E.outElastic(seg(t,T(b+.6),T(b+1.4)));
+      const el=$(w); el.style.left=x+'px'; el.style.top=(y-30)+'px'; el.style.transform=`rotate(${(1-p)*-540}deg) scale(${lerp(.8,1,settle)})`;
+      const st=$(s); const q=E.outBack(seg(t,T(b+.5),T(b+1.1))); st.style.top=(y-60)+'px'; st.style.textAlign= i%2?'right':'left';
+      st.style.right=i%2?'450px':'0'; st.style.left=i%2?'0':'500px'; st.style.transform=`translateY(${(1-q)*80}px)`; st.style.opacity=clamp(q*2);
+      st.style.color=['#A9542F','#7A7350','#B5762E'][i];});
+    const out=E.inCubic(seg(t,T(21.8),T(22.4))); ['h5','w1','w2','w3','st1','st2','st3'].forEach(id=>{$(id).style.opacity=(+$(id).style.opacity||1)*(1-out);});
+    dz=[[930,1720,70,T(21),COL.mus,COL.terraD]];
+  }
+  /* S6 22-26.4 : marquee bands */
+  if(t>=T(22)&&t<T(26.6)){
+    setBurst(COL.rose,'#D29C8B',t*.3);
+    show($('bands'),true); show($('h6'),true);
+    BANDS.forEach(([y,r,bg,fg,dir],i)=>{const el=$('bd'+i);const ein=E.outCubic(seg(t,T(22.1)+i*.08,T(22.9)+i*.08));const out=E.inCubic(seg(t,T(25.9)+i*.05,T(26.5)+i*.05));
+      const slide=(1-ein)*dir*-1600+out*dir*1600; const run=dir*((t-T(22))*260%800);
+      el.style.transform=`translateX(${slide}px) rotate(${r}deg)`; el.querySelector('.bin').style.transform=`translateX(${run-400}px)`;});
+    pill($('h6'),t,T(22.6),-3,T(25.9),1);
+    dz=[[150,1730,100,T(23),COL.cream,COL.mus],[950,1780,80,T(23.3),COL.sage,COL.cream]];
+  }
+  /* S7 26-34 : badge end */
+  if(t>=T(26.2)){
+    setBurst(COL.terra,'#CB8A67',t*.15);
+    const iris=E.inOutCubic(seg(t,T(26.2),T(27)));
+    if(iris<1) $('burst').innerHTML=`<rect width="1080" height="1920" fill="${COL.rose}"/><circle cx="540" cy="680" r="${iris*1500}" fill="${COL.terra}"/>`;
+    ['badge','e1','e2','cta'].forEach(id=>show($(id),true));
+    const b=E.outElastic(seg(t,T(26.4),T(27.6))); $('badge').style.transform=`scale(${b}) rotate(${(1-b)*-40}deg)`; $('badge').style.opacity=clamp(b*3);
+    $('ringRot').setAttribute('transform',`rotate(${-t*22} 350 350)`);
+    slam($('e1'),t,T(28.2)); const e2=E.outBack(seg(t,T(29),T(29.7))); $('e2').style.opacity=clamp(e2*2); $('e2').style.transform=`translateY(${(1-e2)*40}px)`;
+    $('e1').style.color=COL.cream; $('e1').style.textShadow='0 12px 0 rgba(74,52,38,.25)'; $('e2').style.color=COL.cream;
+    const c=E.outElastic(seg(t,T(29.8),T(30.8))); const pulse=1+.035*Math.sin(Math.max(0,t-T(30.8))*6.2832/B/2);
+    $('cta').style.opacity=clamp(c*3); $('cta').style.transform=`translateX(-50%) scale(${c*pulse})`; $('cta').style.background=COL.cream; $('cta').style.color=COL.terraD;
+    const sh=seg(t,T(31.6),T(32.8)); $('ctaShine').style.backgroundPosition=`${lerp(130,-30,sh)}% 0`; $('ctaShine').style.opacity=sh>0&&sh<1?1:0;
+    dz=[[150,1700,110,T(28.6),COL.cream,COL.mus],[930,1650,90,T(28.9),COL.rose,COL.cream],[540,1800,80,T(29.2),COL.sage,COL.cream],[110,250,70,T(29.5),COL.mus,COL.terraD],[970,240,80,T(29.8),COL.cream,COL.terraD]];
+  }
+  setDaisies(t,dz);
+}
+window.FAST=[[T(3.8),T(5),8],[T(7.8),T(8.6),8],[T(12),T(13),8],[T(13.4),T(14.4),8],[T(16.6),T(17.5),8],[T(17.8),T(21.2),6],[T(22),T(23),8],[T(25.9),T(27),8]];
+window.DURATION=T(34)+0.4; window.render=render;
+window.ready=(async()=>{for(const f of['700 300px Karantina','400 200px Bellefair','600 42px Heebo'])await document.fonts.load(f,'אבגabc');
+  await document.fonts.ready;await Promise.all([...document.images].map(i=>i.decode().catch(()=>{})));for(let k=0;k<6;k++){const im=new Image();im.src=`assets/grain${k}.png`;await im.decode();}
+  render(0);return true;})();
+</script>
+</body></html>
