@@ -1,0 +1,9 @@
+Studio GLOSS · "16 עמודים של אור" — third-party assets
+
+Logo: Studio GLOSS logo (gloss-logo.png, gloss-logo-pink.png), owned by Studio GLOSS.
+Fonts (SIL Open Font License 1.1, licence files in fonts/):
+  Heebo by Oded Ezer — https://github.com/OdedEzer/heebo
+  Frank Ruhl Libre — https://github.com/google/fonts/tree/main/ofl/frankruhllibre
+3D: three.js (MIT licence), rendered in a headless browser.
+Studio lighting, floor and post-processing adapted from the Glass Product Render style's engine (studio.js, post.js).
+Music and all sound: synthesised in code for this film (no samples, no third-party audio).
