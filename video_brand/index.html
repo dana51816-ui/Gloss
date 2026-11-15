@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>GLOSS | A Gift You Can't Buy</title>
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<style>
+:root{--sand:#E8DBC7;--cream:#F7F0E4;--terra:#C47A55;--terraD:#A9542F;--rose:#D9A797;--sage:#9BA585;--cocoa:#4A3426;--olive:#7A7350}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
+#stage{position:relative;width:1080px;height:1920px;overflow:hidden;background:var(--sand);color:var(--cocoa);-webkit-font-smoothing:antialiased;font-family:Heebo,sans-serif}
+.abs{position:absolute}.layer{position:absolute;inset:0;overflow:hidden}.p3{transform-style:preserve-3d}
+.mask{overflow:hidden;display:inline-block;vertical-align:top;padding:0 .05em .08em}.mask>span{display:inline-block}
+#studio{position:absolute;inset:0;background:var(--sand)}
+#studioLight{position:absolute;inset:0;background:radial-gradient(ellipse 70% 45% at 55% 40%,rgba(255,246,228,.6),rgba(255,246,228,0) 70%),radial-gradient(ellipse 120% 80% at 50% 50%,rgba(0,0,0,0) 45%,rgba(120,70,35,.26) 100%)}
+#L3d{perspective:2400px;perspective-origin:540px 960px}
+#world{position:absolute;inset:0}
+.obj{position:absolute;left:0;top:0;width:1080px;height:1620px;transform-origin:0 0}
+.face{position:absolute;left:0;top:0;width:1080px;height:1620px;backface-visibility:hidden}
+.edge{position:absolute;background:repeating-linear-gradient(90deg,#f3ece0 0 2px,#ddd1bf 2px 3px)}
+.edgeH{position:absolute;background:repeating-linear-gradient(0deg,#f3ece0 0 2px,#ddd1bf 2px 3px)}
+#floorShadow{position:absolute;left:0;top:0;width:1080px;height:1620px;background:radial-gradient(ellipse 50% 50% at 50% 50%,rgba(90,50,20,.5),rgba(0,0,0,0) 70%);filter:blur(22px);transform-origin:50% 50%}
+.strip{position:absolute;top:0;height:1620px;transform-style:preserve-3d;transform-origin:100% 50%}
+.strip>.sf,.strip>.sb{position:absolute;left:0;top:0;height:1620px;backface-visibility:hidden;background-repeat:no-repeat}
+.strip>.sb{transform:rotateY(180deg);background:linear-gradient(90deg,#efe6d6,#f8f1e5)}
+.sh{position:absolute;inset:0}
+#sheen{position:absolute;left:0;top:0;width:1080px;height:1620px;pointer-events:none;mix-blend-mode:soft-light;background:linear-gradient(105deg,rgba(255,255,255,0) 38%,rgba(255,255,255,.25) 45%,rgba(255,255,255,.9) 50%,rgba(255,255,255,.25) 55%,rgba(255,255,255,0) 62%);background-size:300% 100%;background-repeat:no-repeat;transform:translateZ(1.2px)}
+.bell{font-family:Bellefair,serif;font-weight:400;line-height:1.04;text-align:center;left:0;right:0;color:var(--cocoa)}
+#endCta{left:50%;top:1345px;background:var(--terraD);color:var(--cream);font-weight:500;font-size:38px;padding:24px 64px;border-radius:999px;white-space:nowrap;overflow:hidden}
+#ctaShine{position:absolute;inset:0;background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.5) 50%,transparent 65%);background-size:300% 100%}
+#grain{position:absolute;inset:0;width:1080px;height:1920px;mix-blend-mode:multiply;opacity:.10;pointer-events:none}
+#vig{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 85% 70% at 50% 50%,rgba(0,0,0,0) 55%,rgba(110,60,25,.2) 100%)}
+</style>
+</head>
+<body>
+<div id="stage">
+  <div class="layer" id="L3d">
+    <div id="studio">
+      <svg id="boho" width="1080" height="1920" style="position:absolute;left:0;top:0">
+        <path id="archWin" d="M 150 1700 L 150 700 A 390 390 0 0 1 930 700 L 930 1700 Z" fill="#D9A797" opacity="0"/>
+        <path id="archWin2" d="M 230 1700 L 230 760 A 310 310 0 0 1 850 760 L 850 1700 Z" fill="#C47A55" opacity="0"/>
+        <g id="rainbow" fill="none"></g>
+        <g id="sun" fill="none" stroke="#B5603E" stroke-width="3" stroke-linecap="round"><path d="M 860 300 A 70 70 0 0 1 1000 300"/><g id="rays"></g></g>
+        <g id="dots"></g>
+      </svg>
+      <div id="studioLight"></div>
+    </div>
+    <div id="world" class="p3">
+      <div id="floorShadow"></div>
+      <div id="mag" class="obj p3">
+        <div id="magDrop" style="position:absolute;left:30px;top:50px;width:1080px;height:1620px;background:rgba(90,48,20,.55);filter:blur(46px);transform:translateZ(-40px)"></div>
+        <img class="face" src="assets/pages/b-8.jpg" style="transform:translateZ(-14px) rotateY(180deg)">
+        <div class="edge" style="left:0;top:0;width:14px;height:1620px;transform-origin:0 0;transform:rotateY(90deg)"></div>
+        <div class="edge" style="left:1080px;top:0;width:14px;height:1620px;transform-origin:0 0;transform:rotateY(90deg)"></div>
+        <div class="edgeH" style="left:0;top:0;width:1080px;height:14px;transform-origin:0 0;transform:rotateX(-90deg)"></div>
+        <div class="edgeH" style="left:0;top:1620px;width:1080px;height:14px;transform-origin:0 0;transform:rotateX(-90deg)"></div>
+        <div id="under" class="face"></div>
+        <div id="underShade" style="position:absolute;left:0;top:0;width:1080px;height:1620px;transform:translateZ(.2px)"></div>
+        <div id="leafWrap" class="p3" style="position:absolute;left:0;top:0;width:1080px;height:1620px;transform:translateZ(.6px)"></div>
+        <div id="sheen"></div>
+      </div>
+    </div>
+  </div>
+  <div class="layer" id="Ltype" style="pointer-events:none">
+    <div id="h1" class="abs bell" style="top:420px;font-size:150px"><span class="mask"><span>מתנה שאי אפשר</span></span><br><span class="mask"><span style="color:var(--terraD)">לקנות בחנות.</span></span></div>
+    <div id="h2" class="abs bell" style="top:420px;font-size:150px"><span class="mask"><span>כי היא נכתבת</span></span><br><span class="mask"><span style="color:var(--terraD)">רק עליהם.</span></span></div>
+    <div id="s1" class="abs bell" style="top:200px;font-size:120px"><span class="mask"><span>הסיפור שלהם.</span></span></div>
+    <div id="s2" class="abs bell" style="top:1500px;font-size:120px;color:var(--terraD)"><span class="mask"><span>בעיתון אחד.</span></span></div>
+    <img id="endLogo" class="abs" src="assets/gloss-logo.png" style="left:290px;top:220px;width:500px">
+    <div id="e1" class="abs bell" style="top:1090px;font-size:104px"><span class="mask"><span>מגזין אישי במתנה</span></span></div>
+    <div id="e2" class="abs" style="left:0;right:0;top:1232px;text-align:center;font-size:34px;letter-spacing:.06em;color:var(--olive)">ליום הולדת · נישואין · הורים · חברים</div>
+    <div id="endCta" class="abs">להזמנה בוואטסאפ<div id="ctaShine"></div></div>
+  </div>
+  <img id="grain" src="assets/grain0.png"><div id="vig"></div>
+</div>
+<script src="pages.js"></script>
+<script>
+const BPM=120,B=60/BPM,FPS=30,T=b=>b*B;
+const $=id=>document.getElementById(id);
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x)),seg=(t,a,b)=>clamp((t-a)/(b-a)),lerp=(a,b,p)=>a+(b-a)*p;
+const E={outExpo:p=>p>=1?1:1-Math.pow(2,-10*p),inExpo:p=>p<=0?0:Math.pow(2,10*p-10),outCubic:p=>1-Math.pow(1-p,3),inCubic:p=>p*p*p,
+ inOutCubic:p=>p<.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2,outQuart:p=>1-Math.pow(1-p,4),inOutQuart:p=>p<.5?8*p*p*p*p:1-Math.pow(-2*p+2,4)/2,inOutSine:p=>-(Math.cos(Math.PI*p)-1)/2,
+ outBack:p=>{const c1=1.5,c3=c1+1;return 1+c3*Math.pow(p-1,3)+c1*Math.pow(p-1,2)}};
+const show=(el,v)=>{el.style.display=v?'':'none'};
+function maskReveal(el,t,t0,st=0.06,dur=0.5,out=null,od=0.3){el.querySelectorAll('.mask>span').forEach((s,i)=>{let p=E.outExpo(seg(t,t0+i*st,t0+i*st+dur));let y=(1-p)*112;if(out!=null)y-=E.inCubic(seg(t,out+i*.04,out+i*.04+od))*112;s.style.transform=`translateY(${y}%)`;});}
+const objTf=s=>`translate3d(${s.x}px,${s.y}px,${s.z||0}px) rotateZ(${s.rz||0}deg) rotateX(${s.rx||0}deg) rotateY(${s.ry||0}deg) scale(${s.s??1}) translate(-540px,-810px)`;
+const mix=(a,b,p)=>{const o={};for(const k in b)o[k]=lerp(a[k]??0,b[k],p);return o;};
+
+/* ---------- boho studio ---------- */
+(function(){
+  const cols=['#C47A55','#D9A797','#9BA585','#E2C9A6']; let h='';
+  cols.forEach((c,i)=>{const r=420-i*96; h+=`<path class="rb" d="M ${540-r} 1920 A ${r} ${r} 0 0 1 ${540+r} 1920" stroke="${c}" stroke-width="88"/>`;});
+  $('rainbow').innerHTML=h;
+  let r='';for(let i=0;i<9;i++){const a=Math.PI*(i/8);r+=`<line x1="${930-Math.cos(a)*92}" y1="${300-Math.sin(a)*92}" x2="${930-Math.cos(a)*128}" y2="${300-Math.sin(a)*128}"/>`;} $('rays').innerHTML=r;
+  let d='';for(let i=0;i<14;i++){d+=`<circle cx="${80+i*2}" cy="${700+i*60}" r="4" fill="#A9542F" opacity=".35"/>`;} $('dots').innerHTML='';
+  document.querySelectorAll('#boho .rb,#sun path,#sun line').forEach(p=>{const L=p.getTotalLength();p.style.strokeDasharray=L;p.dataset.L=L;});
+})();
+function studio(t){
+  const dk=E.inOutCubic(seg(t,T(4.2),T(5.6)))*(1-E.inOutCubic(seg(t,T(25.6),T(27))));
+  $('studio').style.background=`rgb(${Math.round(lerp(232,214,dk))},${Math.round(lerp(219,190,dk))},${Math.round(lerp(199,163,dk))})`;
+  const rbs=document.querySelectorAll('#boho .rb');
+  rbs.forEach((p,i)=>{const L=+p.dataset.L;let v;
+    if(t<T(5)) v=E.outCubic(seg(t,0.05+i*.1,0.9+i*.1))*(1-E.inCubic(seg(t,T(3.8)+i*.04,T(4.6)+i*.04)));
+    else v=E.outCubic(seg(t,T(27)+i*.1,T(28.6)+i*.1));
+    p.style.strokeDashoffset=L*(1-v);});
+  $('rainbow').setAttribute('transform',`translate(0 ${t>=T(26)?170:0})`);
+  document.querySelectorAll('#sun path,#sun line').forEach((p,i)=>{const L=+p.dataset.L;const v=t<T(5)?E.outCubic(seg(t,.3+i*.04,1+i*.04))*(1-seg(t,T(3.8),T(4.4))):E.outCubic(seg(t,T(27.4)+i*.04,T(28.4)+i*.04));p.style.strokeDashoffset=L*(1-v);});
+  $('sun').setAttribute('transform',`rotate(${t*5} 930 300)${t>=T(26)?' translate(-40 -60)':''}`);
+  const aw = t<T(4.4)?0 : t<T(22)? E.outCubic(seg(t,T(4.6),T(6))) : t<T(26)? 1-seg(t,T(22),T(23)) : E.outCubic(seg(t,T(26.5),T(28)));
+  const sc = t>=T(26)?0.66:1, ay=t>=T(26)?-260:0;
+  ['archWin','archWin2'].forEach((id,i)=>{$(id).setAttribute('opacity',[0.55,0.35][i]*aw);$(id).setAttribute('transform',`translate(540 ${1200+ay}) scale(${sc}) translate(-540 -1200)`);});
+}
+
+/* ---------- live pages under the leaf ---------- */
+const LIVE=[];for(let k=0;k<=8;k++){const el=buildPage(k);el.style.display='none';$('under').appendChild(el);LIVE.push(el);}
+let curK=-1;function setUnder(k){if(curK===k)return;if(curK>=0)LIVE[curK].style.display='none';LIVE[k].style.display='';curK=k;}
+
+/* ---------- curling leaf (from v2 engine) ---------- */
+const NS=22,WS=1080/NS,strips=[];
+(function(){let parent=$('leafWrap');for(let k=0;k<NS;k++){const s=document.createElement('div');s.className='strip';s.style.width=WS+'px';s.style.left=k===0?(1080-WS)+'px':(-WS)+'px';
+ const f=document.createElement('div');f.className='sf';f.style.width=(WS+1.2)+'px';f.style.left='-0.6px';f.style.backgroundSize='1080px 1620px';f.style.backgroundPosition=`${-(1080-(k+1)*WS)+0.6}px 0`;
+ const fs=document.createElement('div');fs.className='sh';f.appendChild(fs);const b=document.createElement('div');b.className='sb';b.style.width=(WS+1.2)+'px';b.style.left='-0.6px';const bs=document.createElement('div');bs.className='sh';b.appendChild(bs);
+ s.appendChild(f);s.appendChild(b);parent.appendChild(s);strips.push({s,f,fs,b,bs});parent=s;}})();
+let leafSrc=null;
+function setLeaf(src,p,curl=90){const wrap=$('leafWrap');
+  if(src==null||p<=0.0001||p>=0.9999){wrap.style.display='none';$('underShade').style.background='none';return;}
+  wrap.style.display='';if(leafSrc!==src){strips.forEach(o=>o.f.style.backgroundImage=`url(${src})`);leafSrc=src;}
+  const th=180*p,Bc=Math.sin(Math.PI*p)*curl;let ws=0;const w=[];for(let k=0;k<NS;k++){const v=Math.pow((k+1)/NS,1.6);w.push(v);ws+=v;}
+  let cum=0;for(let k=0;k<NS;k++){let d=k===0?th+Bc*w[0]/ws:Bc*w[k]/ws;if(cum+d>179.2)d=179.2-cum;cum+=d;const o=strips[k];o.s.style.transform=`rotateY(${d.toFixed(3)}deg)`;
+    const c=Math.cos(cum*Math.PI/180);const dark=clamp(.45*(1-Math.abs(c)),0,.5);const spec=Math.max(0,Math.cos((cum-32)*Math.PI/180*3))*(cum<70?.25:0);
+    o.fs.style.background=`rgba(60,30,10,${dark.toFixed(3)})`;o.fs.style.boxShadow=spec>.01?`inset 0 0 0 999px rgba(255,248,235,${spec.toFixed(3)})`:'none';o.bs.style.background=`rgba(60,30,10,${clamp(.4*(1-Math.abs(c)),0,.45).toFixed(3)})`;}
+  const a=Math.sin(Math.PI*p),pr=p*100;$('underShade').style.background=`linear-gradient(90deg,rgba(0,0,0,0) ${Math.max(0,pr*.9-30)}%,rgba(70,35,10,${.35*a}) ${Math.max(0,pr*.9)}%,rgba(70,35,10,${.1*a}) 100%)`;}
+
+/* ---------- camera per page ---------- */
+const CAM={
+ 0:{x:540,y:990,s:.8,rx:6,ry:-14,rz:-2},
+ 1:{x:540,y:970,s:.86,rx:4,ry:-10,rz:-1},
+ 2:{x:560,y:1000,s:1.0,rx:10,ry:8,rz:2},
+ 3:{x:540,y:1040,s:.84,rx:24,ry:0,rz:-3},
+ 4:{x:520,y:960,s:.92,rx:0,ry:-16,rz:1},
+ 5:{x:540,y:1120,s:1.08,rx:6,ry:4,rz:0},
+ 6:{x:560,y:980,s:.9,rx:12,ry:14,rz:2},
+ 7:{x:540,y:960,s:.88,rx:0,ry:0,rz:0},
+};
+const FLIP0=8; // beat of first flip
+function render(t){
+  $('grain').src=`assets/grain${Math.floor(t*FPS)%6}.png`;
+  studio(t);
+  const mag=$('mag'); let st; let sheenA=-1;
+  setLeaf(null,0); $('floorShadow').style.opacity=0;
+  /* HOOK -> COVER */
+  if(t<T(FLIP0)){
+    setUnder(0); animPage(LIVE[0],0,seg(t,T(4.6),T(7.6)),t);
+    const q=E.outQuart(seg(t,T(3.9),T(5.4)));
+    const sway=Math.sin(t*1.6)*1.5;
+    st=mix({x:620,y:2700,z:500,s:.8,rx:-50,ry:40,rz:24},{...CAM[0],ry:CAM[0].ry+sway},q);
+    if(t>=T(7.4)) st=mix(st,CAM[1],E.inOutCubic(seg(t,T(7.4),T(8.4))));
+    show(mag,t>=T(3.9));
+    const sw=seg(t,T(6.6),T(7.8)); if(sw>0&&sw<1) sheenA=sw;
+  }
+  /* FLIPS */
+  else if(t<T(22)){
+    const k=Math.min(7,1+Math.floor((t/B-FLIP0)/2)); const b0=FLIP0+(k-1)*2;
+    const p=E.inOutCubic(seg(t,T(b0),T(b0+0.85)));
+    setUnder(k); animPage(LIVE[k],k,seg(t,T(b0+0.45),T(b0+2.1)),t);
+    setLeaf(`assets/pages/b-${k-1}.jpg`,p,95);
+    const prev=CAM[k-1]??CAM[1]; const from = k===1? CAM[1] : prev;
+    const c=E.inOutCubic(seg(t,T(b0),T(b0+1.0)));
+    const drift=seg(t,T(b0+1),T(b0+2));
+    st=mix(from,CAM[k],c); st.ry+=drift*2; st.s*=1+drift*.02;
+    show(mag,true);
+  }
+  /* SPIN: back cover, then front cover again */
+  else if(t<T(26)){
+    setUnder(t<T(23.2)?7:0); animPage(LIVE[0],0,1,t); if(t<T(23.2)) animPage(LIVE[7],7,1,t);
+    const r1=E.inOutCubic(seg(t,T(22),T(23.6))), r2=E.inOutCubic(seg(t,T(24.4),T(25.9)));
+    st=mix(CAM[7],{x:540,y:960,s:.62,rx:6,ry:180,rz:-2},r1);
+    if(t>=T(24.4)) st=mix(st,{x:540,y:960,s:.62,rx:4,ry:360,rz:0},r2);
+    const sw=seg(t,T(23.3),T(24.4)); if(sw>0&&sw<1) sheenA=sw;
+  }
+  /* END */
+  else{
+    setUnder(0); animPage(LIVE[0],0,1,t);
+    const k=E.inOutQuart(seg(t,T(26),T(27.4))); const fl=seg(t,T(27.4),T(36.5));
+    st=mix({x:540,y:960,s:.62,rx:4,ry:360,rz:0},{x:540,y:700,s:.34,rx:6-2*fl,ry:360-14+24*E.inOutSine(fl),rz:-2+2*fl},k);
+    const sw=seg(t,T(30),T(31.6)); if(sw>0&&sw<1) sheenA=sw;
+  }
+  if(t>=T(8)) show(mag,true);
+  mag.style.transform=objTf(st);
+  $('floorShadow').style.opacity=clamp(.8*seg(t,T(4.5),T(5.5)));
+  $('floorShadow').style.transform=`translate3d(${st.x-540}px,${st.y-960+150+1620*st.s*.55}px,-60px) scale(${st.s*.92},${st.s*.12})`;
+  $('sheen').style.opacity=sheenA>=0?Math.sin(Math.PI*sheenA):0; if(sheenA>=0)$('sheen').style.backgroundPosition=`${lerp(130,-30,E.inOutCubic(sheenA))}% 0`;
+  /* type */
+  show($('h1'),t<T(2.8)); show($('h2'),t>T(2.3)&&t<T(4.4));
+  maskReveal($('h1'),t,-1.2+0,0.25,0.5,T(2.3)); $('h1').querySelectorAll('.mask>span')[1].style.transform=`translateY(${(1-E.outExpo(seg(t,T(0.6),T(1.4))))*112 - E.inCubic(seg(t,T(2.34),T(2.94)))*112}%)`;
+  maskReveal($('h2'),t,T(2.5),0.12,0.55,T(3.8));
+  show($('s1'),t>T(22.3)&&t<T(26.2)); show($('s2'),t>T(22.8)&&t<T(26.2));
+  maskReveal($('s1'),t,T(22.4),0.05,0.55,T(25.6)); maskReveal($('s2'),t,T(22.9),0.05,0.55,T(25.7));
+  const eOn=t>=T(26.6); ['endLogo','e1','e2','endCta'].forEach(id=>show($(id),eOn));
+  if(eOn){const l=E.outExpo(seg(t,T(26.8),T(28.2)));$('endLogo').style.opacity=l;$('endLogo').style.transform=`translateY(${(1-l)*30}px) scale(${lerp(1.06,1,l)})`;
+    maskReveal($('e1'),t,T(27.6),0.1,0.7);
+    const s2=E.outCubic(seg(t,T(28.4),T(29.4)));$('e2').style.opacity=s2;$('e2').style.transform=`translateY(${(1-s2)*16}px)`;
+    const c=E.outBack(seg(t,T(29.2),T(30.2)));$('endCta').style.opacity=clamp(c*1.6);$('endCta').style.transform=`translateX(-50%) scale(${lerp(.8,1,c)})`;
+    const sh=seg(t,T(32),T(33.4));$('ctaShine').style.backgroundPosition=`${lerp(130,-30,sh)}% 0`;$('ctaShine').style.opacity=sh>0&&sh<1?1:0;}
+}
+window.FAST=[[T(3.9),T(5.4),10],...[0,1,2,3,4,5,6].map(i=>[T(FLIP0+i*2),T(FLIP0+i*2+0.9),6]),[T(22),T(23.6),8],[T(24.4),T(25.9),8],[T(26),T(27.4),6]];
+window.DURATION=T(36)+0.4; window.render=render;
+window.ready=(async()=>{
+  for(const f of['400 150px Bellefair','700 300px Karantina','400 60px "Playpen Sans Hebrew"','400 30px Heebo','500 38px Heebo','700 40px Heebo','italic 500 60px "Bodoni Moda"'])await document.fonts.load(f,'אבגabc01');
+  await document.fonts.ready;await Promise.all([...document.images].map(i=>i.decode().catch(()=>{})));
+  for(let k=0;k<=8;k++){const im=new Image();im.src=`assets/pages/b-${k}.jpg`;await im.decode();}
+  for(let k=0;k<6;k++){const im=new Image();im.src=`assets/grain${k}.png`;await im.decode();}
+  render(0);return true;})();
+</script>
+</body></html>

@@ -1,0 +1,6 @@
+<!doctype html><html lang="he" dir="rtl"><head><meta charset="utf-8"><link rel="stylesheet" href="assets/fonts/fonts.css">
+<style>html,body{margin:0;width:1080px;height:1620px;overflow:hidden}#h{position:relative;width:1080px;height:1620px}</style></head>
+<body><div id="h"></div><script src="pages.js"></script><script>
+window.show=async k=>{const h=document.getElementById('h');h.innerHTML='';const el=buildPage(k);h.appendChild(el);animPage(el,k,1,0.7);await Promise.all([...el.querySelectorAll('img')].map(i=>i.decode().catch(()=>{})));};
+window.ready=(async()=>{for(const f of['400 100px Bellefair','700 300px Karantina','400 60px "Playpen Sans Hebrew"','400 30px Heebo','700 30px Heebo','italic 600 60px "Bodoni Moda"'])await document.fonts.load(f,'אבגabc01');await document.fonts.ready;return true})();
+</script></body></html>
